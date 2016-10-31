@@ -7,6 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
 
 <BorderPane id="BorderPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.ChessController" stylesheets="@style.css">
     <top>
@@ -17,8 +18,27 @@
             <children>
               <Button text="New" onAction="#openNewGameWindow" />
               <Region HBox.hgrow="ALWAYS" />
-              <Button text="Undo" fx:id="undoButton" />
-              <Button text="Redo" fx:id="redoButton" />
+              <Button fx:id="undoButton">
+                <graphic>
+                  <ImageView>
+                    <Image url="@undo.png" />
+                  </ImageView>
+                </graphic>
+              </Button>
+              <Button fx:id="redoButton">
+                <graphic>
+                  <ImageView>
+                    <Image url="@redo.png" />
+                  </ImageView>
+                </graphic>
+              </Button>
+              <Button fx:id="aboutButton" onAction="#openAboutWindow">
+                <graphic>
+                  <ImageView>
+                    <Image url="@about.png" />
+                  </ImageView>
+                </graphic>
+              </Button>
             </children>
         </HBox>
     </top>

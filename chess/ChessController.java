@@ -46,6 +46,17 @@ public class ChessController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    @FXML
+    private void openAboutWindow() throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("AboutWindow.fxml"));
+        Scene scene = new Scene(root);
+
+        Stage stage = new Stage();
+        stage.setTitle("About Wahjudi Chess");
+        stage.setScene(scene);
+        stage.show();
+    }
     
     private void drawCanvas() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
