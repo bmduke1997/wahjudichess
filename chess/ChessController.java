@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package chess;
 
 import java.net.URL;
@@ -21,12 +16,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 
-/**
- *
- * @author murphy249
- */
 public class ChessController implements Initializable {
-    
     @FXML
     private Canvas canvas;
     @FXML
