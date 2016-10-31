@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  *
  * @author murphy249
  */
-public class Chess extends Application {
+public class Main extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
@@ -23,7 +23,7 @@ public class Chess extends Application {
         
         Scene scene = new Scene(root);
         
-        stage.setTitle("Chess");
+        stage.setTitle("Wahjudi Chess");
         stage.setScene(scene);
         stage.show();
     }

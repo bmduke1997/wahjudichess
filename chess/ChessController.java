@@ -10,12 +10,16 @@ import java.util.ResourceBundle;
 import javafx.beans.binding.ObjectBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.paint.*;
 import javafx.scene.canvas.*;
 import javafx.scene.layout.Pane;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+import javafx.scene.Parent;
 
 /**
  *
@@ -31,8 +35,19 @@ public class ChessController implements Initializable {
     private Button undoButton;
     @FXML
     private Button redoButton;
+
+    @FXML
+    private void openNewGameWindow() throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("NewGameWindow.fxml"));
+        Scene scene = new Scene(root);
+
+        Stage stage = new Stage();
+        stage.setTitle("New Game...");
+        stage.setScene(scene);
+        stage.show();
+    }
     
-    public void drawCanvas() {
+    private void drawCanvas() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
         
         gc.setFill(Color.WHITE);

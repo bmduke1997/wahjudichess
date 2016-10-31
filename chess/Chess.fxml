@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.*?>
 
-<BorderPane id="BorderPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.ChessController">
+<BorderPane id="BorderPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.ChessController" stylesheets="@style.css">
     <top>
-        <HBox spacing="5">
+        <HBox spacing="5" styleClass="button-bar">
             <padding>
                 <Insets left="10" top="10" right="10" bottom="10" />
             </padding>
             <children>
-              <Button text="New" />
+              <Button text="New" onAction="#openNewGameWindow" />
               <Region HBox.hgrow="ALWAYS" />
               <Button text="Undo" fx:id="undoButton" />
               <Button text="Redo" fx:id="redoButton" />
