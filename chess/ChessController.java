@@ -12,9 +12,9 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
+import javafx.scene.control.Button;
 import javafx.scene.paint.*;
 import javafx.scene.canvas.*;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 
 /**
@@ -27,6 +27,10 @@ public class ChessController implements Initializable {
     private Canvas canvas;
     @FXML
     private Pane container;
+    @FXML
+    private Button undoButton;
+    @FXML
+    private Button redoButton;
     
     public void drawCanvas() {
         GraphicsContext gc = canvas.getGraphicsContext2D();
@@ -37,6 +41,10 @@ public class ChessController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        /* Undo/redo buttons start out disabled. */
+        undoButton.setDisable(true);
+        redoButton.setDisable(true);
+
         /* Canvas follows the size of its containing pane. */
         canvas.widthProperty().bind(container.widthProperty());
         canvas.heightProperty().bind(container.heightProperty());
