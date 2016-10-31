@@ -19,6 +19,7 @@
               <Button text="New" onAction="#openNewGameWindow" />
               <Region HBox.hgrow="ALWAYS" />
               <Button fx:id="undoButton">
+                <tooltip><Tooltip text="Undo" wrapText="true" /></tooltip>
                 <graphic>
                   <ImageView>
                     <Image url="@undo.png" />
@@ -26,6 +27,7 @@
                 </graphic>
               </Button>
               <Button fx:id="redoButton">
+                <tooltip><Tooltip text="Redo" wrapText="true" /></tooltip>
                 <graphic>
                   <ImageView>
                     <Image url="@redo.png" />
@@ -33,6 +35,7 @@
                 </graphic>
               </Button>
               <Button fx:id="aboutButton" onAction="#openAboutWindow">
+                <tooltip><Tooltip text="About" wrapText="true" /></tooltip>
                 <graphic>
                   <ImageView>
                     <Image url="@about.png" />
