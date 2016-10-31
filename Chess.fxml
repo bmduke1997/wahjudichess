@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.canvas.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+
+<BorderPane id="BorderPane" prefHeight="200" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.ChessController">
+    <top>
+        <HBox>
+            <padding>
+                <Insets left="10" top="10" right="10" bottom="5" />
+            </padding>
+            <children>
+              <Button text="New" />
+              <Region HBox.hgrow="ALWAYS" />
+              <Button text="Undo" />
+            </children>
+        </HBox>
+    </top>
+    <center>
+        <Pane fx:id="container">
+          <Canvas fx:id="canvas" />
+        </Pane>
+    </center>
+</BorderPane>
