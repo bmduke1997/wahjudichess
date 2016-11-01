@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.*?>
 
-<BorderPane id="VBox" prefHeight="300" prefWidth="240" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.AboutWindowController" stylesheets="@style.css">
+<BorderPane id="VBox" prefHeight="128" prefWidth="240" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.AboutWindowController" stylesheets="@style.css">
   <padding>
     <Insets top="10" bottom="10" left="10" right="10" />
   </padding>

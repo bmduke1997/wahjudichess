@@ -19,7 +19,7 @@ public class NewGameWindowController implements Initializable {
     private BooleanBinding whiteGoesFirst;
 
     @FXML
-    private Button closeButton;
+    private Button cancelButton;
 
     @FXML
     private Button playButton;
@@ -35,8 +35,8 @@ public class NewGameWindowController implements Initializable {
     }
 
     @FXML
-    private void closeButtonAction() {
-        ((Stage)closeButton.getScene().getWindow()).close();
+    private void cancelButtonAction() {
+        ((Stage)cancelButton.getScene().getWindow()).close();
     }
     
     @Override

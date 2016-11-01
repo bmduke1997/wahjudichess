@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.*?>
 
-<BorderPane id="VBox" prefHeight="100" prefWidth="240" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.NewGameWindowController" stylesheets="@style.css">
+<BorderPane id="VBox" prefHeight="128" prefWidth="240" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.NewGameWindowController" stylesheets="@style.css">
   <padding>
     <Insets top="10" bottom="10" left="10" right="10" />
   </padding>
@@ -27,7 +27,7 @@
   <bottom>
     <HBox spacing="5">
       <Region HBox.hgrow="ALWAYS" />
-      <Button text="Close" fx:id="closeButton" onAction="#closeButtonAction" />
+      <Button text="Cancel" fx:id="cancelButton" onAction="#cancelButtonAction" />
       <Button text="Play" fx:id="playButton" onAction="#playButtonAction" />
     </HBox>
   </bottom>
