@@ -8,19 +8,27 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.*?>
 
-<BorderPane id="VBox" prefHeight="300" prefWidth="240" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.NewGameWindowController" stylesheets="@style.css">
+<BorderPane id="VBox" prefHeight="100" prefWidth="240" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.NewGameWindowController" stylesheets="@style.css">
   <padding>
     <Insets top="10" bottom="10" left="10" right="10" />
   </padding>
   <center>
-    <VBox>
-      <Label text="Hello, world!" />
+    <VBox spacing="5">
+      <fx:define>
+        <ToggleGroup fx:id="whoGoesFirst" />
+      </fx:define>
+      <children>
+        <Label text="Who will go first?" />
+        <RadioButton text="Black" userData="Black" selected="true" toggleGroup="$whoGoesFirst" />
+        <RadioButton text="White" userData="White" toggleGroup="$whoGoesFirst" />
+      </children>
     </VBox>
   </center>
   <bottom>
-    <HBox>
+    <HBox spacing="5">
       <Region HBox.hgrow="ALWAYS" />
       <Button text="Close" fx:id="closeButton" onAction="#closeButtonAction" />
+      <Button text="Play" fx:id="playButton" onAction="#playButtonAction" />
     </HBox>
   </bottom>
 </BorderPane>
