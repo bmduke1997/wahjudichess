@@ -7,6 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.*?>
+<?import javafx.collections.*?>
 
 <BorderPane id="VBox" prefHeight="128" prefWidth="240" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.NewGameWindowController" stylesheets="@style.css">
   <padding>
@@ -18,14 +19,52 @@
         <ToggleGroup fx:id="whoGoesFirst" />
       </fx:define>
       <children>
-        <Label text="Who will go first?" />
-        <RadioButton text="Black" userData="Black" selected="true" toggleGroup="$whoGoesFirst" />
-        <RadioButton text="White" userData="White" toggleGroup="$whoGoesFirst" />
+        <Label text="Player Types" styleClass="header" />
+        <GridPane vgap="2" hgap="2">
+          <padding><Insets left="10" /></padding>
+          <HBox GridPane.columnIndex="0"
+                GridPane.rowIndex="0"
+                alignment="center_right">
+            <Label text="Black:" />
+          </HBox>
+          <ComboBox fx:id="blackTypeComboBox" GridPane.columnIndex="1"
+                    GridPane.rowIndex="0" value="Human">
+            <items>
+              <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Human" />
+                <String fx:value="AI" />
+              </FXCollections>
+            </items>
+          </ComboBox>
+          <HBox GridPane.columnIndex="0"
+                GridPane.rowIndex="1"
+                alignment="center_right">
+            <Label text="White:" />
+          </HBox>
+          <ComboBox fx:id="whiteTypeComboBox" GridPane.columnIndex="1"
+                    GridPane.rowIndex="1" value="Human">
+            <items>
+              <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Human" />
+                <String fx:value="AI" />
+              </FXCollections>
+            </items>
+          </ComboBox>
+        </GridPane>
+        <Label text="First Move" styleClass="header" />
+        <VBox spacing="2">
+          <padding><Insets left="10" /></padding>
+          <RadioButton text="Black" userData="Black" selected="true" toggleGroup="$whoGoesFirst" />
+          <RadioButton text="White" userData="White" toggleGroup="$whoGoesFirst" />
+        </VBox>
       </children>
     </VBox>
   </center>
   <bottom>
     <HBox spacing="5">
+      <padding>
+        <Insets top="10" />
+      </padding>
       <Region HBox.hgrow="ALWAYS" />
       <Button text="Cancel" fx:id="cancelButton" onAction="#cancelButtonAction" />
       <Button text="Play" fx:id="playButton" onAction="#playButtonAction" />
