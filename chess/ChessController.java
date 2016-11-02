@@ -15,6 +15,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
+import javafx.stage.Modality;
 
 public class ChessController implements Initializable {
     @FXML
@@ -28,10 +29,17 @@ public class ChessController implements Initializable {
 
     @FXML
     private void openNewGameWindow() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("NewGameWindow.fxml"));
+        URL url = getClass().getResource("NewGameWindow.fxml");
+        FXMLLoader loader = new FXMLLoader(url);
+        Parent root = loader.load();
+
+        ((NewGameWindowController)loader.getController())
+          .setChessController(this);
+      
         Scene scene = new Scene(root);
 
         Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("New Game...");
         stage.setScene(scene);
         stage.show();
@@ -39,10 +47,12 @@ public class ChessController implements Initializable {
 
     @FXML
     private void openAboutWindow() throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("AboutWindow.fxml"));
+        URL url = getClass().getResource("AboutWindow.fxml");
+        Parent root = FXMLLoader.load(url);
         Scene scene = new Scene(root);
 
         Stage stage = new Stage();
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.setTitle("About Wahjudi Chess");
         stage.setScene(scene);
         stage.show();
@@ -53,6 +63,12 @@ public class ChessController implements Initializable {
         
         gc.setFill(Color.WHITE);
         gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+    }
+
+    public void setupGame(boolean whiteGoesFirst,
+                          boolean blackIsHuman,
+                          boolean whiteIsHuman) {
+        System.out.println("Hello from the main window!");
     }
     
     @Override

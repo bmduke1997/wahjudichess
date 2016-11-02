@@ -20,6 +20,7 @@ public class NewGameWindowController implements Initializable {
     private BooleanBinding whiteGoesFirst;
     private BooleanBinding blackIsHuman;
     private BooleanBinding whiteIsHuman;
+    private ChessController chessController;
 
     @FXML
     private ComboBox<String> blackTypeComboBox;
@@ -38,10 +39,9 @@ public class NewGameWindowController implements Initializable {
 
     @FXML
     private void playButtonAction() {
-        System.out.println((whiteGoesFirst.get() ? "White" : "Black")
-                           + " goes first.");
-        System.out.println("Black will be a " + (blackIsHuman.get() ? "human" : "robot") + ".");
-        System.out.println("White will be a " + (whiteIsHuman.get() ? "human" : "robot") + ".");
+        chessController.setupGame(whiteGoesFirst.get(),
+                                  blackIsHuman.get(),
+                                  whiteIsHuman.get());
         ((Stage)playButton.getScene().getWindow()).close();
     }
 
@@ -49,9 +49,15 @@ public class NewGameWindowController implements Initializable {
     private void cancelButtonAction() {
         ((Stage)cancelButton.getScene().getWindow()).close();
     }
+
+    public void setChessController(ChessController c) {
+        chessController = c;
+    }
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        chessController = null;
+
         /* Bind whiteGoesFirst to the state of the radio buttons. */
         whiteGoesFirst = new BooleanBinding() {
             {
