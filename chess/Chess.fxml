@@ -8,6 +8,8 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.image.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.transform.*?>
 
 <BorderPane id="BorderPane" minWidth="190" minHeight="200" prefHeight="250" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.ChessController" stylesheets="@style.css">
     <top>
@@ -46,8 +48,7 @@
         </HBox>
     </top>
     <center>
-        <Pane fx:id="container">
-          <Canvas fx:id="canvas" />
-        </Pane>
+        <Group fx:id="solids">
+        </Group>
     </center>
 </BorderPane>

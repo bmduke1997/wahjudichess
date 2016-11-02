@@ -7,6 +7,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.control.Label;
 import javafx.scene.control.Button;
 import javafx.scene.paint.*;
@@ -16,10 +17,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.stage.Modality;
+import javafx.scene.transform.*;
+import javafx.scene.shape.Box;
 
 public class ChessController implements Initializable {
     @FXML
-    private Canvas canvas;
+    private Group solids;
     @FXML
     private Pane container;
     @FXML
@@ -58,13 +61,6 @@ public class ChessController implements Initializable {
         stage.show();
     }
     
-    private void drawCanvas() {
-        GraphicsContext gc = canvas.getGraphicsContext2D();
-        
-        gc.setFill(Color.WHITE);
-        gc.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-    }
-
     public void setupGame(boolean whiteGoesFirst,
                           boolean blackIsHuman,
                           boolean whiteIsHuman) {
@@ -77,13 +73,33 @@ public class ChessController implements Initializable {
         undoButton.setDisable(true);
         redoButton.setDisable(true);
 
-        /* Canvas follows the size of its containing pane. */
-        canvas.widthProperty().bind(container.widthProperty());
-        canvas.heightProperty().bind(container.heightProperty());
-        
-        /* Redraw the canvas when it changes size. */
-        canvas.widthProperty().addListener(e -> drawCanvas());
-        canvas.heightProperty().addListener(e -> drawCanvas());
+        /* Make the 3D board display. */
+        Material blackMat = new PhongMaterial(Color.BLACK);
+        Material whiteMat = new PhongMaterial(Color.WHITE);
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                Box box = new Box();
+
+                box.setWidth(10);
+                box.setHeight(1);
+                box.setDepth(10);
+
+                if (((i + j) & 1) == 1) {
+                    box.setMaterial(blackMat);
+                } else {
+                    box.setMaterial(whiteMat);
+                }
+
+                Translate translation = new Translate(i * 10,
+                                                      100,
+                                                      (j - 30) * 10);
+
+                box.getTransforms().add(translation);
+
+                solids.getChildren().add(box);
+            }
+        }
     }    
     
 }
