@@ -11,16 +11,18 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.transform.*?>
 
-<BorderPane id="BorderPane" minWidth="190" minHeight="200" prefHeight="250" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.ChessController" stylesheets="@style.css">
+<BorderPane id="BorderPane" minWidth="260" minHeight="200" prefHeight="250" prefWidth="340" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.ChessController" stylesheets="@style.css">
     <top>
-        <HBox spacing="5" styleClass="button-bar">
+        <HBox spacing="5" styleClass="button-bar" alignment="center">
             <padding>
                 <Insets left="10" top="10" right="10" bottom="10" />
             </padding>
             <children>
               <Button text="New" onAction="#openNewGameWindow" />
               <!-- <Region HBox.hgrow="ALWAYS" /> -->
-              <Slider fx:id="slider" min="0" max="360" value="0" HBox.hgrow="ALWAYS" />
+              <Slider fx:id="slider" min="0" max="360" showTickLabels="true" showTickMarks="true" majorTickUnit="90" minorTickCount="3" value="0" HBox.hgrow="ALWAYS">
+                <tooltip><Tooltip text="Rotation (in Degrees)" wrapText="true" /></tooltip>
+              </Slider>
               <Button fx:id="undoButton">
                 <tooltip><Tooltip text="Undo" wrapText="true" /></tooltip>
                 <graphic>
