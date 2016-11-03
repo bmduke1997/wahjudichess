@@ -26,7 +26,7 @@ def object_to_javafx(o):
     num = 0
     for vertex in o.data.vertices:
         coords = vertex.co
-        print(("(float)%.4f" % (-coords[0] * 5)) + ', ' + ("(float)%.4f" % (-coords[1] * 5)) + ', ' + ("(float)%.4f" % (-coords[2] * 5)), end='')
+        print(("(float)%.4f" % (-coords[0] * 5)) + ', ' + ("(float)%.4f" % (-coords[1] * 5)) + ', ' + ("(float)%.4f" % (-coords[2])), end='')
         if num != len(o.data.vertices) - 1:
             print(', ', end='')
         num += 1
