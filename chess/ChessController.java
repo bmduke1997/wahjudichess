@@ -2,6 +2,7 @@ package chess;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.scene.image.Image;
 import javafx.beans.binding.ObjectBinding;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -22,6 +23,8 @@ import javafx.scene.Parent;
 import javafx.stage.Modality;
 import javafx.scene.transform.*;
 import javafx.scene.shape.Box;
+import javafx.scene.input.MouseEvent;
+import javafx.event.EventHandler;
 
 public class ChessController implements Initializable {
     @FXML
@@ -76,12 +79,16 @@ public class ChessController implements Initializable {
         undoButton.setDisable(true);
         redoButton.setDisable(true);
 
-        /* Populate a group of solids with 3D board squares. */
+        /* Declare our group of solid shapes. */
         Group solids = new Group();;
 
-        Material blackMat = new PhongMaterial(Color.BLACK);
-        Material whiteMat = new PhongMaterial(Color.WHITE);
+        /* Initialize color materials for our tiles. */
+        Material blackMat = new PhongMaterial(Color.web("#000"));
+        Material hiblackMat = new PhongMaterial(Color.web("#666"));
+        Material whiteMat = new PhongMaterial(Color.web("#aaa"));
+        Material hiwhiteMat = new PhongMaterial(Color.web("#fff"));
 
+        /* Populate the group with boxes to make the checkerboard. */
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
                 Box box = new Box();
@@ -90,12 +97,51 @@ public class ChessController implements Initializable {
                 box.setHeight(10);
                 box.setDepth(2);
 
+                /* Color each tile black or white. */
                 if (((i + j) & 1) == 1) {
                     box.setMaterial(blackMat);
                 } else {
                     box.setMaterial(whiteMat);
                 }
 
+                /* Save the tile's position to pass to its handlers. */
+                int[] pos = new int[2];
+
+                pos[0] = i;
+                pos[1] = j;
+
+                box.setUserData(pos);
+
+                /* Hilight the row/column of hovered tiles. */
+                box.setOnMouseEntered(e -> {
+                    int[] passedPos = (int[])box.getUserData();
+
+                    if (((passedPos[0] + passedPos[1]) & 1) == 1) {
+                        box.setMaterial(hiblackMat);
+                    } else {
+                        box.setMaterial(hiwhiteMat);
+                    }
+                });
+
+                /* Darken when mouse leaves. */
+                box.setOnMouseExited(e -> {
+                    int[] passedPos = (int[])box.getUserData();
+
+                    if (((passedPos[0] + passedPos[1]) & 1) == 1) {
+                        box.setMaterial(blackMat);
+                    } else {
+                        box.setMaterial(whiteMat);
+                    }
+                });
+
+                /* Make tiles react to clicking. */
+                box.setOnMouseClicked(e -> {
+                    int[] passedPos = (int[])box.getUserData();
+                    System.out.println("Tile clicked: "
+                                       + pos[0] + " " + pos[1]);
+                });
+
+                /* Position the tile on the board. */
                 Translate translation = new Translate(((double)i - 2.0) * 10,
                                                       ((double)j - 2.0) * 10,
                                                       0);
@@ -108,30 +154,30 @@ public class ChessController implements Initializable {
         /* Create an internal scene for the 3D graphics. */
         SubScene sub = new SubScene((Parent)solids, 0, 0, true, null);
 
+        /* Declare the camera we will use for the board. */
         PerspectiveCamera camera = new PerspectiveCamera(true);
         camera.setFarClip(160);
 
+        /* Put the camera at a distance from the board. */
         camera.setTranslateY(80);
         camera.setTranslateZ(-80);
 
-        Rotate dynrot = new Rotate(0, 0, -80, 0);
-        dynrot.angleProperty().bind(slider.valueProperty());
-        camera.getTransforms().add(dynrot);
+        /* Make the slide-able rotation for the board. */
+        Rotate rotate = new Rotate(0, 0, -80, 0);
+        rotate.angleProperty().bind(slider.valueProperty());
+        camera.getTransforms().add(rotate);
 
-        Rotate xrot = new Rotate(45, Rotate.X_AXIS);;
-        camera.getTransforms().add(xrot);
+        /* The chin-down rotation for looking at the board. */
+        camera.getTransforms().add(new Rotate(45, Rotate.X_AXIS));
 
-        //camera.setRotationAxis(Rotate.X_AXIS);
-          //camera.setRotate(40);
-        //camera.setRotationAxis(Rotate.Z_AXIS);
-          //camera.setRotate(45);
+        /* Finally, make the subscene use the camera we've defined. */
         sub.setCamera(camera);
 
+        /* Ensure that the subscene resizes along with the window. */
         sub.widthProperty().bind(subScenePane.widthProperty());
         sub.heightProperty().bind(subScenePane.heightProperty());
 
+        /* Add the subscene to the window. */
         subScenePane.getChildren().add(sub);
-
     }    
-    
 }
