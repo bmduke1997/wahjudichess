@@ -78,7 +78,6 @@ public class ChessController implements Initializable {
 
         /* Populate a group of solids with 3D board squares. */
         Group solids = new Group();;
-        //solids.getChildren().add(new Box(10, 10, 10));
 
         Material blackMat = new PhongMaterial(Color.BLACK);
         Material whiteMat = new PhongMaterial(Color.WHITE);
@@ -97,8 +96,8 @@ public class ChessController implements Initializable {
                     box.setMaterial(whiteMat);
                 }
 
-                Translate translation = new Translate(((double)i - 2.5) * 10,
-                                                      ((double)j - 2.5) * 10,
+                Translate translation = new Translate(((double)i - 2.0) * 10,
+                                                      ((double)j - 2.0) * 10,
                                                       0);
 
                 box.getTransforms().add(translation);
@@ -110,11 +109,18 @@ public class ChessController implements Initializable {
         SubScene sub = new SubScene((Parent)solids, 0, 0, true, null);
 
         PerspectiveCamera camera = new PerspectiveCamera(true);
-        camera.setTranslateY(0);
+        camera.setFarClip(160);
+
+        camera.setTranslateY(80);
         camera.setTranslateZ(-80);
-        Rotate rotate = new Rotate(0, 0, -25, 0);
-        rotate.angleProperty().bind(slider.valueProperty());
-        camera.getTransforms().add(rotate);
+
+        Rotate dynrot = new Rotate(0, 0, -80, 0);
+        dynrot.angleProperty().bind(slider.valueProperty());
+        camera.getTransforms().add(dynrot);
+
+        Rotate xrot = new Rotate(45, Rotate.X_AXIS);;
+        camera.getTransforms().add(xrot);
+
         //camera.setRotationAxis(Rotate.X_AXIS);
           //camera.setRotate(40);
         //camera.setRotationAxis(Rotate.Z_AXIS);
