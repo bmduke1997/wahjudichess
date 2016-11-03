@@ -13,6 +13,10 @@
 #     object_to_javafx(bpy.data.objects['MyObject'])
 #
 # replacing the string 'MyObject' with the name of your model.
+#
+# Note!!!  It will only work on meshes with triangles instead of
+# quads.  You need to hit Ctrl+T in edit mode in the 3D View in
+# order to convert quads into tris.
 
 def object_to_javafx(o):
     # add a dummy tex coords (we use colors, not textures!)
