@@ -8,12 +8,15 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
-import javafx.scene.control.Label;
 import javafx.scene.control.Button;
+import javafx.scene.control.Slider;
 import javafx.scene.paint.*;
 import javafx.scene.canvas.*;
+import javafx.scene.shape.Sphere;
 import javafx.scene.layout.Pane;
 import javafx.scene.Scene;
+import javafx.scene.SubScene;
+import javafx.scene.PerspectiveCamera;
 import javafx.stage.Stage;
 import javafx.scene.Parent;
 import javafx.stage.Modality;
@@ -22,9 +25,9 @@ import javafx.scene.shape.Box;
 
 public class ChessController implements Initializable {
     @FXML
-    private Group solids;
+    private Slider slider;
     @FXML
-    private Pane container;
+    private Pane subScenePane;
     @FXML
     private Button undoButton;
     @FXML
@@ -73,7 +76,10 @@ public class ChessController implements Initializable {
         undoButton.setDisable(true);
         redoButton.setDisable(true);
 
-        /* Make the 3D board display. */
+        /* Populate a group of solids with 3D board squares. */
+        Group solids = new Group();;
+        //solids.getChildren().add(new Box(10, 10, 10));
+
         Material blackMat = new PhongMaterial(Color.BLACK);
         Material whiteMat = new PhongMaterial(Color.WHITE);
 
@@ -82,8 +88,8 @@ public class ChessController implements Initializable {
                 Box box = new Box();
 
                 box.setWidth(10);
-                box.setHeight(1);
-                box.setDepth(10);
+                box.setHeight(10);
+                box.setDepth(2);
 
                 if (((i + j) & 1) == 1) {
                     box.setMaterial(blackMat);
@@ -91,15 +97,35 @@ public class ChessController implements Initializable {
                     box.setMaterial(whiteMat);
                 }
 
-                Translate translation = new Translate(i * 10,
-                                                      100,
-                                                      (j - 30) * 10);
+                Translate translation = new Translate(((double)i - 2.5) * 10,
+                                                      ((double)j - 2.5) * 10,
+                                                      0);
 
                 box.getTransforms().add(translation);
-
                 solids.getChildren().add(box);
             }
         }
+
+        /* Create an internal scene for the 3D graphics. */
+        SubScene sub = new SubScene((Parent)solids, 0, 0, true, null);
+
+        PerspectiveCamera camera = new PerspectiveCamera(true);
+        camera.setTranslateY(0);
+        camera.setTranslateZ(-80);
+        Rotate rotate = new Rotate(0, 0, -25, 0);
+        rotate.angleProperty().bind(slider.valueProperty());
+        camera.getTransforms().add(rotate);
+        //camera.setRotationAxis(Rotate.X_AXIS);
+          //camera.setRotate(40);
+        //camera.setRotationAxis(Rotate.Z_AXIS);
+          //camera.setRotate(45);
+        sub.setCamera(camera);
+
+        sub.widthProperty().bind(subScenePane.widthProperty());
+        sub.heightProperty().bind(subScenePane.heightProperty());
+
+        subScenePane.getChildren().add(sub);
+
     }    
     
 }
