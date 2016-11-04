@@ -72,7 +72,10 @@ public class ChessController implements Initializable {
     public void setupGame(boolean whiteGoesFirst,
                           boolean blackIsHuman,
                           boolean whiteIsHuman) {
-        System.out.println("Hello from the main window!");
+        System.out.println("ChessController got message about new game.");
+        System.out.println("First player: " + (whiteGoesFirst ? "white" : "black"));
+        System.out.println("Black is " + (blackIsHuman ? "human" : "machine"));
+        System.out.println("White is " + (whiteIsHuman ? "human" : "machine"));
     }
     
     @Override
