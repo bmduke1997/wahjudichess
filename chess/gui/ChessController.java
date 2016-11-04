@@ -4,6 +4,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.image.Image;
 import javafx.beans.binding.ObjectBinding;
+import javafx.beans.property.SimpleFloatProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,6 +26,9 @@ import javafx.scene.transform.*;
 import javafx.scene.shape.Box;
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.scene.shape.MeshView;
 import javafx.scene.shape.TriangleMesh;
 
@@ -37,6 +41,8 @@ public class ChessController implements Initializable {
     private Button undoButton;
     @FXML
     private Button redoButton;
+    @FXML
+    private ImageView imgView;
 
     @FXML
     private void openNewGameWindow() throws Exception {
@@ -165,6 +171,17 @@ public class ChessController implements Initializable {
                     int[] passedPos = (int[])box.getUserData();
                     System.out.println("Tile clicked: "
                                        + pos[0] + " " + pos[1]);
+                    
+                    for (Node subSceneAsNode : subScenePane.getChildren()) {
+                        WritableImage img =
+                            ((SubScene)subSceneAsNode).snapshot(null, null);
+                        
+                        imgView.setImage(img);
+                        imgView.setPreserveRatio(true);
+                        imgView.fitWidthProperty().bind(subScenePane.widthProperty().multiply(0.25));
+                        
+                        subScenePane.getChildren().addAll(imgView);
+                    }
                 });
 
                 /* Position the tile on the board. */
