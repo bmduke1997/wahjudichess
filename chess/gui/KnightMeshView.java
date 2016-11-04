@@ -1,4 +1,4 @@
-package chess;
+package chess.gui;
 
 import javafx.scene.shape.MeshView;
 import javafx.scene.shape.TriangleMesh;

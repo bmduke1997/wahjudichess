@@ -1,4 +1,4 @@
-package chess;
+package chess.gui;
 
 import java.net.URL;
 import java.util.ResourceBundle;

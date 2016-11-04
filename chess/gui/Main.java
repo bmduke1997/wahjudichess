@@ -1,4 +1,4 @@
-package chess;
+package chess.gui;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

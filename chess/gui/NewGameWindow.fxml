@@ -9,7 +9,7 @@
 <?import javafx.geometry.*?>
 <?import javafx.collections.*?>
 
-<BorderPane id="VBox" prefHeight="128" prefWidth="240" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.NewGameWindowController" stylesheets="@style.css">
+<BorderPane id="VBox" prefHeight="128" prefWidth="240" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.gui.NewGameWindowController" stylesheets="@style.css">
   <padding>
     <Insets top="10" bottom="10" left="10" right="10" />
   </padding>
