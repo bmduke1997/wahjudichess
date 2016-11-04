@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6719bd32-4d1d-4062-b3eb-a54ad18ec736" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/board/Pawn.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/board/Piece.java" afterPath="$PROJECT_DIR$/board/Piece.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/board/Queen.java" afterPath="$PROJECT_DIR$/board/Queen.java" />
     </list>
     <ignored path="wahjudichess.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -748,7 +745,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1478286173970</updated>
-      <workItem from="1478286177649" duration="10324000" />
+      <workItem from="1478286177649" duration="10380000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'dev' of github.com:unternehmen/wahjudichess into dev&#10;&#10;# Conflicts:&#10;#&#9;chess/gui/ChessController.java&#10;">
       <created>1478294882430</created>
@@ -757,11 +754,18 @@
       <option name="project" value="LOCAL" />
       <updated>1478294882430</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Merge branch 'dev' of github.com:unternehmen/wahjudichess into dev&#10;&#10;# Conflicts:&#10;#&#9;chess/gui/ChessController.java&#10;">
+      <created>1478297687067</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1478297687067</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10324000" />
+    <option name="totallyTimeSpent" value="10380000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="34" width="1920" height="1046" extended-state="6" />
