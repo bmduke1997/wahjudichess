@@ -105,19 +105,19 @@ public class ChessController implements Initializable {
         /* Add test meshes to the board. */
         PawnMeshView pawnMeshView = new PawnMeshView();
         pawnMeshView.setMaterial(redMat);
-        pawnMeshView.setTranslateZ(-2);
+        pawnMeshView.setTranslateZ(18);
         solids.getChildren().add(pawnMeshView);
 
         RookMeshView rookMeshView = new RookMeshView();
         rookMeshView.setMaterial(greenMat);
         rookMeshView.setTranslateX(-10);
-        rookMeshView.setTranslateZ(-2);
+        rookMeshView.setTranslateZ(18);
         solids.getChildren().add(rookMeshView);
         
         KnightMeshView knightMeshView = new KnightMeshView();
         knightMeshView.setMaterial(blueMat);
         knightMeshView.setTranslateX(10);
-        knightMeshView.setTranslateZ(-2);
+        knightMeshView.setTranslateZ(18);
         solids.getChildren().add(knightMeshView);
         
         /* Populate the group with boxes to make the checkerboard. */
@@ -188,8 +188,8 @@ public class ChessController implements Initializable {
 
                 /* Position the tile on the board. */
                 Translate translation = new Translate(((double)i - 2.0) * 10,
-                                                      (((double)j - 2.0) * 10),
-                                                      0);
+                                                      (((double)j - 2.0) * 10) - 10,
+                                                      20);
 
                 box.getTransforms().add(translation);
                 solids.getChildren().add(box);
@@ -208,17 +208,16 @@ public class ChessController implements Initializable {
                     smallBox.setMaterial(whiteMat);
                 }
                 
-                /* Transform it so that it is always at the top left and at the
-                 * rotation of the big board. */
-                Translate smtrans = new Translate((((double)i - 2.0) * 10) - 80,
-                                                  (((double)j - 2.0) * 10) - 160,
-                                                  80);
+                /* Transform mini-board so that it is always at the top */
+                Translate smtrans = new Translate((((double)i - 2.0) * 10),
+                                                  (((double)j - 2.0) * 10) - 175,
+                                                  90);
                 Rotate smrotate = new Rotate(0, 0, 0, 0);
                 smrotate.angleProperty().bind(slider.valueProperty());
                 smallBox.getTransforms().add(smrotate);
-                Rotate sminnerrotate = new Rotate(0, ((((double)i - 2.0) * 10) - 80) + (20 - (10 * i)),
-                                                     ((((double)j - 2.0) * 10) - 160) + (20 - (10 * j)), 0);
-                sminnerrotate.angleProperty().bind(slider.valueProperty().negate());
+                Rotate sminnerrotate = new Rotate(0, ((((double)i - 2.0) * 10)) + (20 - (10 * i)),
+                                                     ((((double)j - 2.0) * 10) - 175) + (30 - (10 * j)), 0);
+                sminnerrotate.angleProperty().bind(slider.valueProperty().negate().subtract(0));
                 smallBox.getTransforms().add(sminnerrotate);
                 
                 smallBox.getTransforms().add(smtrans);
@@ -238,7 +237,7 @@ public class ChessController implements Initializable {
         camera.setTranslateZ(-80);
 
         /* Make the slide-able rotation for the board. */
-        Rotate rotate = new Rotate(0, 0, -80, 0);
+        Rotate rotate = new Rotate(0, 0, -90, 0);
         rotate.angleProperty().bind(slider.valueProperty());
         camera.getTransforms().add(rotate);
 
