@@ -102,7 +102,7 @@ public class ChessController implements Initializable {
         Material greenMat = new PhongMaterial(Color.web("#0f0"));
         Material blueMat = new PhongMaterial(Color.web("#00f"));
         
-        /* Add test meshes to the board. */
+        /* Add test meshes to the Board. */
         PawnMeshView pawnMeshView = new PawnMeshView();
         pawnMeshView.setMaterial(redMat);
         pawnMeshView.setTranslateZ(-2);
@@ -184,7 +184,7 @@ public class ChessController implements Initializable {
                     }
                 });
 
-                /* Position the tile on the board. */
+                /* Position the tile on the Board. */
                 Translate translation = new Translate(((double)i - 2.0) * 10,
                                                       ((double)j - 2.0) * 10,
                                                       0);
@@ -197,20 +197,20 @@ public class ChessController implements Initializable {
         /* Create an internal scene for the 3D graphics. */
         SubScene sub = new SubScene((Parent)solids, 0, 0, true, null);
 
-        /* Declare the camera we will use for the board. */
+        /* Declare the camera we will use for the Board. */
         PerspectiveCamera camera = new PerspectiveCamera(true);
         camera.setFarClip(160);
 
-        /* Put the camera at a distance from the board. */
+        /* Put the camera at a distance from the Board. */
         camera.setTranslateY(80);
         camera.setTranslateZ(-80);
 
-        /* Make the slide-able rotation for the board. */
+        /* Make the slide-able rotation for the Board. */
         Rotate rotate = new Rotate(0, 0, -80, 0);
         rotate.angleProperty().bind(slider.valueProperty());
         camera.getTransforms().add(rotate);
 
-        /* The chin-down rotation for looking at the board. */
+        /* The chin-down rotation for looking at the Board. */
         camera.getTransforms().add(new Rotate(45, Rotate.X_AXIS));
 
         /* Finally, make the subscene use the camera we've defined. */
