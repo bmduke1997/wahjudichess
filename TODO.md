@@ -6,7 +6,6 @@ This file lists things that still need to be done.
 * Implement the rules of the game as constraints for movement
 * Add victory condition
 * Implement the AI
-* Model pieces in Blender and convert them to JavaFX vertices. [Chris]
 
 ## Note: How to examine Blender models using Python
 
