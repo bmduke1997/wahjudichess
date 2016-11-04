@@ -102,27 +102,28 @@ public class ChessController implements Initializable {
         Material greenMat = new PhongMaterial(Color.web("#0f0"));
         Material blueMat = new PhongMaterial(Color.web("#00f"));
         
-        /* Add test meshes to the Board. */
+        /* Add test meshes to the board. */
         PawnMeshView pawnMeshView = new PawnMeshView();
         pawnMeshView.setMaterial(redMat);
-        pawnMeshView.setTranslateZ(-2);
+        pawnMeshView.setTranslateZ(18);
         solids.getChildren().add(pawnMeshView);
 
         RookMeshView rookMeshView = new RookMeshView();
         rookMeshView.setMaterial(greenMat);
         rookMeshView.setTranslateX(-10);
-        rookMeshView.setTranslateZ(-2);
+        rookMeshView.setTranslateZ(18);
         solids.getChildren().add(rookMeshView);
-
+        
         KnightMeshView knightMeshView = new KnightMeshView();
         knightMeshView.setMaterial(blueMat);
         knightMeshView.setTranslateX(10);
-        knightMeshView.setTranslateZ(-2);
+        knightMeshView.setTranslateZ(18);
         solids.getChildren().add(knightMeshView);
-
+        
         /* Populate the group with boxes to make the checkerboard. */
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
+                /* Create the big board. */
                 Box box = new Box();
 
                 box.setWidth(10);
@@ -169,6 +170,7 @@ public class ChessController implements Initializable {
                 /* Make tiles react to clicking. */
                 box.setOnMouseClicked(e -> {
                     int[] passedPos = (int[])box.getUserData();
+                    
                     System.out.println("Tile clicked: "
                                        + pos[0] + " " + pos[1]);
                     
@@ -184,33 +186,62 @@ public class ChessController implements Initializable {
                     }
                 });
 
-                /* Position the tile on the Board. */
+                /* Position the tile on the board. */
                 Translate translation = new Translate(((double)i - 2.0) * 10,
-                                                      ((double)j - 2.0) * 10,
-                                                      0);
+                                                      (((double)j - 2.0) * 10) - 10,
+                                                      20);
 
                 box.getTransforms().add(translation);
                 solids.getChildren().add(box);
+                
+                /* Create the small board (for showing the previous move). */
+                Box smallBox = new Box();
+                
+                smallBox.setWidth(10);
+                smallBox.setHeight(10);
+                smallBox.setDepth(2);
+                
+                /* Color each tile black or white. */
+                if (((i + j) & 1) == 1) {
+                    smallBox.setMaterial(blackMat);
+                } else {
+                    smallBox.setMaterial(whiteMat);
+                }
+                
+                /* Transform mini-board so that it is always at the top */
+                Translate smtrans = new Translate((((double)i - 2.0) * 10),
+                                                  (((double)j - 2.0) * 10) - 175,
+                                                  90);
+                Rotate smrotate = new Rotate(0, 0, 0, 0);
+                smrotate.angleProperty().bind(slider.valueProperty());
+                smallBox.getTransforms().add(smrotate);
+                Rotate sminnerrotate = new Rotate(0, ((((double)i - 2.0) * 10)) + (20 - (10 * i)),
+                                                     ((((double)j - 2.0) * 10) - 175) + (30 - (10 * j)), 0);
+                sminnerrotate.angleProperty().bind(slider.valueProperty().negate().subtract(0));
+                smallBox.getTransforms().add(sminnerrotate);
+                
+                smallBox.getTransforms().add(smtrans);
+                solids.getChildren().add(smallBox);
             }
         }
 
         /* Create an internal scene for the 3D graphics. */
         SubScene sub = new SubScene((Parent)solids, 0, 0, true, null);
 
-        /* Declare the camera we will use for the Board. */
+        /* Declare the camera we will use for the board. */
         PerspectiveCamera camera = new PerspectiveCamera(true);
-        camera.setFarClip(160);
+        camera.setFarClip(400);
 
-        /* Put the camera at a distance from the Board. */
+        /* Put the camera at a distance from the board. */
         camera.setTranslateY(80);
         camera.setTranslateZ(-80);
 
-        /* Make the slide-able rotation for the Board. */
-        Rotate rotate = new Rotate(0, 0, -80, 0);
+        /* Make the slide-able rotation for the board. */
+        Rotate rotate = new Rotate(0, 0, -90, 0);
         rotate.angleProperty().bind(slider.valueProperty());
         camera.getTransforms().add(rotate);
 
-        /* The chin-down rotation for looking at the Board. */
+        /* The chin-down rotation for looking at the board. */
         camera.getTransforms().add(new Rotate(45, Rotate.X_AXIS));
 
         /* Finally, make the subscene use the camera we've defined. */
