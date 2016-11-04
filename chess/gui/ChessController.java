@@ -102,6 +102,8 @@ public class ChessController implements Initializable {
         Material greenMat = new PhongMaterial(Color.web("#0f0"));
         Material blueMat = new PhongMaterial(Color.web("#00f"));
         Material yellowMat = new PhongMaterial(Color.web("#ff0"));
+        Material purpleMat = new PhongMaterial(Color.web("#f0f"));
+        Material tealMat = new PhongMaterial(Color.web("#0ff"));
         
         /* Add test meshes to the board. */
         PawnMeshView pawnMeshView = new PawnMeshView();
@@ -126,6 +128,19 @@ public class ChessController implements Initializable {
         queenMeshView.setTranslateX(20);
         queenMeshView.setTranslateZ(18);
         solids.getChildren().add(queenMeshView);
+        
+        KingMeshView kingMeshView = new KingMeshView();
+        kingMeshView.setMaterial(purpleMat);
+        kingMeshView.setTranslateX(-20);
+        kingMeshView.setTranslateZ(18);
+        solids.getChildren().add(kingMeshView);
+        
+        BishopMeshView bishopMeshView = new BishopMeshView();
+        bishopMeshView.setMaterial(tealMat);
+        bishopMeshView.setTranslateX(-20);
+        bishopMeshView.setTranslateY(-10);
+        bishopMeshView.setTranslateZ(18);
+        solids.getChildren().add(bishopMeshView);
         
         /* Populate the group with boxes to make the checkerboard. */
         for (int i = 0; i < 5; i++) {
