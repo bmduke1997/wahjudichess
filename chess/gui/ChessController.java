@@ -102,13 +102,13 @@ public class ChessController implements Initializable {
         pawnMeshView.setTranslateZ(-2);
         solids.getChildren().add(pawnMeshView);
 
-        KnightMeshView knightMeshView = new KnightMeshView();
-        knightMeshView.setMaterial(greenMat);
-        knightMeshView.setTranslateX(-10);
-        knightMeshView.setTranslateZ(-2);
-        solids.getChildren().add(knightMeshView);
+        RookMeshView rookMeshView = new RookMeshView();
+        rookMeshView.setMaterial(greenMat);
+        rookMeshView.setTranslateX(-10);
+        rookMeshView.setTranslateZ(-2);
+        solids.getChildren().add(rookMeshView);
 
-        knightMeshView = new KnightMeshView();
+        KnightMeshView knightMeshView = new KnightMeshView();
         knightMeshView.setMaterial(blueMat);
         knightMeshView.setTranslateX(10);
         knightMeshView.setTranslateZ(-2);
