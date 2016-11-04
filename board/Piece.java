@@ -5,6 +5,9 @@ package board;
  */
 public abstract class Piece {
     private int x, y, value, color;
+    //color 0=black, 1=white
+    public static final int BLACK = 0;
+    public static final int WHITE = 1;
 
     public Piece(int x, int y, int value, int color){
         this.x = x;

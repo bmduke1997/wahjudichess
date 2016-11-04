@@ -11,6 +11,7 @@ public class Queen extends Piece{
         super(x, y, value, color);
     }
 
+    @Override
     public Movement[] movement(Piece[][] board){
         int i = 0, tempX, tempY;
 
