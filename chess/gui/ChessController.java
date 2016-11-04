@@ -113,16 +113,17 @@ public class ChessController implements Initializable {
         rookMeshView.setTranslateX(-10);
         rookMeshView.setTranslateZ(-2);
         solids.getChildren().add(rookMeshView);
-
+        
         KnightMeshView knightMeshView = new KnightMeshView();
         knightMeshView.setMaterial(blueMat);
         knightMeshView.setTranslateX(10);
         knightMeshView.setTranslateZ(-2);
         solids.getChildren().add(knightMeshView);
-
+        
         /* Populate the group with boxes to make the checkerboard. */
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
+                /* Create the big board. */
                 Box box = new Box();
 
                 box.setWidth(10);
@@ -169,6 +170,7 @@ public class ChessController implements Initializable {
                 /* Make tiles react to clicking. */
                 box.setOnMouseClicked(e -> {
                     int[] passedPos = (int[])box.getUserData();
+                    
                     System.out.println("Tile clicked: "
                                        + pos[0] + " " + pos[1]);
                     
@@ -186,11 +188,41 @@ public class ChessController implements Initializable {
 
                 /* Position the tile on the board. */
                 Translate translation = new Translate(((double)i - 2.0) * 10,
-                                                      ((double)j - 2.0) * 10,
+                                                      (((double)j - 2.0) * 10),
                                                       0);
 
                 box.getTransforms().add(translation);
                 solids.getChildren().add(box);
+                
+                /* Create the small board (for showing the previous move). */
+                Box smallBox = new Box();
+                
+                smallBox.setWidth(10);
+                smallBox.setHeight(10);
+                smallBox.setDepth(2);
+                
+                /* Color each tile black or white. */
+                if (((i + j) & 1) == 1) {
+                    smallBox.setMaterial(blackMat);
+                } else {
+                    smallBox.setMaterial(whiteMat);
+                }
+                
+                /* Transform it so that it is always at the top left and at the
+                 * rotation of the big board. */
+                Translate smtrans = new Translate((((double)i - 2.0) * 10) - 80,
+                                                  (((double)j - 2.0) * 10) - 160,
+                                                  80);
+                Rotate smrotate = new Rotate(0, 0, 0, 0);
+                smrotate.angleProperty().bind(slider.valueProperty());
+                smallBox.getTransforms().add(smrotate);
+                Rotate sminnerrotate = new Rotate(0, ((((double)i - 2.0) * 10) - 80) + (20 - (10 * i)),
+                                                     ((((double)j - 2.0) * 10) - 160) + (20 - (10 * j)), 0);
+                sminnerrotate.angleProperty().bind(slider.valueProperty().negate());
+                smallBox.getTransforms().add(sminnerrotate);
+                
+                smallBox.getTransforms().add(smtrans);
+                solids.getChildren().add(smallBox);
             }
         }
 
@@ -199,7 +231,7 @@ public class ChessController implements Initializable {
 
         /* Declare the camera we will use for the board. */
         PerspectiveCamera camera = new PerspectiveCamera(true);
-        camera.setFarClip(160);
+        camera.setFarClip(400);
 
         /* Put the camera at a distance from the board. */
         camera.setTranslateY(80);
