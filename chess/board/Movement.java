@@ -1,4 +1,4 @@
-package board;
+package chess.board;
 
 /**
  * Created by brandon on 11/4/16.

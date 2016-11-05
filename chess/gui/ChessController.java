@@ -1,5 +1,6 @@
 package chess.gui;
 
+import chess.board.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.image.Image;
@@ -33,6 +34,7 @@ import javafx.scene.shape.MeshView;
 import javafx.scene.shape.TriangleMesh;
 
 public class ChessController implements Initializable {
+    private Group solids;
     @FXML
     private Slider slider;
     @FXML
@@ -72,10 +74,77 @@ public class ChessController implements Initializable {
         stage.setScene(scene);
         stage.show();
     }
+
+    public void put(Board board, Piece piece, int x, int y) {
+        MeshView mv = null;
+
+        if (piece instanceof Pawn) {
+            mv = (MeshView)(new PawnMeshView());
+        } else if (piece instanceof Queen) {
+            mv = (MeshView)(new QueenMeshView());
+        } else if (piece instanceof Knight) {
+            mv = (MeshView)(new KnightMeshView());
+        } else if (piece instanceof King) {
+            mv = (MeshView)(new KingMeshView());
+        } else if (piece instanceof Rook) {
+            mv = (MeshView)(new RookMeshView());
+        } else if (piece instanceof Bishop) {
+            mv = (MeshView)(new BishopMeshView());
+        }
+
+        mv.translateXProperty()
+          .bind(
+            piece
+              .xPositionProperty()
+              .subtract(2)
+              .multiply(10));
+        mv.translateYProperty()
+          .bind(
+            piece
+              .yPositionProperty()
+              .subtract(3)
+              .multiply(10));
+        mv.setRotationAxis(Rotate.Z_AXIS);
+        mv.setTranslateZ(18);
+
+        Material mat;
+        if (piece.getColor() == Piece.BLACK) {
+            mat = new PhongMaterial(Color.web("#333"));
+        } else {
+            mv.setRotate(180);
+            mat = new PhongMaterial(Color.web("#fff"));
+        }
+        mv.setMaterial(mat);
+
+        board.put(piece, x, y);
+        solids.getChildren().add(mv);
+    }
     
     public void setupGame(boolean whiteGoesFirst,
                           boolean blackIsHuman,
                           boolean whiteIsHuman) {
+        Board board = new Board();
+        put(board, new King(0, 0, Piece.BLACK), 0, 0);
+        put(board, new Queen(1, 0, Piece.BLACK), 1, 0);
+        put(board, new Bishop(2, 0, Piece.BLACK), 2, 0);
+        put(board, new Knight(3, 0, Piece.BLACK), 3, 0);
+        put(board, new Rook(4, 0, Piece.BLACK), 4, 0);
+        put(board, new Pawn(0, 1, Piece.BLACK), 0, 1);
+        put(board, new Pawn(1, 1, Piece.BLACK), 1, 1);
+        put(board, new Pawn(2, 1, Piece.BLACK), 2, 1);
+        put(board, new Pawn(3, 1, Piece.BLACK), 3, 1);
+        put(board, new Pawn(4, 1, Piece.BLACK), 4, 1);
+
+        put(board, new King(0, 4, Piece.WHITE), 0, 4);
+        put(board, new Queen(1, 4, Piece.WHITE), 1, 4);
+        put(board, new Bishop(2, 4, Piece.WHITE), 2, 4);
+        put(board, new Knight(3, 4, Piece.WHITE), 3, 4);
+        put(board, new Rook(4, 4, Piece.WHITE), 4, 4);
+        put(board, new Pawn(0, 3, Piece.WHITE), 0, 3);
+        put(board, new Pawn(1, 3, Piece.WHITE), 1, 3);
+        put(board, new Pawn(2, 3, Piece.WHITE), 2, 3);
+        put(board, new Pawn(3, 3, Piece.WHITE), 3, 3);
+        put(board, new Pawn(4, 3, Piece.WHITE), 4, 3);
         System.out.println("ChessController got message about new game.");
         System.out.println("First player: " + (whiteGoesFirst ? "white" : "black"));
         System.out.println("Black is " + (blackIsHuman ? "human" : "machine"));
@@ -89,56 +158,13 @@ public class ChessController implements Initializable {
         redoButton.setDisable(true);
 
         /* Declare our group of solid shapes. */
-        Group solids = new Group();;
+        solids = new Group();;
 
         /* Initialize color materials for our tiles. */
         Material blackMat = new PhongMaterial(Color.web("#000"));
         Material hiblackMat = new PhongMaterial(Color.web("#666"));
         Material whiteMat = new PhongMaterial(Color.web("#aaa"));
         Material hiwhiteMat = new PhongMaterial(Color.web("#fff"));
-        Material redMat = new PhongMaterial(Color.web("#f00"));
-        Material greenMat = new PhongMaterial(Color.web("#0f0"));
-        Material blueMat = new PhongMaterial(Color.web("#00f"));
-        Material yellowMat = new PhongMaterial(Color.web("#ff0"));
-        Material purpleMat = new PhongMaterial(Color.web("#f0f"));
-        Material tealMat = new PhongMaterial(Color.web("#0ff"));
-        
-        /* Add test meshes to the board. */
-        PawnMeshView pawnMeshView = new PawnMeshView();
-        pawnMeshView.setMaterial(redMat);
-        pawnMeshView.setTranslateZ(18);
-        solids.getChildren().add(pawnMeshView);
-
-        RookMeshView rookMeshView = new RookMeshView();
-        rookMeshView.setMaterial(greenMat);
-        rookMeshView.setTranslateX(-10);
-        rookMeshView.setTranslateZ(18);
-        solids.getChildren().add(rookMeshView);
-        
-        KnightMeshView knightMeshView = new KnightMeshView();
-        knightMeshView.setMaterial(blueMat);
-        knightMeshView.setTranslateX(10);
-        knightMeshView.setTranslateZ(18);
-        solids.getChildren().add(knightMeshView);
-        
-        QueenMeshView queenMeshView = new QueenMeshView();
-        queenMeshView.setMaterial(yellowMat);
-        queenMeshView.setTranslateX(20);
-        queenMeshView.setTranslateZ(18);
-        solids.getChildren().add(queenMeshView);
-        
-        KingMeshView kingMeshView = new KingMeshView();
-        kingMeshView.setMaterial(purpleMat);
-        kingMeshView.setTranslateX(-20);
-        kingMeshView.setTranslateZ(18);
-        solids.getChildren().add(kingMeshView);
-        
-        BishopMeshView bishopMeshView = new BishopMeshView();
-        bishopMeshView.setMaterial(tealMat);
-        bishopMeshView.setTranslateX(-20);
-        bishopMeshView.setTranslateY(-10);
-        bishopMeshView.setTranslateZ(18);
-        solids.getChildren().add(bishopMeshView);
         
         /* Populate the group with boxes to make the checkerboard. */
         for (int i = 0; i < 5; i++) {

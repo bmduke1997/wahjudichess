@@ -1,4 +1,4 @@
-package board;
+package chess.board;
 
 /**
  * Created by brandon on 11/4/16.
@@ -7,8 +7,8 @@ public class Queen extends Piece{
 
     private Movement[] myMovements = new Movement[16];
 
-    public Queen(int x, int y, int value, int color) {
-        super(x, y, value, color);
+    public Queen(int x, int y, int color) {
+        super(x, y, 10, color);
     }
 
     @Override

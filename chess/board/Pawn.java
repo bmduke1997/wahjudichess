@@ -1,4 +1,4 @@
-package board;
+package chess.board;
 
 /**
  * Created by brandon on 11/4/16.
@@ -6,8 +6,8 @@ package board;
 public class Pawn extends Piece {
     private Movement[] myMovements = new Movement[3];
 
-    public Pawn(int x, int y, int value, int color) {
-        super(x, y, value, color);
+    public Pawn(int x, int y, int color) {
+        super(x, y, 1, color);
     }
 
     @Override
