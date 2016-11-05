@@ -11,7 +11,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.transform.*?>
 
-<BorderPane id="BorderPane" minWidth="260" minHeight="200" prefHeight="250" prefWidth="340" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.gui.ChessController" stylesheets="@style.css">
+<BorderPane id="BorderPane" minWidth="260" minHeight="200" prefHeight="350" prefWidth="440" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.gui.ChessController" stylesheets="@style.css">
     <top>
         <HBox spacing="5" styleClass="button-bar" alignment="center">
             <padding>
