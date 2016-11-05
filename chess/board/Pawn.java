@@ -12,7 +12,7 @@ public class Pawn extends Piece {
 
     @Override
     public Movement[] movement(Piece[][] board) {
-        int i = 0;
+        int i = -1;
         int j = 0;
         int tempX = getX();
         int tempY = getY();

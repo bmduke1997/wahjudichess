@@ -4,7 +4,6 @@ package chess.board;
  * Created by brandon on 11/4/16.
  */
 public class Queen extends Piece{
-
     private Movement[] myMovements = new Movement[16];
 
     public Queen(int x, int y, int color) {
@@ -13,7 +12,7 @@ public class Queen extends Piece{
 
     @Override
     public Movement[] movement(Piece[][] board){
-        int i = 0, tempX, tempY;
+        int i = -1, tempX, tempY;
 
         // dx and dy represent the direction from the player which we are scanning
         for (int dx = -1; dx <= 1; dx++) {

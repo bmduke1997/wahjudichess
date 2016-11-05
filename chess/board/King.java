@@ -1,13 +1,45 @@
 package chess.board;
 
 /**
- * Created by brandon on 11/4/16.
+ * Created by Brody on 11/4/16.
  */
-public class King extends Piece {
-    public King(int x, int y, int color) {
-        super(x, y, 6, color);
-    }
-
-    @Override
-    public Movement[] movement(Piece[][] board) {return null;}
+public class King extends Piece
+{
+	private Movement[] myMovements = new Movement[8];
+	
+	public King(int x, int y, int color)
+	{
+		super(x, y, 1, color);
+	}
+	
+	public Movement[] movement(Piece[][] board)
+	{
+		int i = -1;
+		int j = -1;
+		int k = -1;
+		int tempX = getX();
+		int tempY = getY();
+		
+		for (; j < 2; j++)
+		{
+			tempX += j;
+			for (; k < 2; k++)
+			{
+				if(j == 0 && k == 0) continue;
+				
+				tempY += k;
+				if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX] == null)
+				{
+		            myMovements[i++] = new Movement(tempX, tempY);
+		        }
+		        else if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor())
+		        {
+		            myMovements[i++] = new Movement(tempX, tempY);
+		            break;
+		        }
+		        else break;
+			}
+		}
+		return myMovements;
+	}
 }

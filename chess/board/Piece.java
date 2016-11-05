@@ -1,37 +1,36 @@
 package chess.board;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 /**
  * Created by brandon on 11/4/16.
  */
 public abstract class Piece {
-    private int x, y, value, color;
-    private IntegerProperty xPosition, yPosition;
+    private IntegerProperty x, y;
+    private int value, color;
     //color 0=black, 1=white
     public static final int BLACK = 0;
     public static final int WHITE = 1;
 
     public Piece(int x, int y, int value, int color){
-        this.xPosition = new SimpleIntegerProperty(x);
-        this.yPosition = new SimpleIntegerProperty(y);
-        this.x = x;
-        this.y = y;
+        this.x = new SimpleIntegerProperty(x);
+        this.y = new SimpleIntegerProperty(y);
         this. value = value;
-         this.color = color;
+        this.color = color;
     }
 
-    public IntegerProperty xPositionProperty() { return xPosition; }
-    public IntegerProperty yPositionProperty() { return yPosition; }
-
     public int getX(){
-        return x;
+        return x.get();
     }
 
     public int getY(){
-        return y;
+        return y.get();
     }
+
+    public IntegerProperty xProperty() { return x; }
+
+    public IntegerProperty yProperty() { return y; }
 
     public int getValue(){
         return value;

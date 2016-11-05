@@ -107,13 +107,13 @@ public class ChessController implements Initializable {
         mv.translateXProperty()
           .bind(
             piece
-              .xPositionProperty()
+              .xProperty()
               .subtract(2)
               .multiply(10));
         mv.translateYProperty()
           .bind(
             piece
-              .yPositionProperty()
+              .yProperty()
               .subtract(3)
               .multiply(10));
         mv.setRotationAxis(Rotate.Z_AXIS);
@@ -131,14 +131,14 @@ public class ChessController implements Initializable {
         /* Combine the x and y of the piece into an array, 'binding'. */
         ObjectBinding binding = new ObjectBinding() {
             {
-                super.bind(piece.xPositionProperty(),
-                        piece.yPositionProperty());
+                super.bind(piece.xProperty(),
+                        piece.yProperty());
             }
 
             @Override
                 protected Object computeValue() {
-                    int value[] = {piece.xPositionProperty().get(),
-                        piece.yPositionProperty().get()};
+                    int value[] = {piece.xProperty().get(),
+                        piece.yProperty().get()};
 
                     return (Object)value;
                 }
