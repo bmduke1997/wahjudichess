@@ -41,8 +41,6 @@ public class ChessController implements Initializable {
     private Button undoButton;
     @FXML
     private Button redoButton;
-    @FXML
-    private ImageView imgView;
 
     @FXML
     private void openNewGameWindow() throws Exception {
@@ -195,17 +193,6 @@ public class ChessController implements Initializable {
                     
                     System.out.println("Tile clicked: "
                                        + pos[0] + " " + pos[1]);
-                    
-                    for (Node subSceneAsNode : subScenePane.getChildren()) {
-                        WritableImage img =
-                            ((SubScene)subSceneAsNode).snapshot(null, null);
-                        
-                        imgView.setImage(img);
-                        imgView.setPreserveRatio(true);
-                        imgView.fitWidthProperty().bind(subScenePane.widthProperty().multiply(0.25));
-                        
-                        subScenePane.getChildren().addAll(imgView);
-                    }
                 });
 
                 /* Position the tile on the board. */

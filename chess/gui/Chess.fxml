@@ -20,7 +20,6 @@
             <children>
               <Button text="New" onAction="#openNewGameWindow" />
               <!-- <Region HBox.hgrow="ALWAYS" /> -->
-              <ImageView fx:id="imgView" />
               <Slider fx:id="slider" min="0" max="360" showTickLabels="true" showTickMarks="true" majorTickUnit="90" minorTickCount="3" value="0" HBox.hgrow="ALWAYS">
                 <tooltip><Tooltip text="Rotation (in Degrees)" wrapText="true" /></tooltip>
               </Slider>
