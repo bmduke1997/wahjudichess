@@ -25,6 +25,7 @@ import javafx.scene.Parent;
 import javafx.stage.Modality;
 import javafx.scene.transform.*;
 import javafx.scene.shape.Box;
+import javafx.scene.shape.Shape3D;
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
@@ -34,7 +35,18 @@ import javafx.scene.shape.MeshView;
 import javafx.scene.shape.TriangleMesh;
 
 public class ChessController implements Initializable {
+    private Board board;
+    private Group cellGroups[][];
     private Group solids;
+
+    /* Color materials. */
+    private final Material blackMat = new PhongMaterial(Color.web("#000"));
+    private final Material hiblackMat = new PhongMaterial(Color.web("#666"));
+    private final Material whiteMat = new PhongMaterial(Color.web("#aaa"));
+    private final Material hiwhiteMat = new PhongMaterial(Color.web("#fff"));
+    private final Material pieceBlackMat = new PhongMaterial(Color.web("#333"));
+    private final Material pieceWhiteMat = new PhongMaterial(Color.web("#ddd"));
+
     @FXML
     private Slider slider;
     @FXML
@@ -52,7 +64,7 @@ public class ChessController implements Initializable {
 
         ((NewGameWindowController)loader.getController())
           .setChessController(this);
-      
+
         Scene scene = new Scene(root);
 
         Stage stage = new Stage();
@@ -76,7 +88,7 @@ public class ChessController implements Initializable {
     }
 
     public void put(Board board, Piece piece, int x, int y) {
-        MeshView mv = null;
+        final MeshView mv;
 
         if (piece instanceof Pawn) {
             mv = (MeshView)(new PawnMeshView());
@@ -88,7 +100,7 @@ public class ChessController implements Initializable {
             mv = (MeshView)(new KingMeshView());
         } else if (piece instanceof Rook) {
             mv = (MeshView)(new RookMeshView());
-        } else if (piece instanceof Bishop) {
+        } else {
             mv = (MeshView)(new BishopMeshView());
         }
 
@@ -112,18 +124,46 @@ public class ChessController implements Initializable {
             mat = new PhongMaterial(Color.web("#333"));
         } else {
             mv.setRotate(180);
-            mat = new PhongMaterial(Color.web("#fff"));
+            mat = new PhongMaterial(Color.web("#ddd"));
         }
         mv.setMaterial(mat);
 
+        /* Combine the x and y of the piece into an array, 'binding'. */
+        ObjectBinding binding = new ObjectBinding() {
+            {
+                super.bind(piece.xPositionProperty(),
+                        piece.yPositionProperty());
+            }
+
+            @Override
+                protected Object computeValue() {
+                    int value[] = {piece.xPositionProperty().get(),
+                        piece.yPositionProperty().get()};
+
+                    return (Object)value;
+                }
+        };
+
+        /* Updates the cell group matrix whenever the piece moves. */
+        binding.addListener((obs, old, neu) -> {
+            if (old != null) {
+                int[] oldints = (int[])old;
+                cellGroups[oldints[0]][oldints[1]].getChildren().remove(mv);
+            }
+
+            int[] neuints = (int[])neu;
+            cellGroups[neuints[0]][neuints[1]].getChildren().add(mv);
+        });
+
         board.put(piece, x, y);
-        solids.getChildren().add(mv);
+        cellGroups[x][y].getChildren().add(mv);
     }
-    
+
     public void setupGame(boolean whiteGoesFirst,
                           boolean blackIsHuman,
                           boolean whiteIsHuman) {
-        Board board = new Board();
+        board = new Board();
+
         put(board, new King(0, 0, Piece.BLACK), 0, 0);
         put(board, new Queen(1, 0, Piece.BLACK), 1, 0);
         put(board, new Bishop(2, 0, Piece.BLACK), 2, 0);
@@ -135,24 +175,34 @@ public class ChessController implements Initializable {
         put(board, new Pawn(3, 1, Piece.BLACK), 3, 1);
         put(board, new Pawn(4, 1, Piece.BLACK), 4, 1);
 
-        put(board, new Rook(0, 4, Piece.WHITE), 4, 4);
-        put(board, new Knight(1, 4, Piece.WHITE), 3, 4);
+        put(board, new Rook(0, 4, Piece.WHITE), 0, 4);
+        put(board, new Knight(1, 4, Piece.WHITE), 1, 4);
         put(board, new Bishop(2, 4, Piece.WHITE), 2, 4);
-        put(board, new Queen(3, 4, Piece.WHITE), 1, 4);
-        put(board, new King(4, 4, Piece.WHITE), 0, 4);
+        put(board, new Queen(3, 4, Piece.WHITE), 3, 4);
+        put(board, new King(4, 4, Piece.WHITE), 4, 4);
         put(board, new Pawn(0, 3, Piece.WHITE), 0, 3);
         put(board, new Pawn(1, 3, Piece.WHITE), 1, 3);
         put(board, new Pawn(2, 3, Piece.WHITE), 2, 3);
         put(board, new Pawn(3, 3, Piece.WHITE), 3, 3);
         put(board, new Pawn(4, 3, Piece.WHITE), 4, 3);
+
         System.out.println("ChessController got message about new game.");
         System.out.println("First player: " + (whiteGoesFirst ? "white" : "black"));
         System.out.println("Black is " + (blackIsHuman ? "human" : "machine"));
         System.out.println("White is " + (whiteIsHuman ? "human" : "machine"));
     }
-    
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        /* Initialize the cell groups (tile + piece groups). */
+        cellGroups = new Group[5][5];
+
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                cellGroups[i][j] = new Group();
+            }
+        }
+
         /* Undo/redo buttons start out disabled. */
         undoButton.setDisable(true);
         redoButton.setDisable(true);
@@ -160,12 +210,6 @@ public class ChessController implements Initializable {
         /* Declare our group of solid shapes. */
         solids = new Group();;
 
-        /* Initialize color materials for our tiles. */
-        Material blackMat = new PhongMaterial(Color.web("#000"));
-        Material hiblackMat = new PhongMaterial(Color.web("#666"));
-        Material whiteMat = new PhongMaterial(Color.web("#aaa"));
-        Material hiwhiteMat = new PhongMaterial(Color.web("#fff"));
-        
         /* Populate the group with boxes to make the checkerboard. */
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -184,41 +228,59 @@ public class ChessController implements Initializable {
                 }
 
                 /* Save the tile's position to pass to its handlers. */
-                int[] pos = new int[2];
-
-                pos[0] = i;
-                pos[1] = j;
-
-                box.setUserData(pos);
+                final int pos[] = {i, j};
 
                 /* Hilight the row/column of hovered tiles. */
-                box.setOnMouseEntered(e -> {
-                    int[] passedPos = (int[])box.getUserData();
+                cellGroups[i][j].setOnMouseEntered(e -> {
+                    int x = pos[0];
+                    int y = pos[1];
 
-                    if (((passedPos[0] + passedPos[1]) & 1) == 1) {
-                        box.setMaterial(hiblackMat);
-                    } else {
-                        box.setMaterial(hiwhiteMat);
+                    for (Node child : cellGroups[x][y].getChildren()) {
+                        if (child instanceof Box) {
+                            if (((x + y) & 1) == 1) {
+                                ((Box)child).setMaterial(hiblackMat);
+                            } else {
+                                ((Box)child).setMaterial(hiwhiteMat);
+                            }
+                        } else {
+                            if (board.getPlayingBoard()[x][y].getColor() == Piece.BLACK) {
+                                ((MeshView)child).setMaterial(hiblackMat);
+                            } else {
+                                ((MeshView)child).setMaterial(hiwhiteMat);
+                            }
+                        }
                     }
                 });
 
                 /* Darken when mouse leaves. */
-                box.setOnMouseExited(e -> {
-                    int[] passedPos = (int[])box.getUserData();
+                cellGroups[i][j].setOnMouseExited(e -> {
+                    int x = pos[0];
+                    int y = pos[1];
 
-                    if (((passedPos[0] + passedPos[1]) & 1) == 1) {
-                        box.setMaterial(blackMat);
-                    } else {
-                        box.setMaterial(whiteMat);
+                    for (Node child : cellGroups[x][y].getChildren()) {
+                        if (child instanceof Box) {
+                            if (((x + y) & 1) == 1) {
+                                ((Box)child).setMaterial(blackMat);
+                            } else {
+                                ((Box)child).setMaterial(whiteMat);
+                            }
+                        } else {
+                            if (board.getPlayingBoard()[x][y].getColor() == Piece.BLACK) {
+                                ((MeshView)child).setMaterial(pieceBlackMat);
+                            } else {
+                                ((MeshView)child).setMaterial(pieceWhiteMat);
+                            }
+                        }
                     }
                 });
 
                 /* Make tiles react to clicking. */
-                box.setOnMouseClicked(e -> {
-                    int[] passedPos = (int[])box.getUserData();
-                    
+                cellGroups[i][j].setOnMouseClicked(e -> {
+                    int x = pos[0];
+                    int y = pos[1];
+
                     System.out.println("Tile clicked: "
-                                       + pos[0] + " " + pos[1]);
+                        + x + " " + y);
                 });
 
                 /* Position the tile on the board. */
@@ -227,7 +289,8 @@ public class ChessController implements Initializable {
                                                       20);
 
                 box.getTransforms().add(translation);
-                solids.getChildren().add(box);
+                cellGroups[i][j].getChildren().add(box);
+                solids.getChildren().add(cellGroups[i][j]);
                 
                 /* Create the small board (for showing the previous move). */
                 Box smallBox = new Box();
