@@ -135,11 +135,11 @@ public class ChessController implements Initializable {
         put(board, new Pawn(3, 1, Piece.BLACK), 3, 1);
         put(board, new Pawn(4, 1, Piece.BLACK), 4, 1);
 
-        put(board, new King(0, 4, Piece.WHITE), 0, 4);
-        put(board, new Queen(1, 4, Piece.WHITE), 1, 4);
+        put(board, new Rook(0, 4, Piece.WHITE), 4, 4);
+        put(board, new Knight(1, 4, Piece.WHITE), 3, 4);
         put(board, new Bishop(2, 4, Piece.WHITE), 2, 4);
-        put(board, new Knight(3, 4, Piece.WHITE), 3, 4);
-        put(board, new Rook(4, 4, Piece.WHITE), 4, 4);
+        put(board, new Queen(3, 4, Piece.WHITE), 1, 4);
+        put(board, new King(4, 4, Piece.WHITE), 0, 4);
         put(board, new Pawn(0, 3, Piece.WHITE), 0, 3);
         put(board, new Pawn(1, 3, Piece.WHITE), 1, 3);
         put(board, new Pawn(2, 3, Piece.WHITE), 2, 3);
