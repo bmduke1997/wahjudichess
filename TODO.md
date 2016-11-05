@@ -1,5 +1,6 @@
 This file lists things that still need to be done.
 
+* Add hover, leaving, & clicking reactions to the pieces themselves.
 * Write a board structure which supports undo & redo
 * Implement piece movement and piece rendering
 * Turn taking
