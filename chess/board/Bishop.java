@@ -43,7 +43,7 @@ public class Bishop extends Piece
 					tempY = getY();
 					dx = 1;
 				}
-				else break;
+				else continue; 
 
 			}
 			if (dy == 1) break;
