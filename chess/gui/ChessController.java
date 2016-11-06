@@ -163,6 +163,17 @@ public class ChessController implements Initializable {
     public void setupGame(boolean whiteGoesFirst,
                           boolean blackIsHuman,
                           boolean whiteIsHuman) {
+        /* Get rid of models for old pieces. */
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                cellGroups[i][j].getChildren().removeIf(o -> o instanceof MeshView);
+            }
+        }
+
+        /* Empty the board. */
+        board.clear();
+
+        /* Set up the pieces for a game. */
         put(board, new King(0, 0, Piece.BLACK), 0, 0);
         put(board, new Queen(1, 0, Piece.BLACK), 1, 0);
         put(board, new Bishop(2, 0, Piece.BLACK), 2, 0);

@@ -17,6 +17,14 @@ public class Board {
         return playingBoard;
     }
 
+    public void clear() {
+        for (int i = 0; i < 5; i++) {
+            for (int j = 0; j < 5; j++) {
+                playingBoard[i][j] = null;
+            }
+        }
+    }
+
     public void move(int srcX, int srcY, int destX, int destY) {
         Piece piece = playingBoard[srcY][srcX];
         playingBoard[srcY][srcX] = null;
