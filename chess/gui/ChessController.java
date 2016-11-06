@@ -38,6 +38,7 @@ public class ChessController implements Initializable {
     private Board board;
     private Group cellGroups[][];
     private Group solids;
+    private Piece selection = null;
 
     /* Color materials. */
     private final Material blackMat = new PhongMaterial(Color.web("#000"));
@@ -162,8 +163,6 @@ public class ChessController implements Initializable {
     public void setupGame(boolean whiteGoesFirst,
                           boolean blackIsHuman,
                           boolean whiteIsHuman) {
-        board = new Board();
-
         put(board, new King(0, 0, Piece.BLACK), 0, 0);
         put(board, new Queen(1, 0, Piece.BLACK), 1, 0);
         put(board, new Bishop(2, 0, Piece.BLACK), 2, 0);
@@ -194,6 +193,8 @@ public class ChessController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        board = new Board();
+
         /* Initialize the cell groups (tile + piece groups). */
         cellGroups = new Group[5][5];
 
@@ -243,7 +244,7 @@ public class ChessController implements Initializable {
                                 ((Box)child).setMaterial(hiwhiteMat);
                             }
                         } else {
-                            if (board.getPlayingBoard()[x][y].getColor() == Piece.BLACK) {
+                            if (board.getPieceAt(x, y).getColor() == Piece.BLACK) {
                                 ((MeshView)child).setMaterial(hiblackMat);
                             } else {
                                 ((MeshView)child).setMaterial(hiwhiteMat);
@@ -265,7 +266,7 @@ public class ChessController implements Initializable {
                                 ((Box)child).setMaterial(whiteMat);
                             }
                         } else {
-                            if (board.getPlayingBoard()[x][y].getColor() == Piece.BLACK) {
+                            if (board.getPieceAt(x, y).getColor() == Piece.BLACK) {
                                 ((MeshView)child).setMaterial(pieceBlackMat);
                             } else {
                                 ((MeshView)child).setMaterial(pieceWhiteMat);
@@ -281,6 +282,24 @@ public class ChessController implements Initializable {
 
                     System.out.println("Tile clicked: "
                         + x + " " + y);
+                    if (selection == null) {
+                        /* Try to select the piece if there is one */
+                        if (board.getPieceAt(x, y) != null) {
+                            selection = board.getPieceAt(x, y);
+                            System.out.println("Selected piece.");
+                        }
+                    } else {
+                        /* Try to move the piece to that square. */
+                        if (board.isLegalMove(
+                              selection.movement(
+                                board.getPlayingBoard()),
+                              x, y)) {
+                            System.out.println("Move would be successful.");
+                        }
+
+                        System.out.println("Selection freed.");
+                        selection = null;
+                    }
                 });
 
                 /* Position the tile on the board. */
