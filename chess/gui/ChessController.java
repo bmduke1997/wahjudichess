@@ -294,6 +294,8 @@ public class ChessController implements Initializable {
                               selection.movement(
                                 board.getPlayingBoard()),
                               x, y)) {
+                            /* remove mesh for taken pieces, if appropriate */
+                            cellGroups[x][y].getChildren().removeIf(o -> o instanceof MeshView);
                             board.move(selection.getX(), selection.getY(), x, y);
                             System.out.println("Move was be successful.");
                         }
