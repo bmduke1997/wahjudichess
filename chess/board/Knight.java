@@ -5,7 +5,7 @@ package chess.board;
  */
 public class Knight extends Piece
 {
-    private Movement[] myMovements = new Movement[8];
+    public Movement[] myMovements = new Movement[8];
 
     public Knight(int x, int y, int color)
     {
@@ -14,74 +14,67 @@ public class Knight extends Piece
 
     public Movement[] movement(Piece[][] board)
     {
-        int i = -1;
+        int i = 0;
         int tempX = getX();
         int tempY = getY();
         
-        int dx = -1;
-        int dy = -2;
+        int dy;
+        int dx;
         
-        while (dx <= 1)
+        for(dy = -1; dy <= 1; dy++)
         {
-        	tempX += dx;
-        	while (dy <= 2)
-        	{
-	            tempY += dy;
-	            if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX] == null)
-	            {
-	                myMovements[i++] = new Movement(tempX, tempY);
-	            }
-	            else if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor())
-	            {
-	                myMovements[i++] = new Movement(tempX, tempY);
-	                break;
-	            }
-	            else if(dy == -2)
-	            {
-	                tempY = getY();
-	                dy = 2;
-	            }
-	            else break;
-        	}
-        	if(dx == 1) break;
-        	else
-        	{
-        		tempX = getX();
-        		dx = 1;
-        		dy = -2;
-        	}
+			tempY += dy;
+			for (dx = -2; dx <= 2; dx++)
+			{
+				tempX += dx;
+				if (tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX] == null) {
+					myMovements[i++] = new Movement(tempY, tempX);
+				}
+				else if (tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor()) {
+					myMovements[i++] = new Movement(tempY, tempX);
+					break;
+				}
+				if (dx == -2) {
+					tempX = getX();
+					dx = 1;
+				}
+			}
+			if (dy == -1)
+			{
+				tempY = getY();
+				tempX = getX();
+				dy = 0;
+			}
         }
-        
-        dx = -2;
-        dy = -1;
-        
-        while (dx <= 2)
+
+        tempY = getY();
+		tempX = getX();
+
+        for (dy = -2; dy <= 2; dy++)
         {
-        	tempX += dx;
-        	while (dy <= 1)
+        	tempY += dy;
+        	for(dx = -1; dx <= 1; dx++)
         	{
-	            tempY += dy;
+	            tempX += dx;
 	            if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX] == null){
-	                myMovements[i++] = new Movement(tempX, tempY);
+	                myMovements[i++] = new Movement(tempY, tempX);
 	            }
 	            else if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor()){
-	                myMovements[i++] = new Movement(tempX, tempY);
+	                myMovements[i++] = new Movement(tempY, tempX);
 	                break;
 	            }
-	            else if(dy == -1)
+	            if(dx == -1)
 	            {
-	                tempY = getY();
-	                dy = 1;
+	                tempX = getX();
+	                dx = 0;
 	            }
 	            else break;
         	}
-        	if(dx == 2) break;
-        	else
-        	{
-        		tempX = getX();
-        		dx = 2;
-        		dy = -1;
-        	}
+        	if(dy == -2) {
+				tempY = getY();
+				tempX = getX();
+				dy = 1;
+			}
         }
         
         return myMovements;

@@ -4,7 +4,7 @@ package chess.board;
  * Created by brandon on 11/4/16.
  */
 public class Pawn extends Piece {
-    private Movement[] myMovements = new Movement[3];
+    public Movement[] myMovements = new Movement[3];
 
     public Pawn(int x, int y, int color) {
         super(x, y, 1, color);
@@ -12,7 +12,7 @@ public class Pawn extends Piece {
 
     @Override
     public Movement[] movement(Piece[][] board) {
-        int i = -1;
+        int i = 0;
         int j = 0;
         int tempX = getX();
         int tempY = getY();
@@ -24,11 +24,11 @@ public class Pawn extends Piece {
             j = -1;
         }
         if(tempY + j < 5 && board[tempY+j][tempX] == null){
-            myMovements[i++]= new Movement (tempX, tempY+j);
+            myMovements[i++]= new Movement (tempY+j, tempX);
         }
         try {
             if (tempY + j < 5 && tempX + j < 5&& board[tempY+j][tempX+j].getColor() != getColor()){
-                myMovements[i++]= new Movement (tempX+j, tempY+j);
+                myMovements[i++]= new Movement (tempY+j, tempX+j);
             }
         }
         catch (Exception e){
@@ -36,7 +36,7 @@ public class Pawn extends Piece {
         }
         try {
             if (tempY + j < 5 && tempX - j > 0 && board[tempY+j][tempX-j].getColor() != getColor()){
-                myMovements[i++]= new Movement (tempX-j, tempY+j);
+                myMovements[i++]= new Movement (tempY+j, tempX-j);
             }
         }
         catch (Exception e) {

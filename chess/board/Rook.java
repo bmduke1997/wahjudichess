@@ -6,7 +6,7 @@ package chess.board;
 public class Rook extends Piece
 {
 
-    private Movement[] myMovements = new Movement[8];
+    public Movement[] myMovements = new Movement[8];
 
     public Rook (int x, int y, int color)
     {
@@ -18,7 +18,7 @@ public class Rook extends Piece
     {
         int tempX = getX();
         int tempY = getY();
-        int i = -1;
+        int i = 0;
 
         int dx = -1;
         int dy = -1;
@@ -29,11 +29,11 @@ public class Rook extends Piece
             tempX += dx;
             if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX] == null)
             {
-                myMovements[i++] = new Movement(tempX, tempY);
+                myMovements[i++] = new Movement(tempY, tempX);
             }
             else if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor())
             {
-                myMovements[i++] = new Movement(tempX, tempY);
+                myMovements[i++] = new Movement(tempY, tempX);
                 break;
             }
             else if(tempX == -1)
@@ -44,17 +44,19 @@ public class Rook extends Piece
             else break;
         }
 
+        tempX = getX();
+
         //Checks Top to bottom
         while (dy <= 1)
         {
             tempY += dy;
             if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX] == null)
             {
-                myMovements[i++] = new Movement(tempX, tempY);
+                myMovements[i++] = new Movement(tempY, tempX);
             }
             else if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor())
             {
-                myMovements[i++] = new Movement(tempX, tempY);
+                myMovements[i++] = new Movement(tempY, tempX);
                 break;
             }
             else if(tempY == -1)

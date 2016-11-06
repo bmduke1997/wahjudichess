@@ -5,7 +5,7 @@ package chess.board;
  */
 public class Bishop extends Piece
 {
-	private Movement[] myMovements = new Movement[8];
+	public Movement[] myMovements = new Movement[8];
 	
 	public Bishop(int x, int y, int color)
 	{
@@ -14,44 +14,45 @@ public class Bishop extends Piece
 	
 	public Movement[] movement(Piece[][] board)
 	{
-		int i = -1;
+		int i = 0;
+		int j = 0;
 		int tempX = getX();
 		int tempY = getY();
 		
 		int dx = -1;
 		int dy = -1;
 		
-		while (dx <= 1)
+		while (dy <= 1)
 		{
-			while (dy <= 1)
+			while (dx <= 1)
 			{
 				tempX += dx;
 				tempY += dy;
-				if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX] == null)
+				if (tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX] == null) {
+					myMovements[i++] = new Movement(tempY, tempX);
+				} else if (tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor()) {
+					myMovements[i++] = new Movement(tempY, tempX);
+					break;
+				}
+				else if(dx == 1)
 				{
-	                myMovements[i++] = new Movement(tempX, tempY);
-	            }
-	            else if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor())
-	            {
-	                myMovements[i++] = new Movement(tempX, tempY);
-	                break;
-	            }
-	            else if(dy == 1) 
-	            {
-	            	break;
-	           	}
-	            else if (tempY <= 0 || tempY >= 5)
-	            {
-	            	tempY = getY();
-	            	dy = 1;
-	            }
-	            else break;
+					break;
+				}
+				else if (tempX <= 0 || tempX >= 5) {
+					tempX = getX();
+					tempY = getY();
+					dx = 1;
+				}
+				else break;
+
 			}
-			if (dx == 1) break;
+			if (dy == 1) break;
 			else
 			{
+				tempY = getY();
 				tempX = getX();
-				dx = 1;
+				dy = 1;
+				dx = -1;
 			}
 		}
 		
