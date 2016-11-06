@@ -6,18 +6,18 @@ package chess.board;
 public class King extends Piece
 {
 	public Movement[] myMovements = new Movement[8];
-	
+
 	public King(int x, int y, int color)
 	{
 		super(x, y, 2, color);
 	}
-	
+
 	public Movement[] movement(Piece[][] board)
 	{
 		int i = 0;
 		int tempX = getX();
 		int tempY = getY();
-		
+
 		for (int j = -1; j < 2; j++)
 		{
 			tempY +=j;
@@ -29,7 +29,7 @@ public class King extends Piece
 				} else if (tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor()) {
 					myMovements[i++] = new Movement(tempY, tempX);
 					break;
-				} else break;
+				}
 				tempX = getX();
 			}
 			tempY = getY();
