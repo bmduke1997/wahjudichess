@@ -294,7 +294,8 @@ public class ChessController implements Initializable {
                               selection.movement(
                                 board.getPlayingBoard()),
                               x, y)) {
-                            System.out.println("Move would be successful.");
+                            board.move(selection.getX(), selection.getY(), x, y);
+                            System.out.println("Move was be successful.");
                         }
 
                         System.out.println("Selection freed.");

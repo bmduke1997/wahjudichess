@@ -17,6 +17,15 @@ public class Board {
         return playingBoard;
     }
 
+    public void move(int srcX, int srcY, int destX, int destY) {
+        Piece piece = playingBoard[srcY][srcX];
+        playingBoard[srcY][srcX] = null;
+        /* bug - here, delete any taken pieces and kill its model on-screen */
+        playingBoard[destY][destX] = piece;
+        piece.setX(destX);
+        piece.setY(destY);
+    }
+
     public Piece getPieceAt(int x, int y) {
         return playingBoard[y][x];
     }
