@@ -5,8 +5,7 @@ package chess.board;
  */
 public class Rook extends Piece
 {
-
-    public Movement[] myMovements = new Movement[8];
+    private Movement[] myMovements = new Movement[8];
 
     public Rook (int x, int y, int color)
     {
@@ -34,9 +33,14 @@ public class Rook extends Piece
             else if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor())
             {
                 myMovements[i++] = new Movement(tempY, tempX);
-                break;
+                if(dx == -1)
+                {
+                    tempX = getX();
+                    dx = 1;
+                }
+                else break;
             }
-            else if(tempX == -1)
+            else if(dx == -1)
             {
                 tempX = getX();
                 dx = 1;
@@ -57,9 +61,14 @@ public class Rook extends Piece
             else if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor())
             {
                 myMovements[i++] = new Movement(tempY, tempX);
-                break;
+                if(dy == -1)
+                {
+                    tempY = getY();
+                    dy = 1;
+                }
+                else break;
             }
-            else if(tempY == -1)
+            else if(dy == -1)
             {
                 tempY = getY();
                 dy = 1;

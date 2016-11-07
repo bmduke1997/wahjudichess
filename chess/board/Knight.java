@@ -5,7 +5,7 @@ package chess.board;
  */
 public class Knight extends Piece
 {
-    public Movement[] myMovements = new Movement[8];
+    private Movement[] myMovements = new Movement[8];
 
     public Knight(int x, int y, int color)
     {

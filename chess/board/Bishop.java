@@ -5,7 +5,7 @@ package chess.board;
  */
 public class Bishop extends Piece
 {
-	public Movement[] myMovements = new Movement[8];
+	private Movement[] myMovements = new Movement[8];
 	
 	public Bishop(int x, int y, int color)
 	{
@@ -30,8 +30,27 @@ public class Bishop extends Piece
 				tempY += dy;
 				if (tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX] == null) {
 					myMovements[i++] = new Movement(tempY, tempX);
-				} else if (tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor()) {
+				}
+				else if (tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() == getColor()) {
+					if(dx == -1) {
+						tempX = getX();
+						tempY = getY();
+						dx = 1;
+					}
+					else if(dx == 1)
+					{
+						break;
+					}
+				}
+				else if (tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor()) {
 					myMovements[i++] = new Movement(tempY, tempX);
+					if (dx == -1) {
+						tempX = getX();
+						tempY = getY();
+						dx = 1;
+					} else if (dx == 1) {
+						break;
+					}
 				}
 				else if(dx == 1)
 				{
@@ -42,7 +61,6 @@ public class Bishop extends Piece
 					tempY = getY();
 					dx = 1;
 				}
-				else continue; 
 
 			}
 			if (dy == 1) break;

@@ -4,7 +4,8 @@ package chess.board;
  * Created by brandon on 11/4/16.
  */
 public class Queen extends Piece{
-    public Movement[] myMovements = new Movement[16];
+
+    private Movement[] myMovements = new Movement[16];
 
     public Queen(int x, int y, int color) {
         super(x, y, 10, color);
