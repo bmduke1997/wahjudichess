@@ -31,6 +31,7 @@ import javafx.scene.shape.Shape3D;
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.shape.MeshView;
@@ -219,16 +220,16 @@ public class ChessController implements Initializable {
         /* Make the selection ring. */
         Group selectionRing = new Group();
         Material blueMat = new PhongMaterial(Color.web("#cff"));
-        Box top = new Box(10, 1, 2);
+        Box top = new Box(10, 1, 0.2);
         top.setMaterial(blueMat);
         top.setTranslateY(-4.5);
-        Box left = new Box(1, 10, 2);
+        Box left = new Box(1, 10, 0.2);
         left.setTranslateX(-4.5);
         left.setMaterial(blueMat);
-        Box bottom = new Box(10, 1, 2);
+        Box bottom = new Box(10, 1, 0.2);
         bottom.setMaterial(blueMat);
         bottom.setTranslateY(4.5); /* maybe 1 less? */
-        Box right = new Box(1, 10, 2);
+        Box right = new Box(1, 10, 0.2);
         right.setMaterial(blueMat);
         right.setTranslateX(4.5); /* maybe 1 less? */
         selectionRing.getChildren().addAll(top, bottom, left, right);
@@ -239,7 +240,7 @@ public class ChessController implements Initializable {
         selectionRing
           .translateYProperty()
           .bind(selectionY.subtract(2).multiply(10).subtract(10));
-        selectionRing.setTranslateZ(19.25);
+        selectionRing.setTranslateZ(18.8 + (top.getDepth() / 2));
         solids.getChildren().add(selectionRing);
 
         /* Undo/redo buttons start out disabled. */
