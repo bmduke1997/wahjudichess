@@ -9,8 +9,8 @@ public class Board {
 
     public Board(){}
 
-    public void put(Piece piece, int x, int y) {
-         playingBoard[y][x] = piece;
+    public void put(Piece piece) {
+         playingBoard[piece.getY()][piece.getX()] = piece;
     }
 
     public Piece[][] getPlayingBoard() {
@@ -20,18 +20,35 @@ public class Board {
     public void clear() {
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
-                playingBoard[i][j] = null;
+                remove(j, i);
             }
         }
     }
 
     public void move(int srcX, int srcY, int destX, int destY) {
+        System.out.println("Executing move...");
+
         Piece piece = playingBoard[srcY][srcX];
-        playingBoard[srcY][srcX] = null;
-        /* bug - here, delete any taken pieces and kill its model on-screen */
+
+        /* If there is already a piece at the spot, remove it. */
+        if (playingBoard[destY][destX] != null) {
+            remove(destX, destY);
+        }
+
         playingBoard[destY][destX] = piece;
-        piece.setX(destX);
-        piece.setY(destY);
+
+        piece.setPosition(destX, destY);
+
+        playingBoard[srcY][srcX] = null;
+    }
+
+    public void remove(int x, int y) {
+        if (playingBoard[y][x] == null)
+            return;
+
+        playingBoard[y][x].setPosition(-1, -1);
+
+        playingBoard[y][x] = null;
     }
 
     public Piece getPieceAt(int x, int y) {

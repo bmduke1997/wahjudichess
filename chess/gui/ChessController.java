@@ -88,7 +88,7 @@ public class ChessController implements Initializable {
         stage.show();
     }
 
-    public void put(Board board, Piece piece, int x, int y) {
+    public void put(Board board, Piece piece) {
         final MeshView mv;
 
         if (piece instanceof Pawn) {
@@ -129,35 +129,24 @@ public class ChessController implements Initializable {
         }
         mv.setMaterial(mat);
 
-        /* Combine the x and y of the piece into an array, 'binding'. */
-        ObjectBinding binding = new ObjectBinding() {
-            {
-                super.bind(piece.xProperty(),
-                        piece.yProperty());
-            }
-
-            @Override
-                protected Object computeValue() {
-                    int value[] = {piece.xProperty().get(),
-                        piece.yProperty().get()};
-
-                    return (Object)value;
-                }
-        };
-
-        /* Updates the cell group matrix whenever the piece moves. */
-        binding.addListener((obs, old, neu) -> {
-            if (old != null) {
-                int[] oldints = (int[])old;
-                cellGroups[oldints[0]][oldints[1]].getChildren().remove(mv);
-            }
-
+	/* Updates the cell group matrix whenever the piece moves. */
+        piece.positionProperty().addListener((obs, old, neu) -> {
+            int[] oldints = (int[])old;
             int[] neuints = (int[])neu;
-            cellGroups[neuints[0]][neuints[1]].getChildren().add(mv);
+
+            if (old != null) {
+                if (oldints[0] != -1 && oldints[1] != -1) {
+                    cellGroups[oldints[0]][oldints[1]].getChildren().remove(mv);
+                }
+            }
+
+            if (neuints[0] != -1 && neuints[1] != -1) {
+                cellGroups[neuints[0]][neuints[1]].getChildren().add(mv);
+            }
         });
 
-        board.put(piece, x, y);
-        cellGroups[x][y].getChildren().add(mv);
+        board.put(piece);
+        cellGroups[piece.getX()][piece.getY()].getChildren().add(mv);
     }
 
     public void setupGame(boolean whiteGoesFirst,
@@ -174,27 +163,27 @@ public class ChessController implements Initializable {
         board.clear();
 
         /* Set up the pieces for a game. */
-        put(board, new King(0, 0, Piece.BLACK), 0, 0);
-        put(board, new Queen(1, 0, Piece.BLACK), 1, 0);
-        put(board, new Bishop(2, 0, Piece.BLACK), 2, 0);
-        put(board, new Knight(3, 0, Piece.BLACK), 3, 0);
-        put(board, new Rook(4, 0, Piece.BLACK), 4, 0);
-        put(board, new Pawn(0, 1, Piece.BLACK), 0, 1);
-        put(board, new Pawn(1, 1, Piece.BLACK), 1, 1);
-        put(board, new Pawn(2, 1, Piece.BLACK), 2, 1);
-        put(board, new Pawn(3, 1, Piece.BLACK), 3, 1);
-        put(board, new Pawn(4, 1, Piece.BLACK), 4, 1);
+        put(board, new King(0, 0, Piece.BLACK));
+        put(board, new Queen(1, 0, Piece.BLACK));
+        put(board, new Bishop(2, 0, Piece.BLACK));
+        put(board, new Knight(3, 0, Piece.BLACK));
+        put(board, new Rook(4, 0, Piece.BLACK));
+        put(board, new Pawn(0, 1, Piece.BLACK));
+        put(board, new Pawn(1, 1, Piece.BLACK));
+        put(board, new Pawn(2, 1, Piece.BLACK));
+        put(board, new Pawn(3, 1, Piece.BLACK));
+        put(board, new Pawn(4, 1, Piece.BLACK));
 
-        put(board, new Rook(0, 4, Piece.WHITE), 0, 4);
-        put(board, new Knight(1, 4, Piece.WHITE), 1, 4);
-        put(board, new Bishop(2, 4, Piece.WHITE), 2, 4);
-        put(board, new Queen(3, 4, Piece.WHITE), 3, 4);
-        put(board, new King(4, 4, Piece.WHITE), 4, 4);
-        put(board, new Pawn(0, 3, Piece.WHITE), 0, 3);
-        put(board, new Pawn(1, 3, Piece.WHITE), 1, 3);
-        put(board, new Pawn(2, 3, Piece.WHITE), 2, 3);
-        put(board, new Pawn(3, 3, Piece.WHITE), 3, 3);
-        put(board, new Pawn(4, 3, Piece.WHITE), 4, 3);
+        put(board, new Rook(0, 4, Piece.WHITE));
+        put(board, new Knight(1, 4, Piece.WHITE));
+        put(board, new Bishop(2, 4, Piece.WHITE));
+        put(board, new Queen(3, 4, Piece.WHITE));
+        put(board, new King(4, 4, Piece.WHITE));
+        put(board, new Pawn(0, 3, Piece.WHITE));
+        put(board, new Pawn(1, 3, Piece.WHITE));
+        put(board, new Pawn(2, 3, Piece.WHITE));
+        put(board, new Pawn(3, 3, Piece.WHITE));
+        put(board, new Pawn(4, 3, Piece.WHITE));
 
         System.out.println("ChessController got message about new game.");
         System.out.println("First player: " + (whiteGoesFirst ? "white" : "black"));
@@ -308,7 +297,6 @@ public class ChessController implements Initializable {
                             /* remove mesh for taken pieces, if appropriate */
                             cellGroups[x][y].getChildren().removeIf(o -> o instanceof MeshView);
                             board.move(selection.getX(), selection.getY(), x, y);
-                            System.out.println("Move was be successful.");
                         }
 
                         System.out.println("Selection freed.");
