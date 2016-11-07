@@ -315,8 +315,6 @@ public class ChessController implements Initializable {
                     int x = pos[0];
                     int y = pos[1];
 
-                    System.out.println("Tile clicked: "
-                        + x + " " + y);
                     if (selection == null) {
                         /* Try to select the piece if there is one */
                         if (board.getPieceAt(x, y) != null) {
@@ -335,7 +333,6 @@ public class ChessController implements Initializable {
                             board.move(selection.getX(), selection.getY(), x, y);
                         }
 
-                        System.out.println("Selection freed.");
                         selectionX.set(-100);
                         selectionY.set(-100);
                         selection = null;

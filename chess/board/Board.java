@@ -26,8 +26,6 @@ public class Board {
     }
 
     public void move(int srcX, int srcY, int destX, int destY) {
-        System.out.println("Executing move...");
-
         Piece piece = playingBoard[srcY][srcX];
 
         /* If there is already a piece at the spot, remove it. */
