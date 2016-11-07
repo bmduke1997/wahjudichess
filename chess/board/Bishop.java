@@ -32,7 +32,6 @@ public class Bishop extends Piece
 					myMovements[i++] = new Movement(tempY, tempX);
 				} else if (tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor()) {
 					myMovements[i++] = new Movement(tempY, tempX);
-					break;
 				}
 				else if(dx == 1)
 				{
