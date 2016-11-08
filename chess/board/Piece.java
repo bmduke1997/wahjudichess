@@ -66,4 +66,5 @@ public abstract class Piece {
 
     public abstract Movement[] movement(Piece[][] board);
 
+    public abstract void clear();
 }

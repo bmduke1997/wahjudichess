@@ -10,7 +10,7 @@ public class Board {
     public Board(){}
 
     public void put(Piece piece) {
-         playingBoard[piece.getY()][piece.getX()] = piece;
+        playingBoard[piece.getY()][piece.getX()] = piece;
     }
 
     public Piece[][] getPlayingBoard() {
@@ -58,23 +58,20 @@ public class Board {
     public boolean isLegalMove(Board board, Piece piece, Movement[] myMovements, int targetX, int targetY)
     {
         boolean found = false;
-        if(board.getPieceAt(targetX, targetY) == null)
-        {
-            found = true;
-        }
-        else if(board.getPieceAt(targetX, targetY).getColor() == piece.getColor())
-        {
-            found = false;
-        }
-        else {
-            for (int i = 0; i < myMovements.length; i++) {
-                if (myMovements[i] == null) break;
 
-                else if (myMovements[i].getX() == targetX && myMovements[i].getY() == targetY) {
-                    found = true;
-                }
+        for (int i = 0; i < myMovements.length; i++) {
+            if (myMovements[i] == null) break;
+
+            else if ( board.getPieceAt(targetX, targetY) == null
+                    && myMovements[i].getX() == targetX && myMovements[i].getY() == targetY) {
+                found = true;
+            }
+            else if (myMovements[i].getX() == targetX && myMovements[i].getY() == targetY
+                    && board.getPieceAt(targetX, targetY).getColor() != piece.getColor()) {
+                found = true;
             }
         }
+
         if (found == true)
         {
             return true;

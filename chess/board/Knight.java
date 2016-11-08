@@ -60,12 +60,14 @@ public class Knight extends Piece
 	            }
 	            else if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor()){
 	                myMovements[i++] = new Movement(tempY, tempX);
+	                break;
 	            }
 	            if(dx == -1)
 	            {
 	                tempX = getX();
 	                dx = 0;
 	            }
+	            else break;
         	}
         	if(dy == -2) {
 				tempY = getY();
@@ -76,4 +78,10 @@ public class Knight extends Piece
         
         return myMovements;
     }
+
+	public void clear() {
+		for (int i = 0; i < myMovements.length; i++) {
+			myMovements[i] = null;
+		}
+	}
 }

@@ -75,4 +75,10 @@ public class Bishop extends Piece
 		
 		return myMovements;
 	}
+	public void clear(){
+
+		for(int i = 0; i < myMovements.length; i++) {
+			myMovements[i] = null;
+		}
+	}
 }
