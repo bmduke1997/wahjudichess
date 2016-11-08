@@ -26,6 +26,8 @@ public class Board {
     }
 
     public void move(int srcX, int srcY, int destX, int destY) {
+        System.out.println("Executing move...");
+
         Piece piece = playingBoard[srcY][srcX];
 
         /* If there is already a piece at the spot, remove it. */
@@ -53,16 +55,24 @@ public class Board {
         return playingBoard[y][x];
     }
 
-    public boolean isLegalMove(Movement[] myMovements, int targetX, int targetY)
+    public boolean isLegalMove(Board board, Piece piece, Movement[] myMovements, int targetX, int targetY)
     {
         boolean found = false;
-        for (int i = 0; i < myMovements.length; i++)
+        if(board.getPieceAt(targetX, targetY) == null)
         {
-            if (myMovements[i] == null) break;
+            found = true;
+        }
+        else if(board.getPieceAt(targetX, targetY).getColor() == piece.getColor())
+        {
+            found = false;
+        }
+        else {
+            for (int i = 0; i < myMovements.length; i++) {
+                if (myMovements[i] == null) break;
 
-            if (myMovements[i].getX() == targetX && myMovements[i].getY() == targetY)
-            {
-                found = true;
+                else if (myMovements[i].getX() == targetX && myMovements[i].getY() == targetY) {
+                    found = true;
+                }
             }
         }
         if (found == true)
