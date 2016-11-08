@@ -290,10 +290,11 @@ public class ChessController implements Initializable {
                         }
                     } else {
                         /* Try to move the piece to that square. */
+                        selection.clear();
                         if (board.isLegalMove(board, selection,
-                              selection.movement(
-                                board.getPlayingBoard()),
-                              x, y)) {
+                                selection.movement(
+                                        board.getPlayingBoard()),
+                                x, y)) {
                             /* remove mesh for taken pieces, if appropriate */
                             cellGroups[x][y].getChildren().removeIf(o -> o instanceof MeshView);
                             board.move(selection.getX(), selection.getY(), x, y);
