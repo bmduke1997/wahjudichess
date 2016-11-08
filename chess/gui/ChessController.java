@@ -5,9 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.scene.image.Image;
 import javafx.beans.binding.ObjectBinding;
-import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleFloatProperty;
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -31,7 +29,6 @@ import javafx.scene.shape.Shape3D;
 import javafx.scene.input.MouseEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.scene.shape.MeshView;
@@ -42,8 +39,6 @@ public class ChessController implements Initializable {
     private Group cellGroups[][];
     private Group solids;
     private Piece selection = null;
-    private final IntegerProperty selectionX = new SimpleIntegerProperty(-100);
-    private final IntegerProperty selectionY = new SimpleIntegerProperty(-100);
 
     /* Color materials. */
     private final Material blackMat = new PhongMaterial(Color.web("#000"));
@@ -157,11 +152,6 @@ public class ChessController implements Initializable {
     public void setupGame(boolean whiteGoesFirst,
                           boolean blackIsHuman,
                           boolean whiteIsHuman) {
-        /* Clear any selection. */
-        selection = null;
-        selectionX.set(-100);
-        selectionY.set(-100);
-        
         /* Get rid of models for old pieces. */
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -213,39 +203,13 @@ public class ChessController implements Initializable {
                 cellGroups[i][j] = new Group();
             }
         }
-        
-        /* Declare our group of solid shapes. */
-        solids = new Group();;
-        
-        /* Make the selection ring. */
-        Group selectionRing = new Group();
-        Material blueMat = new PhongMaterial(Color.web("#cff"));
-        Box top = new Box(10, 1, 0.2);
-        top.setMaterial(blueMat);
-        top.setTranslateY(-4.5);
-        Box left = new Box(1, 10, 0.2);
-        left.setTranslateX(-4.5);
-        left.setMaterial(blueMat);
-        Box bottom = new Box(10, 1, 0.2);
-        bottom.setMaterial(blueMat);
-        bottom.setTranslateY(4.5); /* maybe 1 less? */
-        Box right = new Box(1, 10, 0.2);
-        right.setMaterial(blueMat);
-        right.setTranslateX(4.5); /* maybe 1 less? */
-        selectionRing.getChildren().addAll(top, bottom, left, right);
-        
-        selectionRing
-          .translateXProperty()
-          .bind(selectionX.subtract(2).multiply(10).subtract(0));
-        selectionRing
-          .translateYProperty()
-          .bind(selectionY.subtract(2).multiply(10).subtract(10));
-        selectionRing.setTranslateZ(18.8 + (top.getDepth() / 2));
-        solids.getChildren().add(selectionRing);
 
         /* Undo/redo buttons start out disabled. */
         undoButton.setDisable(true);
         redoButton.setDisable(true);
+
+        /* Declare our group of solid shapes. */
+        solids = new Group();;
 
         /* Populate the group with boxes to make the checkerboard. */
         for (int i = 0; i < 5; i++) {
@@ -316,16 +280,17 @@ public class ChessController implements Initializable {
                     int x = pos[0];
                     int y = pos[1];
 
+                    System.out.println("Tile clicked: "
+                        + x + " " + y);
                     if (selection == null) {
                         /* Try to select the piece if there is one */
                         if (board.getPieceAt(x, y) != null) {
                             selection = board.getPieceAt(x, y);
-                            selectionX.set(x);
-                            selectionY.set(y);
+                            System.out.println("Selected piece.");
                         }
                     } else {
                         /* Try to move the piece to that square. */
-                        if (board.isLegalMove(
+                        if (board.isLegalMove(board, selection,
                               selection.movement(
                                 board.getPlayingBoard()),
                               x, y)) {
@@ -334,8 +299,7 @@ public class ChessController implements Initializable {
                             board.move(selection.getX(), selection.getY(), x, y);
                         }
 
-                        selectionX.set(-100);
-                        selectionY.set(-100);
+                        System.out.println("Selection freed.");
                         selection = null;
                     }
                 });
