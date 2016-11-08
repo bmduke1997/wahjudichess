@@ -24,11 +24,11 @@ public class Pawn extends Piece {
         else if(getColor() == Piece.WHITE){  //Bottom to top
             j = -1;
         }
-        if(tempY + j < 5 && board[tempY+j][tempX] == null){
+        if(tempY + j > -1 && tempY + j < 5 && board[tempY+j][tempX] == null){
             myMovements[i++]= new Movement (tempY+j, tempX);
         }
         try {
-            if (tempY + j < 5 && tempX + j < 5 && board[tempY+j][tempX+j].getColor() != getColor()){
+            if (tempY + j > -1 && tempX + j > -1 && tempY + j < 5 && tempX + j < 5 && board[tempY+j][tempX+j].getColor() != getColor()){
                 myMovements[i++]= new Movement (tempY+j, tempX+j);
             }
         }
@@ -36,7 +36,7 @@ public class Pawn extends Piece {
 
         }
         try {
-            if (tempY + j < 5 && tempX - j > -1 && board[tempY+j][tempX-j].getColor() != getColor()){
+            if (tempY + j > -1 && tempY + j < 5 && tempX - j > -1 && tempX - j < 5 && board[tempY+j][tempX-j].getColor() != getColor()){
                 myMovements[i++]= new Movement (tempY+j, tempX-j);
             }
         }
