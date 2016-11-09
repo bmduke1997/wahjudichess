@@ -3,12 +3,9 @@ package chess.gui;
 import chess.board.*;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.scene.image.Image;
-import javafx.beans.binding.ObjectBinding;
+import java.util.Stack;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.property.SimpleIntegerProperty;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -16,8 +13,6 @@ import javafx.scene.Group;
 import javafx.scene.control.Button;
 import javafx.scene.control.Slider;
 import javafx.scene.paint.*;
-import javafx.scene.canvas.*;
-import javafx.scene.shape.Sphere;
 import javafx.scene.layout.Pane;
 import javafx.scene.Scene;
 import javafx.scene.SubScene;
@@ -27,15 +22,8 @@ import javafx.scene.Parent;
 import javafx.stage.Modality;
 import javafx.scene.transform.*;
 import javafx.scene.shape.Box;
-import javafx.scene.shape.Shape3D;
-import javafx.scene.input.MouseEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.image.WritableImage;
 import javafx.scene.shape.MeshView;
-import javafx.scene.shape.TriangleMesh;
 
 public class ChessController implements Initializable {
     private Board board;
@@ -44,7 +32,8 @@ public class ChessController implements Initializable {
     private Piece selection = null;
     private final IntegerProperty selectionX = new SimpleIntegerProperty(-100);
     private final IntegerProperty selectionY = new SimpleIntegerProperty(-100);
-
+    private Stack<MeshView> meshHistory;
+    
     /* Color materials. */
     private final Material blackMat = new PhongMaterial(Color.web("#000"));
     private final Material hiblackMat = new PhongMaterial(Color.web("#666"));
@@ -93,6 +82,14 @@ public class ChessController implements Initializable {
         stage.show();
     }
 
+    @FXML
+    private void handleUndo() {
+        meshHistory.pop();
+        
+        if (meshHistory.size() == 0)
+            undoButton.setDisable(true);
+    }
+    
     public void put(Board board, Piece piece) {
         final MeshView mv;
 
@@ -256,6 +253,9 @@ public class ChessController implements Initializable {
                 box.setWidth(10);
                 box.setHeight(10);
                 box.setDepth(2);
+                
+                /* Initialize deleted mesh stack. */
+                meshHistory = new Stack<>();
 
                 /* Color each tile black or white. */
                 if (((i + j) & 1) == 1) {
@@ -331,7 +331,21 @@ public class ChessController implements Initializable {
                                         board.getPlayingBoard()),
                                 x, y)) {
                             /* remove mesh for taken pieces, if appropriate */
-                            cellGroups[x][y].getChildren().removeIf(o -> o instanceof MeshView);
+                            undoButton.setDisable(false);
+                            Object[] children = cellGroups[x][y].getChildren().toArray();
+                            
+                            boolean wasKill = false;
+                            for (Object child : children) {
+                                Node node = (Node)child;
+                                if (node instanceof MeshView) {
+                                    wasKill = true;
+                                    meshHistory.push((MeshView)node);
+                                    cellGroups[x][y].getChildren().remove(node);
+                                    break;
+                                }
+                            }
+                            if (!wasKill) meshHistory.push(null);
+                            
                             board.move(selection.getX(), selection.getY(), x, y);
                         }
 
