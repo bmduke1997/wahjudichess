@@ -33,7 +33,7 @@ public class ChessController implements Initializable {
     private final IntegerProperty selectionX = new SimpleIntegerProperty(-100);
     private final IntegerProperty selectionY = new SimpleIntegerProperty(-100);
     private Stack<MeshView> meshHistory;
-    
+
     /* Color materials. */
     private final Material blackMat = new PhongMaterial(Color.web("#000"));
     private final Material hiblackMat = new PhongMaterial(Color.web("#666"));
@@ -85,11 +85,11 @@ public class ChessController implements Initializable {
     @FXML
     private void handleUndo() {
         meshHistory.pop();
-        
+
         if (meshHistory.size() == 0)
             undoButton.setDisable(true);
     }
-    
+
     public void put(Board board, Piece piece) {
         final MeshView mv;
 
@@ -253,7 +253,7 @@ public class ChessController implements Initializable {
                 box.setWidth(10);
                 box.setHeight(10);
                 box.setDepth(2);
-                
+
                 /* Initialize deleted mesh stack. */
                 meshHistory = new Stack<>();
 
@@ -326,27 +326,50 @@ public class ChessController implements Initializable {
                     } else {
                         /* Try to move the piece to that square. */
                         selection.clear();
-                        if (board.isLegalMove(board, selection,
+                        board.checkRestrictions(board, selection,
                                 selection.movement(
                                         board.getPlayingBoard()),
-                                x, y)) {
-                            /* remove mesh for taken pieces, if appropriate */
-                            undoButton.setDisable(false);
-                            Object[] children = cellGroups[x][y].getChildren().toArray();
-                            
-                            boolean wasKill = false;
-                            for (Object child : children) {
-                                Node node = (Node)child;
-                                if (node instanceof MeshView) {
-                                    wasKill = true;
-                                    meshHistory.push((MeshView)node);
-                                    cellGroups[x][y].getChildren().remove(node);
-                                    break;
+                                x, y);
+                        /* remove mesh for taken pieces, if appropriate */
+                        if(board.hasLegalMove) {
+                            if (board.restricted) {
+                                undoButton.setDisable(false);
+                                Object[] children = cellGroups[x][y].getChildren().toArray();
+
+                                boolean wasKill = false;
+                                for (Object child : children) {
+                                    Node node = (Node) child;
+                                    if (node instanceof MeshView) {
+                                        wasKill = true;
+                                        meshHistory.push((MeshView) node);
+                                        cellGroups[x][y].getChildren().remove(node);
+                                        break;
+                                    }
                                 }
+                                if (!wasKill) {
+                                    meshHistory.push(null);
+                                }
+                                board.restrictedMove(selection.getX(), selection.getY(), x, y);
                             }
-                            if (!wasKill) meshHistory.push(null);
-                            
-                            board.move(selection.getX(), selection.getY(), x, y);
+                            else {
+                                undoButton.setDisable(false);
+                                Object[] children = cellGroups[x][y].getChildren().toArray();
+
+                                boolean wasKill = false;
+                                for (Object child : children) {
+                                    Node node = (Node) child;
+                                    if (node instanceof MeshView) {
+                                        wasKill = true;
+                                        meshHistory.push((MeshView) node);
+                                        cellGroups[x][y].getChildren().remove(node);
+                                        break;
+                                    }
+                                }
+                                if (!wasKill) {
+                                    meshHistory.push(null);
+                                }
+                                board.move(selection.getX(), selection.getY(), x, y);
+                            }
                         }
 
                         selectionX.set(-100);
