@@ -26,6 +26,7 @@ import javafx.scene.Node;
 import javafx.scene.shape.MeshView;
 
 public class ChessController implements Initializable {
+    int counter = 0;
     private Board board;
     private Group cellGroups[][];
     private Group solids;
@@ -33,6 +34,7 @@ public class ChessController implements Initializable {
     private final IntegerProperty selectionX = new SimpleIntegerProperty(-100);
     private final IntegerProperty selectionY = new SimpleIntegerProperty(-100);
     private Stack<MeshView> meshHistory;
+    private Stack<Object> moveHistory;
 
     /* Color materials. */
     private final Material blackMat = new PhongMaterial(Color.web("#000"));
@@ -84,9 +86,10 @@ public class ChessController implements Initializable {
 
     @FXML
     private void handleUndo() {
+        board.undo(moveHistory.pop());
         meshHistory.pop();
 
-        if (meshHistory.size() == 0)
+        if (moveHistory.size() == 0)
             undoButton.setDisable(true);
     }
 
@@ -154,10 +157,25 @@ public class ChessController implements Initializable {
     public void setupGame(boolean whiteGoesFirst,
                           boolean blackIsHuman,
                           boolean whiteIsHuman) {
+
+        if (whiteGoesFirst) {
+            counter = 1;
+        } else {
+            counter = 0;
+        }
+
         /* Clear any selection. */
         selection = null;
         selectionX.set(-100);
         selectionY.set(-100);
+        
+        /* Clear out undo lists. */
+        moveHistory = new Stack<>();
+        meshHistory = new Stack<>();
+        
+        /* Undo/redo buttons start out disabled. */
+        undoButton.setDisable(true);
+        redoButton.setDisable(true);
         
         /* Get rid of models for old pieces. */
         for (int i = 0; i < 5; i++) {
@@ -211,6 +229,11 @@ public class ChessController implements Initializable {
             }
         }
         
+        /* Undo/redo buttons start out disabled. */
+        undoButton.setDisable(true);
+        redoButton.setDisable(true);
+        
+        
         /* Declare our group of solid shapes. */
         solids = new Group();;
         
@@ -240,10 +263,6 @@ public class ChessController implements Initializable {
         selectionRing.setTranslateZ(18.8 + (top.getDepth() / 2));
         solids.getChildren().add(selectionRing);
 
-        /* Undo/redo buttons start out disabled. */
-        undoButton.setDisable(true);
-        redoButton.setDisable(true);
-
         /* Populate the group with boxes to make the checkerboard. */
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -256,6 +275,9 @@ public class ChessController implements Initializable {
 
                 /* Initialize deleted mesh stack. */
                 meshHistory = new Stack<>();
+                
+                /* Initialize the game history stack. */
+                moveHistory = new Stack<>();
 
                 /* Color each tile black or white. */
                 if (((i + j) & 1) == 1) {
@@ -316,9 +338,11 @@ public class ChessController implements Initializable {
                     int x = pos[0];
                     int y = pos[1];
 
+
+
                     if (selection == null) {
                         /* Try to select the piece if there is one */
-                        if (board.getPieceAt(x, y) != null) {
+                        if (board.getPieceAt(x, y) != null && board.getPieceAt(x, y).getColor() == counter%2) {
                             selection = board.getPieceAt(x, y);
                             selectionX.set(x);
                             selectionY.set(y);
@@ -327,48 +351,49 @@ public class ChessController implements Initializable {
                         /* Try to move the piece to that square. */
                         selection.clear();
                         board.checkRestrictions(board, selection,
-                                selection.movement(
-                                        board.getPlayingBoard()),
+                                selection.movement(board.getPlayingBoard()),
                                 x, y);
+                        
                         /* remove mesh for taken pieces, if appropriate */
                         if(board.hasLegalMove) {
-                            if (board.restricted) {
-                                undoButton.setDisable(false);
-                                Object[] children = cellGroups[x][y].getChildren().toArray();
+                            Object[] children = cellGroups[x][y].getChildren().toArray();
+                            MeshView meshView = null;
 
-                                boolean wasKill = false;
-                                for (Object child : children) {
-                                    Node node = (Node) child;
-                                    if (node instanceof MeshView) {
-                                        wasKill = true;
-                                        meshHistory.push((MeshView) node);
-                                        cellGroups[x][y].getChildren().remove(node);
-                                        break;
-                                    }
+                            for (Object child : children) {
+                                Node node = (Node) child;
+                                if (node instanceof MeshView) {
+                                    meshView = (MeshView)node;
+                                    break;
                                 }
-                                if (!wasKill) {
-                                    meshHistory.push(null);
-                                }
-                                board.restrictedMove(selection.getX(), selection.getY(), x, y);
                             }
-                            else {
-                                undoButton.setDisable(false);
-                                Object[] children = cellGroups[x][y].getChildren().toArray();
-
-                                boolean wasKill = false;
-                                for (Object child : children) {
-                                    Node node = (Node) child;
-                                    if (node instanceof MeshView) {
-                                        wasKill = true;
-                                        meshHistory.push((MeshView) node);
-                                        cellGroups[x][y].getChildren().remove(node);
-                                        break;
+                                
+                            Object delta = board.move(selection.getX(), selection.getY(), x, y);
+                            if (delta != null) {
+                                if (meshView != null) {
+                                    if (board.getPieceAt(x, y)
+                                          .getColor() == Piece.BLACK) {
+                                        /* Since we are checking the opposite
+                                         * team's mesh, the color should be the
+                                         * opposite. */
+                                        ((MeshView)meshView)
+                                          .setMaterial(pieceWhiteMat);
+                                    } else {
+                                        ((MeshView)meshView)
+                                          .setMaterial(pieceBlackMat);
                                     }
                                 }
-                                if (!wasKill) {
-                                    meshHistory.push(null);
+                            
+                                counter++;
+
+                                undoButton.setDisable(false);
+                                meshHistory.push(meshView);
+                                moveHistory.push(delta);
+                                    
+                                if (meshView != null) {
+                                    cellGroups[x][y]
+                                      .getChildren()
+                                      .remove(meshView);
                                 }
-                                board.move(selection.getX(), selection.getY(), x, y);
                             }
                         }
 
