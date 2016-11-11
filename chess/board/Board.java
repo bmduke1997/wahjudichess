@@ -88,10 +88,9 @@ public class Board {
         Piece capturer = playingBoard[srcY][srcX];
         Piece captured = playingBoard[destY][destX];
         
-        if((restricted
-            && captured != null
-            && captured.getColor() != capturer.getColor())
-           || !restricted) {
+        if(( (restricted || capture)
+            && captured != null)
+           || (!restricted && !capture)) {
         
             System.out.println("Executing move...");
 
@@ -212,9 +211,9 @@ public class Board {
         }
         isLegalMove(board, piece, myMovements, targetX, targetY);
     }
-
-    public boolean teamCapture(int color){
-        boolean capture = false;
+    private boolean capture;
+    public void teamCapture(int color){
+        capture = false;
 
         for (int y = 0; y < 5; y++){
             if(capture) break;
@@ -234,7 +233,5 @@ public class Board {
                 }
             }
         }
-
-        return capture;
     }
 }

@@ -1,17 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6719bd32-4d1d-4062-b3eb-a54ad18ec736" name="Default" comment="Integrated team captures">
+    <list default="true" id="6719bd32-4d1d-4062-b3eb-a54ad18ec736" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/board/Bishop.java" afterPath="$PROJECT_DIR$/chess/board/Bishop.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/board/Board.java" afterPath="$PROJECT_DIR$/chess/board/Board.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/board/King.java" afterPath="$PROJECT_DIR$/chess/board/King.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/board/Knight.java" afterPath="$PROJECT_DIR$/chess/board/Knight.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/board/Pawn.java" afterPath="$PROJECT_DIR$/chess/board/Pawn.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/board/Piece.java" afterPath="$PROJECT_DIR$/chess/board/Piece.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/board/Queen.java" afterPath="$PROJECT_DIR$/chess/board/Queen.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/board/Rook.java" afterPath="$PROJECT_DIR$/chess/board/Rook.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/gui/ChessController.java" afterPath="$PROJECT_DIR$/chess/gui/ChessController.java" />
     </list>
     <ignored path="wahjudichess.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,12 +25,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Board.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Board.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/chess/board/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2189">
-              <caret line="201" column="37" selection-start-line="201" selection-start-column="37" selection-end-line="201" selection-end-column="37" />
-              <folding />
+            <state relative-caret-position="342">
+              <caret line="92" column="39" selection-start-line="92" selection-start-column="39" selection-end-line="92" selection-end-column="39" />
+              <folding>
+                <element signature="e#4909#4910#0" expanded="true" />
+                <element signature="e#4950#4951#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -73,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChessController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ChessController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chess/gui/ChessController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="384" column="53" selection-start-line="384" selection-start-column="53" selection-end-line="384" selection-end-column="53" />
+            <state relative-caret-position="243">
+              <caret line="364" column="20" selection-start-line="364" selection-start-column="20" selection-end-line="364" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -158,8 +153,8 @@
         <option value="$PROJECT_DIR$/chess/board/Rook.java" />
         <option value="$PROJECT_DIR$/chess/board/Bishop.java" />
         <option value="$PROJECT_DIR$/chess/board/Queen.java" />
-        <option value="$PROJECT_DIR$/chess/board/Board.java" />
         <option value="$PROJECT_DIR$/chess/gui/ChessController.java" />
+        <option value="$PROJECT_DIR$/chess/board/Board.java" />
       </list>
     </option>
   </component>
@@ -298,7 +293,8 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/chess/gui/ChessController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/chess/board/Board.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/chess/gui/Chess.fxml</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -852,7 +848,7 @@
       <workItem from="1478571455978" duration="716000" />
       <workItem from="1478737507655" duration="206000" />
       <workItem from="1478741365164" duration="156000" />
-      <workItem from="1478892313431" duration="6230000" />
+      <workItem from="1478892313431" duration="8019000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'dev' of github.com:unternehmen/wahjudichess into dev&#10;&#10;# Conflicts:&#10;#&#9;chess/gui/ChessController.java&#10;">
       <created>1478294882430</created>
@@ -875,25 +871,32 @@
       <option name="project" value="LOCAL" />
       <updated>1478894036682</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Integrated team captures">
+      <created>1478898556227</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1478898556227</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="17688000" />
+    <option name="totallyTimeSpent" value="19477000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="34" width="1920" height="1046" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -926,7 +929,8 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Merge branch 'dev' of github.com:unternehmen/wahjudichess into dev&#10;&#10;# Conflicts:&#10;#&#9;chess/gui/ChessController.java&#10;" />
     <MESSAGE value="Has turns!!! ^--^" />
-    <option name="LAST_COMMIT_MESSAGE" value="Has turns!!! ^--^" />
+    <MESSAGE value="Integrated team captures" />
+    <option name="LAST_COMMIT_MESSAGE" value="Integrated team captures" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />
@@ -941,7 +945,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#4909#4910#0" expanded="true" />
+            <element signature="e#4950#4951#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1029,19 +1036,22 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chess/board/Board.java">
+    <entry file="file://$PROJECT_DIR$/chess/gui/ChessController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2189">
-          <caret line="201" column="37" selection-start-line="201" selection-start-column="37" selection-end-line="201" selection-end-column="37" />
+        <state relative-caret-position="243">
+          <caret line="364" column="20" selection-start-line="364" selection-start-column="20" selection-end-line="364" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chess/gui/ChessController.java">
+    <entry file="file://$PROJECT_DIR$/chess/board/Board.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="18">
-          <caret line="384" column="53" selection-start-line="384" selection-start-column="53" selection-end-line="384" selection-end-column="53" />
-          <folding />
+        <state relative-caret-position="342">
+          <caret line="92" column="39" selection-start-line="92" selection-start-column="39" selection-end-line="92" selection-end-column="39" />
+          <folding>
+            <element signature="e#4909#4910#0" expanded="true" />
+            <element signature="e#4950#4951#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
