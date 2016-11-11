@@ -33,8 +33,8 @@ public class ChessController implements Initializable {
     private Piece selection = null;
     private final IntegerProperty selectionX = new SimpleIntegerProperty(-100);
     private final IntegerProperty selectionY = new SimpleIntegerProperty(-100);
-    private Stack<MeshView> meshHistory;
     private Stack<Object> moveHistory;
+    private Stack<Object> moveFutures;
 
     /* Color materials. */
     private final Material blackMat = new PhongMaterial(Color.web("#000"));
@@ -86,11 +86,30 @@ public class ChessController implements Initializable {
 
     @FXML
     private void handleUndo() {
-        board.undo(moveHistory.pop());
-        meshHistory.pop();
+        Object delta = moveHistory.pop();
+        board.undo(delta);
+        moveFutures.push(delta);
+        selection = null;
+        
+        counter--;
+        redoButton.setDisable(false);
 
         if (moveHistory.size() == 0)
             undoButton.setDisable(true);
+    }
+    
+    @FXML
+    private void handleRedo() {
+        Object delta = moveFutures.pop();
+        board.redo(delta);
+        moveHistory.push(delta);
+        selection = null;
+        
+        counter++;
+        undoButton.setDisable(false);
+        
+        if (moveFutures.size() == 0)
+            redoButton.setDisable(true);
     }
 
     public void put(Board board, Piece piece) {
@@ -148,6 +167,13 @@ public class ChessController implements Initializable {
             if (neuints[0] != -1 && neuints[1] != -1) {
                 cellGroups[neuints[0]][neuints[1]].getChildren().add(mv);
             }
+            
+            /* Restore regular mesh color. */
+            if (piece.getColor() == Piece.BLACK) {
+                mv.setMaterial(pieceBlackMat);
+            } else {
+                mv.setMaterial(pieceWhiteMat);
+            }
         });
 
         board.put(piece);
@@ -170,8 +196,8 @@ public class ChessController implements Initializable {
         selectionY.set(-100);
         
         /* Clear out undo lists. */
-        moveHistory = new Stack<>();
-        meshHistory = new Stack<>();
+        moveHistory.clear();
+        moveFutures.clear();
         
         /* Undo/redo buttons start out disabled. */
         undoButton.setDisable(true);
@@ -219,6 +245,10 @@ public class ChessController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         board = new Board();
+        
+        /* Initialize the game history stack. */
+        moveHistory = new Stack<>();
+        moveFutures = new Stack<>();
 
         /* Initialize the cell groups (tile + piece groups). */
         cellGroups = new Group[5][5];
@@ -272,12 +302,6 @@ public class ChessController implements Initializable {
                 box.setWidth(10);
                 box.setHeight(10);
                 box.setDepth(2);
-
-                /* Initialize deleted mesh stack. */
-                meshHistory = new Stack<>();
-                
-                /* Initialize the game history stack. */
-                moveHistory = new Stack<>();
 
                 /* Color each tile black or white. */
                 if (((i + j) & 1) == 1) {
@@ -338,8 +362,6 @@ public class ChessController implements Initializable {
                     int x = pos[0];
                     int y = pos[1];
 
-
-
                     if (selection == null) {
                         /* Try to select the piece if there is one */
                         if (board.getPieceAt(x, y) != null && board.getPieceAt(x, y).getColor() == counter%2) {
@@ -356,44 +378,18 @@ public class ChessController implements Initializable {
                         
                         /* remove mesh for taken pieces, if appropriate */
                         if(board.hasLegalMove) {
-                            Object[] children = cellGroups[x][y].getChildren().toArray();
-                            MeshView meshView = null;
-
-                            for (Object child : children) {
-                                Node node = (Node) child;
-                                if (node instanceof MeshView) {
-                                    meshView = (MeshView)node;
-                                    break;
-                                }
-                            }
-                                
-                            Object delta = board.move(selection.getX(), selection.getY(), x, y);
+                            Object delta = board.move(selection.getX(),
+                                                      selection.getY(),
+                                                      x, y);
                             if (delta != null) {
-                                if (meshView != null) {
-                                    if (board.getPieceAt(x, y)
-                                          .getColor() == Piece.BLACK) {
-                                        /* Since we are checking the opposite
-                                         * team's mesh, the color should be the
-                                         * opposite. */
-                                        ((MeshView)meshView)
-                                          .setMaterial(pieceWhiteMat);
-                                    } else {
-                                        ((MeshView)meshView)
-                                          .setMaterial(pieceBlackMat);
-                                    }
-                                }
-                            
+                                /* Since we moved, reset the redo list. */
+                                redoButton.setDisable(true);
+                                moveFutures.clear();
+                                
                                 counter++;
 
                                 undoButton.setDisable(false);
-                                meshHistory.push(meshView);
                                 moveHistory.push(delta);
-                                    
-                                if (meshView != null) {
-                                    cellGroups[x][y]
-                                      .getChildren()
-                                      .remove(meshView);
-                                }
                             }
                         }
 
