@@ -165,6 +165,9 @@ public class ChessController implements Initializable {
         moveHistory = new Stack<>();
         meshHistory = new Stack<>();
         
+        /* Undo/redo buttons start out disabled. */
+        undoButton.setDisable(true);
+        redoButton.setDisable(true);
         
         /* Get rid of models for old pieces. */
         for (int i = 0; i < 5; i++) {
@@ -218,6 +221,11 @@ public class ChessController implements Initializable {
             }
         }
         
+        /* Undo/redo buttons start out disabled. */
+        undoButton.setDisable(true);
+        redoButton.setDisable(true);
+        
+        
         /* Declare our group of solid shapes. */
         solids = new Group();;
         
@@ -246,10 +254,6 @@ public class ChessController implements Initializable {
           .bind(selectionY.subtract(2).multiply(10).subtract(10));
         selectionRing.setTranslateZ(18.8 + (top.getDepth() / 2));
         solids.getChildren().add(selectionRing);
-
-        /* Undo/redo buttons start out disabled. */
-        undoButton.setDisable(true);
-        redoButton.setDisable(true);
 
         /* Populate the group with boxes to make the checkerboard. */
         for (int i = 0; i < 5; i++) {
