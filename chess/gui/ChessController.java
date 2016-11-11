@@ -90,24 +90,24 @@ public class ChessController implements Initializable {
         board.undo(delta);
         moveFutures.push(delta);
         selection = null;
-        
+
         counter--;
         redoButton.setDisable(false);
 
         if (moveHistory.size() == 0)
             undoButton.setDisable(true);
     }
-    
+
     @FXML
     private void handleRedo() {
         Object delta = moveFutures.pop();
         board.redo(delta);
         moveHistory.push(delta);
         selection = null;
-        
+
         counter++;
         undoButton.setDisable(false);
-        
+
         if (moveFutures.size() == 0)
             redoButton.setDisable(true);
     }
@@ -167,7 +167,7 @@ public class ChessController implements Initializable {
             if (neuints[0] != -1 && neuints[1] != -1) {
                 cellGroups[neuints[0]][neuints[1]].getChildren().add(mv);
             }
-            
+
             /* Restore regular mesh color. */
             if (piece.getColor() == Piece.BLACK) {
                 mv.setMaterial(pieceBlackMat);
@@ -245,7 +245,7 @@ public class ChessController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         board = new Board();
-        
+
         /* Initialize the game history stack. */
         moveHistory = new Stack<>();
         moveFutures = new Stack<>();
@@ -362,6 +362,8 @@ public class ChessController implements Initializable {
                     int x = pos[0];
                     int y = pos[1];
 
+                    board.teamCapture(counter%2);
+
                     if (selection == null) {
                         /* Try to select the piece if there is one */
                         if (board.getPieceAt(x, y) != null && board.getPieceAt(x, y).getColor() == counter%2) {
@@ -385,7 +387,7 @@ public class ChessController implements Initializable {
                                 /* Since we moved, reset the redo list. */
                                 redoButton.setDisable(true);
                                 moveFutures.clear();
-                                
+
                                 counter++;
 
                                 undoButton.setDisable(false);
