@@ -45,4 +45,33 @@ public class Queen extends Piece{
             myMovements[i] = null;
         }
     }
+
+    public boolean hasCapture(Piece[][] board){
+        boolean capture = false;
+        int i = 0, tempX, tempY;
+
+        // dx and dy represent the direction from the player which we are scanning
+        for (int dy = -1; dy <= 1; dy++) {
+            if (capture) break;
+            for (int dx = -1; dx <= 1; dx++) {
+                //skip the spot that the piece is on
+                if (dx == 0 && dy == 0) continue;
+
+                tempX = getX();
+                tempY = getY();
+                for (int step = 0; step < 5; step++) {
+                    tempX = tempX + dx;
+                    tempY = tempY + dy;
+                    if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX] == null) continue;
+
+                    else if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor()){
+                        capture = true;
+                        break;
+                    }
+                    else break;
+                }
+            }
+        }
+        return capture;
+    }
 }

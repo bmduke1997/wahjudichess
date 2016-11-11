@@ -212,4 +212,29 @@ public class Board {
         }
         isLegalMove(board, piece, myMovements, targetX, targetY);
     }
+
+    public boolean teamCapture(int color){
+        boolean capture = false;
+
+        for (int y = 0; y < 5; y++){
+            if(capture) break;
+            for (int x = 0; x < 5; x++){
+                //TODO watch out for null spaces
+                try {
+                    if (playingBoard[y][x].getColor() == color) {
+                        capture = playingBoard[y][x].hasCapture(playingBoard);
+                        if(capture) {
+                            System.out.println("Team has capture. " + "Color: " + color);
+                            break;
+                        }
+                    }
+                }
+                catch (Exception e){
+                    //get rid of this error
+                }
+            }
+        }
+
+        return capture;
+    }
 }
