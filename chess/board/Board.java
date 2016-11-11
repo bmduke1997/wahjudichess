@@ -142,6 +142,16 @@ public class Board {
         return null;
     }
     
+    /**
+     * Link a transforming piece (always a King) to a delta.
+     * 
+     * This should only be used after clicking and moving a pawn to one
+     * of the ends of the board, i.e., when the pawn is transforming.
+     * 
+     * @param delta is the delta object, as returned by the
+     *        {@link #move(int, int, int, int) move} method.
+     * @param king is the Piece (King) to link.
+     */
     public void assocMorphed(Object delta, Piece king) {
         Delta _delta = (Delta)delta;
         
