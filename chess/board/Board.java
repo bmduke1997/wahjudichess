@@ -98,6 +98,7 @@ public class Board {
             /* If there is already a piece at the spot, remove it. */
             if (captured != null) {
                 remove(destX, destY);
+                captured.setPosition(-1, -1);
             }
 
             playingBoard[destY][destX] = capturer;
@@ -133,6 +134,29 @@ public class Board {
         
         playingBoard[_delta.getSrcY()][_delta.getSrcX()] = capturer;
         playingBoard[_delta.getDestY()][_delta.getDestX()] = captured;
+    }
+    
+    /**
+     * Redo a move using a delta object.
+     * 
+     * The same delta that was used to undo a move can be used to redo it.
+     * 
+     * @param delta is the delta object, as returned by the
+     *        {@link #move(int, int, int, int) move} method.
+     * @see #move(int, int, int, int)
+     */
+    public void redo(Object delta) {
+        Delta _delta = (Delta)delta;
+        System.out.println(_delta.getSrcX() + "," + _delta.getSrcY() + " -> " +
+                           _delta.getDestX() + "," + _delta.getDestY());
+        
+        Piece piece = getPieceAt(_delta.getSrcX(), _delta.getSrcY());
+        piece.clear();
+        checkRestrictions(this, piece, piece.movement(getPlayingBoard()),
+                          _delta.getDestX(), _delta.getDestY());
+        
+        move(_delta.getSrcX(), _delta.getSrcY(),
+             _delta.getDestX(), _delta.getDestY());
     }
 
     public void remove(int x, int y) {
