@@ -36,16 +36,20 @@ public class Board {
      */
     private class Delta {
         private int srcX, srcY, destX, destY;
-        private Piece capturer, captured;
+        private Piece capturer, captured, morphed;
+        private boolean isTransform;
         
         public Delta(int srcX, int srcY, int destX, int destY,
-                     Piece capturer, Piece captured) {
+                     Piece capturer, Piece captured,
+                     boolean isTransform) {
             this.srcX = srcX;
             this.srcY = srcY;
             this.destX = destX;
             this.destY = destY;
             this.capturer = capturer;
             this.captured = captured;
+            this.isTransform = isTransform;
+            this.morphed = null;
         }
 
         public int getSrcX() {
@@ -71,6 +75,28 @@ public class Board {
         public Piece getCaptured() {
             return captured;
         }
+
+        public boolean isTransform() {
+            return isTransform;
+        }
+
+        public Piece getMorphed() {
+            return morphed;
+        }
+        
+        public void setMorphed(Piece morphed) {
+            this.morphed = morphed;
+        }
+    }
+    
+    /**
+     * Returns whether a delta involved transformation.
+     * 
+     * @param delta is an undo delta, as returned by the
+     *        {@link #move(int, int, int, int) move} method.
+     */
+    public boolean wasTransform(Object delta) {
+        return ((Delta)delta).isTransform();
     }
 
     /**
@@ -87,6 +113,9 @@ public class Board {
     public Object move(int srcX, int srcY, int destX, int destY) {
         Piece capturer = playingBoard[srcY][srcX];
         Piece captured = playingBoard[destY][destX];
+        
+        boolean isTransform = capturer instanceof Pawn && (destY == 0
+                                                           || destY == 4);
         
         if(( (restricted || capture)
             && captured != null)
@@ -107,10 +136,16 @@ public class Board {
             playingBoard[srcY][srcX] = null;
         
             return (Object)(new Delta(srcX, srcY, destX, destY,
-                                      capturer, captured));
+                                      capturer, captured, isTransform));
         }
 
         return null;
+    }
+    
+    public void assocMorphed(Object delta, Piece king) {
+        Delta _delta = (Delta)delta;
+        
+        _delta.setMorphed(king);
     }
     
     /**
@@ -124,6 +159,11 @@ public class Board {
         Delta _delta = (Delta)delta;
         Piece capturer = _delta.getCapturer();
         Piece captured = _delta.getCaptured();
+        
+        if (_delta.isTransform()) {
+            /* Delete the king that resulted from the transformation. */
+            remove(_delta.getDestX(), _delta.getDestY());
+        }
         
         capturer.setPosition(_delta.getSrcX(), _delta.getSrcY());
         
@@ -148,7 +188,7 @@ public class Board {
         Delta _delta = (Delta)delta;
         System.out.println(_delta.getSrcX() + "," + _delta.getSrcY() + " -> " +
                            _delta.getDestX() + "," + _delta.getDestY());
-        
+
         Piece piece = getPieceAt(_delta.getSrcX(), _delta.getSrcY());
         piece.clear();
         checkRestrictions(this, piece, piece.movement(getPlayingBoard()),
@@ -156,12 +196,23 @@ public class Board {
         
         move(_delta.getSrcX(), _delta.getSrcY(),
              _delta.getDestX(), _delta.getDestY());
+        
+        if (_delta.isTransform()) {
+            remove(_delta.getDestX(), _delta.getDestY());
+            
+            Piece king = _delta.getMorphed();
+            
+            king.setPosition(_delta.getDestX(), _delta.getDestY());
+            
+            put(king);
+        }
     }
 
     public void remove(int x, int y) {
         if (playingBoard[y][x] == null) {
             return;
         }
+        
         playingBoard[y][x].setPosition(-1, -1);
 
         playingBoard[y][x] = null;

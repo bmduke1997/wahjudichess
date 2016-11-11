@@ -87,6 +87,7 @@ public class ChessController implements Initializable {
     @FXML
     private void handleUndo() {
         Object delta = moveHistory.pop();
+        
         board.undo(delta);
         moveFutures.push(delta);
         selection = null;
@@ -265,7 +266,7 @@ public class ChessController implements Initializable {
         
         
         /* Declare our group of solid shapes. */
-        solids = new Group();;
+        solids = new Group();
         
         /* Make the selection ring. */
         Group selectionRing = new Group();
@@ -378,13 +379,25 @@ public class ChessController implements Initializable {
                                 selection.movement(board.getPlayingBoard()),
                                 x, y);
                         
+                        boolean isTransform = selection instanceof Pawn
+                                                && (y == 0 || y == 4);
+                        
                         /* remove mesh for taken pieces, if appropriate */
                         if(board.hasLegalMove) {
                             Object delta = board.move(selection.getX(),
                                                       selection.getY(),
                                                       x, y);
                             if (delta != null) {
-                                /* Since we moved, reset the redo list. */
+                                /* Transform pawn to king at end of board. */
+                                if (isTransform) {
+                                    board.remove(x, y);
+                                    
+                                    Piece king = new King(x, y, counter%2);
+                                    board.assocMorphed(delta, king);
+                                    
+                                    put(board, king);
+                                }
+                                
                                 redoButton.setDisable(true);
                                 moveFutures.clear();
 
