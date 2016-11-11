@@ -359,14 +359,29 @@ public class ChessController implements Initializable {
                                 
                             Object delta = board.move(selection.getX(), selection.getY(), x, y);
                             if (delta != null) {
+                                if (meshView != null) {
+                                    if (board.getPieceAt(x, y)
+                                          .getColor() == Piece.BLACK) {
+                                        /* Since we are checking the opposite
+                                         * team's mesh, the color should be the
+                                         * opposite. */
+                                        ((MeshView)meshView)
+                                          .setMaterial(pieceWhiteMat);
+                                    } else {
+                                        ((MeshView)meshView)
+                                          .setMaterial(pieceBlackMat);
+                                    }
+                                }
+                            
                                 undoButton.setDisable(false);
                                 meshHistory.push(meshView);
                                 moveHistory.push(delta);
                                     
-                                if (meshView != null)
+                                if (meshView != null) {
                                     cellGroups[x][y]
                                       .getChildren()
                                       .remove(meshView);
+                                }
                             }
                         }
 
