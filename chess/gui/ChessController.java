@@ -26,6 +26,7 @@ import javafx.scene.Node;
 import javafx.scene.shape.MeshView;
 
 public class ChessController implements Initializable {
+    int counter = 0;
     private Board board;
     private Group cellGroups[][];
     private Group solids;
@@ -156,6 +157,13 @@ public class ChessController implements Initializable {
     public void setupGame(boolean whiteGoesFirst,
                           boolean blackIsHuman,
                           boolean whiteIsHuman) {
+
+        if (whiteGoesFirst) {
+            counter = 1;
+        } else {
+            counter = 0;
+        }
+
         /* Clear any selection. */
         selection = null;
         selectionX.set(-100);
@@ -330,9 +338,11 @@ public class ChessController implements Initializable {
                     int x = pos[0];
                     int y = pos[1];
 
+
+
                     if (selection == null) {
                         /* Try to select the piece if there is one */
-                        if (board.getPieceAt(x, y) != null) {
+                        if (board.getPieceAt(x, y) != null && board.getPieceAt(x, y).getColor() == counter%2) {
                             selection = board.getPieceAt(x, y);
                             selectionX.set(x);
                             selectionY.set(y);
@@ -359,6 +369,8 @@ public class ChessController implements Initializable {
                                 
                             Object delta = board.move(selection.getX(), selection.getY(), x, y);
                             if (delta != null) {
+                                counter++;
+
                                 undoButton.setDisable(false);
                                 meshHistory.push(meshView);
                                 moveHistory.push(delta);

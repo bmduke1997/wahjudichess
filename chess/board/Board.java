@@ -186,20 +186,6 @@ public class Board {
                 }
             }
         }
-        if(restricted){
-            int i = 0;
-            int j = 0;
-            while(i < myMovements.length) {
-                if (myMovements[i] == null){
-                    i++;
-                }
-                else {
-                    myMovements[j] = myMovements[i];
-                    j++;
-                    i++;
-                }
-            }
-        }
         isLegalMove(board, piece, myMovements, targetX, targetY);
     }
 }
