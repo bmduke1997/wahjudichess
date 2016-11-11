@@ -412,6 +412,12 @@ public class ChessController implements Initializable {
                         selectionY.set(-100);
                         selection = null;
                     }
+                    if(board.black == 0) {
+                        System.out.println("Black won!");
+                    }
+                    if(board.white == 0){
+                        System.out.println("White won!");
+                    }
                 });
 
                 /* Position the tile on the board. */

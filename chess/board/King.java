@@ -40,16 +40,14 @@ public class King extends Piece {
 
 	public boolean hasCapture(Piece[][] board) {
 		boolean capture = false;
-		int i = 0;
 		int tempX = getX();
 		int tempY = getY();
-
 		for (int j = -1; j < 2; j++) {
 			if (capture) break;
 			tempY += j;
 			for (int k = -1; k < 2; k++) {
 				tempX += k;
-				if (j == 0 && k == 0) continue;
+				if (tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX] == null) continue;
 				else if (tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor()) {
 					capture = true;
 					break;

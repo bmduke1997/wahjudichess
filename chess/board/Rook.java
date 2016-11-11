@@ -97,12 +97,12 @@ public class Rook extends Piece
         while (dx <= 1)
         {
             tempX += dx;
-            if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor())
+            if (board[tempY][tempX] == null  && tempX < 5 && tempX > -1) continue;
+            else if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor())
             {
                 capture = true;
                 break;
             }
-            else if (board[tempY][tempX] == null  && tempX < 5 && tempX > -1) continue;
             else if(dx == -1)
             {
                 tempX = getX();
@@ -118,12 +118,12 @@ public class Rook extends Piece
         {
             if (capture) break;
             tempY += dy;
-            if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor())
+            if (board[tempY][tempX] == null  && tempY < 5 && tempY > -1) continue;
+            else if(tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor())
             {
                 capture = true;
                 break;
             }
-            else if (board[tempY][tempX] == null  && tempY < 5 && tempY > -1) continue;
             else if(dy == -1)
             {
                 tempY = getY();

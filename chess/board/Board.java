@@ -83,15 +83,15 @@ public class Board {
         public Piece getMorphed() {
             return morphed;
         }
-        
+
         public void setMorphed(Piece morphed) {
             this.morphed = morphed;
         }
     }
-    
+
     /**
      * Returns whether a delta involved transformation.
-     * 
+     *
      * @param delta is an undo delta, as returned by the
      *        {@link #move(int, int, int, int) move} method.
      */
@@ -110,13 +110,14 @@ public class Board {
      *         was illegal.
      * @see #undo(Object)
      */
+    public int black = 10, white = 10;
     public Object move(int srcX, int srcY, int destX, int destY) {
         Piece capturer = playingBoard[srcY][srcX];
         Piece captured = playingBoard[destY][destX];
-        
+
         boolean isTransform = capturer instanceof Pawn && (destY == 0
                                                            || destY == 4);
-        
+
         if(( (restricted || capture)
             && captured != null)
            || (!restricted && !capture)) {
@@ -125,6 +126,8 @@ public class Board {
 
             /* If there is already a piece at the spot, remove it. */
             if (captured != null) {
+                if (captured.getColor() == Piece.BLACK) black--;
+                if (captured.getColor() == Piece.WHITE) white--;
                 remove(destX, destY);
                 captured.setPosition(-1, -1);
             }
@@ -144,20 +147,20 @@ public class Board {
     
     /**
      * Link a transforming piece (always a King) to a delta.
-     * 
+     *
      * This should only be used after clicking and moving a pawn to one
      * of the ends of the board, i.e., when the pawn is transforming.
-     * 
+     *
      * @param delta is the delta object, as returned by the
      *        {@link #move(int, int, int, int) move} method.
      * @param king is the Piece (King) to link.
      */
     public void assocMorphed(Object delta, Piece king) {
         Delta _delta = (Delta)delta;
-        
+
         _delta.setMorphed(king);
     }
-    
+
     /**
      * Undo a move using a delta object.
      * 
@@ -174,7 +177,7 @@ public class Board {
             /* Delete the king that resulted from the transformation. */
             remove(_delta.getDestX(), _delta.getDestY());
         }
-        
+
         capturer.setPosition(_delta.getSrcX(), _delta.getSrcY());
         
         if (captured != null) {
@@ -206,14 +209,14 @@ public class Board {
         
         move(_delta.getSrcX(), _delta.getSrcY(),
              _delta.getDestX(), _delta.getDestY());
-        
+
         if (_delta.isTransform()) {
             remove(_delta.getDestX(), _delta.getDestY());
-            
+
             Piece king = _delta.getMorphed();
-            
+
             king.setPosition(_delta.getDestX(), _delta.getDestY());
-            
+
             put(king);
         }
     }
@@ -222,7 +225,7 @@ public class Board {
         if (playingBoard[y][x] == null) {
             return;
         }
-        
+
         playingBoard[y][x].setPosition(-1, -1);
 
         playingBoard[y][x] = null;
