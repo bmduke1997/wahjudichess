@@ -31,7 +31,7 @@
                   </ImageView>
                 </graphic>
               </Button>
-              <Button fx:id="redoButton">
+              <Button fx:id="redoButton" onAction="#handleRedo">
                 <tooltip><Tooltip text="Redo" wrapText="true" /></tooltip>
                 <graphic>
                   <ImageView>
