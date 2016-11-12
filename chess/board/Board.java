@@ -181,6 +181,15 @@ public class Board {
         capturer.setPosition(_delta.getSrcX(), _delta.getSrcY());
         
         if (captured != null) {
+            if (captured.getColor() == Piece.BLACK) {
+                System.out.print("Black score went to " + black + " to ");
+                black++;
+                System.out.println(black);
+            } else {
+                System.out.print("White score went to " + white + " to ");
+                white++;
+                System.out.println(white);
+            }
             captured.setPosition(_delta.getDestX(), _delta.getDestY());
         }
         
