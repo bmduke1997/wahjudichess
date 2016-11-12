@@ -147,6 +147,40 @@ public class Board {
 
         return null;
     }
+
+    /**
+     * Create a new delta from an old one with the current board.
+     *
+     * Although Deltas allow undoing and redoing, they are by necessity
+     * bound to a specific Board's pieces.  This function facilitates
+     * the sharing of Deltas between boards by making a copy of a
+     * Delta with the board-specific parts bound to a different board.
+     *
+     * @param delta is the delta object, as returned by the
+     *        {@link #move(int, int, int, int) move} method.
+     * @param morphed is the transformed piece if the delta describes
+     *        a transforming move, else should be null.
+     * @return a new delta which reflects this board.
+     */
+    public Object reflectDelta(Object delta, Piece morphed) {
+        Delta _delta = (Delta)delta;
+
+        int srcX = _delta.getSrcX();
+        int srcY = _delta.getSrcY();
+        int destX = _delta.getDestX();
+        int destY = _delta.getDestY();
+        Piece newCapturer = playingBoard[srcY][srcX];
+        Piece newCaptured = playingBoard[destY][destX];
+        boolean isTransform = _delta.isTransform();
+
+        Delta newDelta = new Delta(srcX, srcY,
+                                   destX, destY,
+                                   newCapturer,
+                                   newCaptured,
+                                   isTransform);
+        assocMorphed((Object)newDelta, morphed);
+        return (Object)newDelta;
+    }
     
     /**
      * Link a transforming piece (always a King) to a delta.
