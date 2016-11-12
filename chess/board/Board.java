@@ -125,8 +125,6 @@ public class Board {
             && captured != null)
            || (!restricted && !capture)) {
         
-            System.out.println("Executing move...");
-
             /* If there is already a piece at the spot, remove it. */
             if (captured != null) {
                 if (captured.getColor() == Piece.BLACK) black--;
@@ -148,40 +146,6 @@ public class Board {
         return null;
     }
 
-    /**
-     * Create a new delta from an old one with the current board.
-     *
-     * Although Deltas allow undoing and redoing, they are by necessity
-     * bound to a specific Board's pieces.  This function facilitates
-     * the sharing of Deltas between boards by making a copy of a
-     * Delta with the board-specific parts bound to a different board.
-     *
-     * @param delta is the delta object, as returned by the
-     *        {@link #move(int, int, int, int) move} method.
-     * @param morphed is the transformed piece if the delta describes
-     *        a transforming move, else should be null.
-     * @return a new delta which reflects this board.
-     */
-    public Object reflectDelta(Object delta, Piece morphed) {
-        Delta _delta = (Delta)delta;
-
-        int srcX = _delta.getSrcX();
-        int srcY = _delta.getSrcY();
-        int destX = _delta.getDestX();
-        int destY = _delta.getDestY();
-        Piece newCapturer = playingBoard[srcY][srcX];
-        Piece newCaptured = playingBoard[destY][destX];
-        boolean isTransform = _delta.isTransform();
-
-        Delta newDelta = new Delta(srcX, srcY,
-                                   destX, destY,
-                                   newCapturer,
-                                   newCaptured,
-                                   isTransform);
-        assocMorphed((Object)newDelta, morphed);
-        return (Object)newDelta;
-    }
-    
     /**
      * Link a transforming piece (always a King) to a delta.
      *
@@ -219,13 +183,9 @@ public class Board {
         
         if (captured != null) {
             if (captured.getColor() == Piece.BLACK) {
-                System.out.print("Black score went to " + black + " to ");
                 black++;
-                System.out.println(black);
             } else {
-                System.out.print("White score went to " + white + " to ");
                 white++;
-                System.out.println(white);
             }
             captured.setPosition(_delta.getDestX(), _delta.getDestY());
         }
@@ -245,8 +205,6 @@ public class Board {
      */
     public void redo(Object delta) {
         Delta _delta = (Delta)delta;
-        System.out.println(_delta.getSrcX() + "," + _delta.getSrcY() + " -> " +
-                           _delta.getDestX() + "," + _delta.getDestY());
 
         Piece piece = getPieceAt(_delta.getSrcX(), _delta.getSrcY());
         piece.clear();
@@ -270,6 +228,19 @@ public class Board {
         }
     }
 
+    public Object copyMove(Object delta) {
+        Delta _delta = (Delta)delta;
+
+        Piece piece = getPieceAt(_delta.getSrcX(), _delta.getSrcY());
+        piece.clear();
+        checkRestrictions(this, piece, piece.movement(getPlayingBoard()),
+                          _delta.getDestX(), _delta.getDestY());
+        teamCapture(piece.getColor());
+        
+        return move(_delta.getSrcX(), _delta.getSrcY(),
+                    _delta.getDestX(), _delta.getDestY());
+    }
+
     public void remove(int x, int y) {
         if (playingBoard[y][x] == null) {
             return;
@@ -278,6 +249,16 @@ public class Board {
         playingBoard[y][x].setPosition(-1, -1);
 
         playingBoard[y][x] = null;
+    }
+
+    public Piece getCapturer(Object delta) {
+        Delta _delta = (Delta)delta;
+        return _delta.getCapturer();
+    }
+
+    public void removeCapturer(Object delta) {
+        Delta _delta = (Delta)delta;
+        remove(_delta.getCapturer().getX(), _delta.getCapturer().getY());
     }
 
     public Piece getPieceAt(int x, int y) {

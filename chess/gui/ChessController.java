@@ -34,6 +34,8 @@ public class ChessController implements Initializable {
     private Piece selection = null;
     private final IntegerProperty selectionX = new SimpleIntegerProperty(-100);
     private final IntegerProperty selectionY = new SimpleIntegerProperty(-100);
+    private Stack<Object> prevMoveHistory;
+    private Stack<Object> prevMoveFutures;
     private Stack<Object> moveHistory;
     private Stack<Object> moveFutures;
     private Board prevBoard;
@@ -99,8 +101,9 @@ public class ChessController implements Initializable {
         selectionY.set(-100);
 
         if (moveHistory.size() > 0) {
-            /* handle transforming pieces. */
-            prevBoard.undo(moveHistory.peek());
+            Object prevDelta = prevMoveHistory.pop();
+            prevBoard.undo(prevDelta);
+            prevMoveFutures.push(prevDelta);
         }
 
         counter--;
@@ -120,6 +123,12 @@ public class ChessController implements Initializable {
         selection = null;
         selectionX.set(-100);
         selectionY.set(-100);
+
+        if (moveHistory.size() > 1) {
+            Object prevDelta = prevMoveFutures.pop();
+            prevBoard.redo(prevDelta);
+            prevMoveHistory.push(prevDelta);
+        }
 
         counter++;
         undoButton.setDisable(false);
@@ -329,6 +338,8 @@ public class ChessController implements Initializable {
         /* Clear out undo lists. */
         moveHistory.clear();
         moveFutures.clear();
+        prevMoveHistory.clear();
+        prevMoveFutures.clear();
         
         /* Undo/redo buttons start out disabled. */
         undoButton.setDisable(true);
@@ -343,6 +354,7 @@ public class ChessController implements Initializable {
 
         /* Empty the board. */
         board.clear();
+        prevBoard.clear();
 
         /* Set up the pieces for a game. */
         put(board, new King(0, 0, Piece.BLACK));
@@ -404,6 +416,8 @@ public class ChessController implements Initializable {
         /* Initialize the game history stack. */
         moveHistory = new Stack<>();
         moveFutures = new Stack<>();
+        prevMoveHistory = new Stack<>();
+        prevMoveFutures = new Stack<>();
 
         /* Initialize the cell groups (tile + piece groups). */
         cellGroups = new Group[5][5];
@@ -562,7 +576,21 @@ public class ChessController implements Initializable {
                                 if (moveHistory.size() > 0) {
                                     /* If there has been a previous board state,
                                      * reflect it on the miniboard. */
-                                    prevBoard.redo(moveHistory.peek());
+                                    Object prevDelta = moveHistory.peek();
+
+                                    Object newDelta = prevBoard
+                                                        .copyMove(
+                                                          prevDelta);
+
+                                    if (prevBoard.wasTransform(newDelta)) {
+                                        Piece miniKing = new King(prevBoard.getCapturer(newDelta).getX(), prevBoard.getCapturer(newDelta).getY(), counter%2);
+                                        prevBoard.removeCapturer(newDelta);
+                                    
+                                        prevBoard.assocMorphed(newDelta, miniKing);
+                                        miniPut(prevBoard, miniKing);
+                                    }
+
+                                    prevMoveHistory.push(newDelta);
                                 }
                                 moveHistory.push(delta);
                             }
