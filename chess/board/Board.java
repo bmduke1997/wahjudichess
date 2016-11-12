@@ -23,6 +23,9 @@ public class Board {
                 remove(j, i);
             }
         }
+
+        black = 10;
+        white = 10;
     }
     
     /**
@@ -36,16 +39,20 @@ public class Board {
      */
     private class Delta {
         private int srcX, srcY, destX, destY;
-        private Piece capturer, captured;
+        private Piece capturer, captured, morphed;
+        private boolean isTransform;
         
         public Delta(int srcX, int srcY, int destX, int destY,
-                     Piece capturer, Piece captured) {
+                     Piece capturer, Piece captured,
+                     boolean isTransform) {
             this.srcX = srcX;
             this.srcY = srcY;
             this.destX = destX;
             this.destY = destY;
             this.capturer = capturer;
             this.captured = captured;
+            this.isTransform = isTransform;
+            this.morphed = null;
         }
 
         public int getSrcX() {
@@ -71,6 +78,28 @@ public class Board {
         public Piece getCaptured() {
             return captured;
         }
+
+        public boolean isTransform() {
+            return isTransform;
+        }
+
+        public Piece getMorphed() {
+            return morphed;
+        }
+
+        public void setMorphed(Piece morphed) {
+            this.morphed = morphed;
+        }
+    }
+
+    /**
+     * Returns whether a delta involved transformation.
+     *
+     * @param delta is an undo delta, as returned by the
+     *        {@link #move(int, int, int, int) move} method.
+     */
+    public boolean wasTransform(Object delta) {
+        return ((Delta)delta).isTransform();
     }
 
     /**
@@ -84,20 +113,26 @@ public class Board {
      *         was illegal.
      * @see #undo(Object)
      */
+    public int black = 10, white = 10;
     public Object move(int srcX, int srcY, int destX, int destY) {
         Piece capturer = playingBoard[srcY][srcX];
         Piece captured = playingBoard[destY][destX];
-        
-        if((restricted
-            && captured != null
-            && captured.getColor() != capturer.getColor())
-           || !restricted) {
+
+        boolean isTransform = capturer instanceof Pawn && (destY == 0
+                                                           || destY == 4);
+
+        if(( (restricted || capture)
+            && captured != null)
+           || (!restricted && !capture)) {
         
             System.out.println("Executing move...");
 
             /* If there is already a piece at the spot, remove it. */
             if (captured != null) {
+                if (captured.getColor() == Piece.BLACK) black--;
+                if (captured.getColor() == Piece.WHITE) white--;
                 remove(destX, destY);
+                captured.setPosition(-1, -1);
             }
 
             playingBoard[destY][destX] = capturer;
@@ -107,12 +142,28 @@ public class Board {
             playingBoard[srcY][srcX] = null;
         
             return (Object)(new Delta(srcX, srcY, destX, destY,
-                                      capturer, captured));
+                                      capturer, captured, isTransform));
         }
 
         return null;
     }
     
+    /**
+     * Link a transforming piece (always a King) to a delta.
+     *
+     * This should only be used after clicking and moving a pawn to one
+     * of the ends of the board, i.e., when the pawn is transforming.
+     *
+     * @param delta is the delta object, as returned by the
+     *        {@link #move(int, int, int, int) move} method.
+     * @param king is the Piece (King) to link.
+     */
+    public void assocMorphed(Object delta, Piece king) {
+        Delta _delta = (Delta)delta;
+
+        _delta.setMorphed(king);
+    }
+
     /**
      * Undo a move using a delta object.
      * 
@@ -125,20 +176,71 @@ public class Board {
         Piece capturer = _delta.getCapturer();
         Piece captured = _delta.getCaptured();
         
+        if (_delta.isTransform()) {
+            /* Delete the king that resulted from the transformation. */
+            remove(_delta.getDestX(), _delta.getDestY());
+        }
+
         capturer.setPosition(_delta.getSrcX(), _delta.getSrcY());
         
         if (captured != null) {
+            if (captured.getColor() == Piece.BLACK) {
+                System.out.print("Black score went to " + black + " to ");
+                black++;
+                System.out.println(black);
+            } else {
+                System.out.print("White score went to " + white + " to ");
+                white++;
+                System.out.println(white);
+            }
             captured.setPosition(_delta.getDestX(), _delta.getDestY());
         }
         
         playingBoard[_delta.getSrcY()][_delta.getSrcX()] = capturer;
         playingBoard[_delta.getDestY()][_delta.getDestX()] = captured;
     }
+    
+    /**
+     * Redo a move using a delta object.
+     * 
+     * The same delta that was used to undo a move can be used to redo it.
+     * 
+     * @param delta is the delta object, as returned by the
+     *        {@link #move(int, int, int, int) move} method.
+     * @see #move(int, int, int, int)
+     */
+    public void redo(Object delta) {
+        Delta _delta = (Delta)delta;
+        System.out.println(_delta.getSrcX() + "," + _delta.getSrcY() + " -> " +
+                           _delta.getDestX() + "," + _delta.getDestY());
+
+        Piece piece = getPieceAt(_delta.getSrcX(), _delta.getSrcY());
+        piece.clear();
+        checkRestrictions(this, piece, piece.movement(getPlayingBoard()),
+                          _delta.getDestX(), _delta.getDestY());
+        teamCapture(piece.getColor());
+        
+        if (move(_delta.getSrcX(), _delta.getSrcY(),
+                 _delta.getDestX(), _delta.getDestY()) == null) {
+            System.out.println("Move unsuccessful.");
+        }
+
+        if (_delta.isTransform()) {
+            remove(_delta.getDestX(), _delta.getDestY());
+
+            Piece king = _delta.getMorphed();
+
+            king.setPosition(_delta.getDestX(), _delta.getDestY());
+
+            put(king);
+        }
+    }
 
     public void remove(int x, int y) {
         if (playingBoard[y][x] == null) {
             return;
         }
+
         playingBoard[y][x].setPosition(-1, -1);
 
         playingBoard[y][x] = null;
@@ -187,5 +289,28 @@ public class Board {
             }
         }
         isLegalMove(board, piece, myMovements, targetX, targetY);
+    }
+    private boolean capture;
+    public void teamCapture(int color){
+        capture = false;
+
+        for (int y = 0; y < 5; y++){
+            if(capture) break;
+            for (int x = 0; x < 5; x++){
+                //TODO watch out for null spaces
+                try {
+                    if (playingBoard[y][x].getColor() == color) {
+                        capture = playingBoard[y][x].hasCapture(playingBoard);
+                        if(capture) {
+                            System.out.println("Team has capture. " + "Color: " + color);
+                            break;
+                        }
+                    }
+                }
+                catch (Exception e){
+                    //get rid of this error
+                }
+            }
+        }
     }
 }

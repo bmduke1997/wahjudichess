@@ -50,4 +50,36 @@ public class Pawn extends Piece {
             myMovements[i] = null;
         }
     }
+
+    public boolean hasCapture(Piece[][] board) {
+        boolean capture = false;
+        int i = 0;
+        int j = 0;
+        int tempX = getX();
+        int tempY = getY();
+
+        if (getColor() == Piece.BLACK) { // Top to bottom
+            j = 1;
+        }
+        else if(getColor() == Piece.WHITE){  //Bottom to top
+            j = -1;
+        }
+        try {
+            if (tempY + j > -1 && tempX + j > -1 && tempY + j < 5 && tempX + j < 5 && board[tempY+j][tempX+j].getColor() != getColor()){
+                capture = true;
+            }
+        }
+        catch (Exception e){
+
+        }
+        try {
+            if (tempY + j > -1 && tempY + j < 5 && tempX - j > -1 && tempX - j < 5 && board[tempY+j][tempX-j].getColor() != getColor()){
+                capture = true;
+            }
+        }
+        catch (Exception e) {
+
+        }
+        return capture;
+    }
 }

@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.paint.*;
 import javafx.scene.layout.Pane;
@@ -33,8 +34,8 @@ public class ChessController implements Initializable {
     private Piece selection = null;
     private final IntegerProperty selectionX = new SimpleIntegerProperty(-100);
     private final IntegerProperty selectionY = new SimpleIntegerProperty(-100);
-    private Stack<MeshView> meshHistory;
     private Stack<Object> moveHistory;
+    private Stack<Object> moveFutures;
 
     /* Color materials. */
     private final Material blackMat = new PhongMaterial(Color.web("#000"));
@@ -44,6 +45,8 @@ public class ChessController implements Initializable {
     private final Material pieceBlackMat = new PhongMaterial(Color.web("#333"));
     private final Material pieceWhiteMat = new PhongMaterial(Color.web("#ddd"));
 
+    @FXML
+    private Label statusBar;
     @FXML
     private Slider slider;
     @FXML
@@ -86,11 +89,61 @@ public class ChessController implements Initializable {
 
     @FXML
     private void handleUndo() {
-        board.undo(moveHistory.pop());
-        meshHistory.pop();
+        Object delta = moveHistory.pop();
+        
+        board.undo(delta);
+        moveFutures.push(delta);
+        selection = null;
+        selectionX.set(-100);
+        selectionY.set(-100);
+
+        counter--;
+        updateStatusBar();
+
+        redoButton.setDisable(false);
 
         if (moveHistory.size() == 0)
             undoButton.setDisable(true);
+    }
+
+    @FXML
+    private void handleRedo() {
+        Object delta = moveFutures.pop();
+        board.redo(delta);
+        moveHistory.push(delta);
+        selection = null;
+        selectionX.set(-100);
+        selectionY.set(-100);
+
+        counter++;
+        undoButton.setDisable(false);
+
+        if(board.black == 0) {
+            handleWin(Piece.BLACK);
+        } else if (board.white == 0){
+            handleWin(Piece.WHITE);
+        } else {
+            updateStatusBar();
+        }
+
+        if (moveFutures.size() == 0)
+            redoButton.setDisable(true);
+    }
+
+    void updateStatusBar() {
+        if (counter % 2 == 0) {
+            statusBar.setText("Black's turn.");
+        } else if (counter % 2 == 1) {
+            statusBar.setText("White's turn.");
+        }
+    }
+
+    private void handleWin(int color) {
+        if (color == Piece.BLACK) {
+            statusBar.setText("Black wins!");
+        } else if (color == Piece.WHITE) {
+            statusBar.setText("White wins!");
+        }
     }
 
     public void put(Board board, Piece piece) {
@@ -148,6 +201,13 @@ public class ChessController implements Initializable {
             if (neuints[0] != -1 && neuints[1] != -1) {
                 cellGroups[neuints[0]][neuints[1]].getChildren().add(mv);
             }
+
+            /* Restore regular mesh color. */
+            if (piece.getColor() == Piece.BLACK) {
+                mv.setMaterial(pieceBlackMat);
+            } else {
+                mv.setMaterial(pieceWhiteMat);
+            }
         });
 
         board.put(piece);
@@ -157,12 +217,14 @@ public class ChessController implements Initializable {
     public void setupGame(boolean whiteGoesFirst,
                           boolean blackIsHuman,
                           boolean whiteIsHuman) {
-
         if (whiteGoesFirst) {
             counter = 1;
         } else {
             counter = 0;
         }
+
+        /* Say whose turn it is. */
+        updateStatusBar();
 
         /* Clear any selection. */
         selection = null;
@@ -170,8 +232,8 @@ public class ChessController implements Initializable {
         selectionY.set(-100);
         
         /* Clear out undo lists. */
-        moveHistory = new Stack<>();
-        meshHistory = new Stack<>();
+        moveHistory.clear();
+        moveFutures.clear();
         
         /* Undo/redo buttons start out disabled. */
         undoButton.setDisable(true);
@@ -220,6 +282,10 @@ public class ChessController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         board = new Board();
 
+        /* Initialize the game history stack. */
+        moveHistory = new Stack<>();
+        moveFutures = new Stack<>();
+
         /* Initialize the cell groups (tile + piece groups). */
         cellGroups = new Group[5][5];
 
@@ -235,7 +301,7 @@ public class ChessController implements Initializable {
         
         
         /* Declare our group of solid shapes. */
-        solids = new Group();;
+        solids = new Group();
         
         /* Make the selection ring. */
         Group selectionRing = new Group();
@@ -272,12 +338,6 @@ public class ChessController implements Initializable {
                 box.setWidth(10);
                 box.setHeight(10);
                 box.setDepth(2);
-
-                /* Initialize deleted mesh stack. */
-                meshHistory = new Stack<>();
-                
-                /* Initialize the game history stack. */
-                moveHistory = new Stack<>();
 
                 /* Color each tile black or white. */
                 if (((i + j) & 1) == 1) {
@@ -338,7 +398,7 @@ public class ChessController implements Initializable {
                     int x = pos[0];
                     int y = pos[1];
 
-
+                    board.teamCapture(counter%2);
 
                     if (selection == null) {
                         /* Try to select the piece if there is one */
@@ -354,52 +414,45 @@ public class ChessController implements Initializable {
                                 selection.movement(board.getPlayingBoard()),
                                 x, y);
                         
+                        boolean isTransform = selection instanceof Pawn
+                                                && (y == 0 || y == 4);
+                        
                         /* remove mesh for taken pieces, if appropriate */
                         if(board.hasLegalMove) {
-                            Object[] children = cellGroups[x][y].getChildren().toArray();
-                            MeshView meshView = null;
-
-                            for (Object child : children) {
-                                Node node = (Node) child;
-                                if (node instanceof MeshView) {
-                                    meshView = (MeshView)node;
-                                    break;
-                                }
-                            }
-                                
-                            Object delta = board.move(selection.getX(), selection.getY(), x, y);
+                            Object delta = board.move(selection.getX(),
+                                                      selection.getY(),
+                                                      x, y);
                             if (delta != null) {
-                                if (meshView != null) {
-                                    if (board.getPieceAt(x, y)
-                                          .getColor() == Piece.BLACK) {
-                                        /* Since we are checking the opposite
-                                         * team's mesh, the color should be the
-                                         * opposite. */
-                                        ((MeshView)meshView)
-                                          .setMaterial(pieceWhiteMat);
-                                    } else {
-                                        ((MeshView)meshView)
-                                          .setMaterial(pieceBlackMat);
-                                    }
+                                /* Transform pawn to king at end of board. */
+                                if (isTransform) {
+                                    board.remove(x, y);
+                                    
+                                    Piece king = new King(x, y, counter%2);
+                                    board.assocMorphed(delta, king);
+                                    
+                                    put(board, king);
                                 }
-                            
+                                
+                                redoButton.setDisable(true);
+                                moveFutures.clear();
+
                                 counter++;
+                                updateStatusBar();
 
                                 undoButton.setDisable(false);
-                                meshHistory.push(meshView);
                                 moveHistory.push(delta);
-                                    
-                                if (meshView != null) {
-                                    cellGroups[x][y]
-                                      .getChildren()
-                                      .remove(meshView);
-                                }
                             }
                         }
 
                         selectionX.set(-100);
                         selectionY.set(-100);
                         selection = null;
+                    }
+
+                    if(board.black == 0) {
+                        handleWin(Piece.BLACK);
+                    } else if (board.white == 0){
+                        handleWin(Piece.WHITE);
                     }
                 });
 
