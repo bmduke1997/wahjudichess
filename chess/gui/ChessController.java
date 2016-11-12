@@ -34,8 +34,11 @@ public class ChessController implements Initializable {
     private Piece selection = null;
     private final IntegerProperty selectionX = new SimpleIntegerProperty(-100);
     private final IntegerProperty selectionY = new SimpleIntegerProperty(-100);
+    private Stack<Object> prevMoveHistory;
+    private Stack<Object> prevMoveFutures;
     private Stack<Object> moveHistory;
     private Stack<Object> moveFutures;
+    private Board prevBoard;
 
     /* Color materials. */
     private final Material blackMat = new PhongMaterial(Color.web("#000"));
@@ -97,6 +100,12 @@ public class ChessController implements Initializable {
         selectionX.set(-100);
         selectionY.set(-100);
 
+        if (moveHistory.size() > 0) {
+            Object prevDelta = prevMoveHistory.pop();
+            prevBoard.undo(prevDelta);
+            prevMoveFutures.push(prevDelta);
+        }
+
         counter--;
         updateStatusBar();
 
@@ -114,6 +123,12 @@ public class ChessController implements Initializable {
         selection = null;
         selectionX.set(-100);
         selectionY.set(-100);
+
+        if (moveHistory.size() > 1) {
+            Object prevDelta = prevMoveFutures.pop();
+            prevBoard.redo(prevDelta);
+            prevMoveHistory.push(prevDelta);
+        }
 
         counter++;
         undoButton.setDisable(false);
@@ -144,6 +159,95 @@ public class ChessController implements Initializable {
         } else if (color == Piece.WHITE) {
             statusBar.setText("White wins!");
         }
+    }
+
+    public void miniPut(Board board, Piece piece) {
+        final MeshView mv;
+
+        if (piece instanceof Pawn) {
+            mv = (MeshView)(new PawnMeshView());
+        } else if (piece instanceof Queen) {
+            mv = (MeshView)(new QueenMeshView());
+        } else if (piece instanceof Knight) {
+            mv = (MeshView)(new KnightMeshView());
+        } else if (piece instanceof King) {
+            mv = (MeshView)(new KingMeshView());
+        } else if (piece instanceof Rook) {
+            mv = (MeshView)(new RookMeshView());
+        } else {
+            mv = (MeshView)(new BishopMeshView());
+        }
+
+        /* These transforms are just copied from the small box transforms
+         * in #initialize(). */
+        Translate smtrans = new Translate(0, 0, 88);
+        smtrans.xProperty().bind(piece.xProperty().subtract(2.0).multiply(10));
+        smtrans.yProperty().bind(piece.yProperty().subtract(2.0).multiply(10).subtract(175));
+
+        Rotate smrotate = new Rotate(0, 0, 0, 0);
+        smrotate.angleProperty().bind(slider.valueProperty());
+        mv.getTransforms().add(smrotate);
+
+        Rotate sminnerrotate = new Rotate(0, 0, 0, 0);
+        sminnerrotate.angleProperty().bind(slider.valueProperty().negate());
+        sminnerrotate
+          .pivotXProperty()
+          .bind(
+            piece
+              .xProperty()
+              .subtract(2)
+              .multiply(10)
+              .add(
+                piece
+                  .xProperty()
+                  .multiply(10)
+                  .negate()
+                  .add(20)));
+        sminnerrotate
+          .pivotYProperty()
+          .bind(
+            piece
+              .yProperty()
+              .subtract(2)
+              .multiply(10)
+              .subtract(175)
+              .add(
+                piece
+                  .yProperty()
+                  .multiply(10)
+                  .negate()
+                  .add(30)));
+        mv.getTransforms().add(sminnerrotate);
+        mv.getTransforms().add(smtrans);
+
+        Material mat;
+        if (piece.getColor() == Piece.BLACK) {
+            mat = new PhongMaterial(Color.web("#333"));
+        } else {
+            mv.getTransforms().add(new Rotate(180, Rotate.Z_AXIS));
+            mat = new PhongMaterial(Color.web("#ddd"));
+        }
+        mv.setMaterial(mat);
+
+        piece.positionProperty().addListener((obs, old, neu) -> {
+            int[] oldints = (int[])old;
+            int[] neuints = (int[])neu;
+
+            if (old != null) {
+                if (oldints[0] != -1 && oldints[1] != -1) {
+                    if (solids.getChildren().contains(mv))
+                        solids.getChildren().remove(mv);
+                }
+            }
+
+            if (neuints[0] != -1 && neuints[1] != -1) {
+                if (!solids.getChildren().contains(mv))
+                    solids.getChildren().add(mv);
+            }
+        });
+
+        board.put(piece);
+        solids.getChildren().add(mv);
     }
 
     public void put(Board board, Piece piece) {
@@ -234,6 +338,8 @@ public class ChessController implements Initializable {
         /* Clear out undo lists. */
         moveHistory.clear();
         moveFutures.clear();
+        prevMoveHistory.clear();
+        prevMoveFutures.clear();
         
         /* Undo/redo buttons start out disabled. */
         undoButton.setDisable(true);
@@ -248,6 +354,7 @@ public class ChessController implements Initializable {
 
         /* Empty the board. */
         board.clear();
+        prevBoard.clear();
 
         /* Set up the pieces for a game. */
         put(board, new King(0, 0, Piece.BLACK));
@@ -272,6 +379,29 @@ public class ChessController implements Initializable {
         put(board, new Pawn(3, 3, Piece.WHITE));
         put(board, new Pawn(4, 3, Piece.WHITE));
 
+        /* Set up the pieces on the miniboard. */
+        miniPut(prevBoard, new King(0, 0, Piece.BLACK));
+        miniPut(prevBoard, new Queen(1, 0, Piece.BLACK));
+        miniPut(prevBoard, new Bishop(2, 0, Piece.BLACK));
+        miniPut(prevBoard, new Knight(3, 0, Piece.BLACK));
+        miniPut(prevBoard, new Rook(4, 0, Piece.BLACK));
+        miniPut(prevBoard, new Pawn(0, 1, Piece.BLACK));
+        miniPut(prevBoard, new Pawn(1, 1, Piece.BLACK));
+        miniPut(prevBoard, new Pawn(2, 1, Piece.BLACK));
+        miniPut(prevBoard, new Pawn(3, 1, Piece.BLACK));
+        miniPut(prevBoard, new Pawn(4, 1, Piece.BLACK));
+
+        miniPut(prevBoard, new Rook(0, 4, Piece.WHITE));
+        miniPut(prevBoard, new Knight(1, 4, Piece.WHITE));
+        miniPut(prevBoard, new Bishop(2, 4, Piece.WHITE));
+        miniPut(prevBoard, new Queen(3, 4, Piece.WHITE));
+        miniPut(prevBoard, new King(4, 4, Piece.WHITE));
+        miniPut(prevBoard, new Pawn(0, 3, Piece.WHITE));
+        miniPut(prevBoard, new Pawn(1, 3, Piece.WHITE));
+        miniPut(prevBoard, new Pawn(2, 3, Piece.WHITE));
+        miniPut(prevBoard, new Pawn(3, 3, Piece.WHITE));
+        miniPut(prevBoard, new Pawn(4, 3, Piece.WHITE));
+
         System.out.println("ChessController got message about new game.");
         System.out.println("First player: " + (whiteGoesFirst ? "white" : "black"));
         System.out.println("Black is " + (blackIsHuman ? "human" : "machine"));
@@ -281,10 +411,13 @@ public class ChessController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         board = new Board();
+        prevBoard = new Board();
 
         /* Initialize the game history stack. */
         moveHistory = new Stack<>();
         moveFutures = new Stack<>();
+        prevMoveHistory = new Stack<>();
+        prevMoveFutures = new Stack<>();
 
         /* Initialize the cell groups (tile + piece groups). */
         cellGroups = new Group[5][5];
@@ -440,6 +573,25 @@ public class ChessController implements Initializable {
                                 updateStatusBar();
 
                                 undoButton.setDisable(false);
+                                if (moveHistory.size() > 0) {
+                                    /* If there has been a previous board state,
+                                     * reflect it on the miniboard. */
+                                    Object prevDelta = moveHistory.peek();
+
+                                    Object newDelta = prevBoard
+                                                        .copyMove(
+                                                          prevDelta);
+
+                                    if (prevBoard.wasTransform(newDelta)) {
+                                        Piece miniKing = new King(prevBoard.getCapturer(newDelta).getX(), prevBoard.getCapturer(newDelta).getY(), counter%2);
+                                        prevBoard.removeCapturer(newDelta);
+                                    
+                                        prevBoard.assocMorphed(newDelta, miniKing);
+                                        miniPut(prevBoard, miniKing);
+                                    }
+
+                                    prevMoveHistory.push(newDelta);
+                                }
                                 moveHistory.push(delta);
                             }
                         }

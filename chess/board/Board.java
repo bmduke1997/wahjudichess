@@ -125,8 +125,6 @@ public class Board {
             && captured != null)
            || (!restricted && !capture)) {
         
-            System.out.println("Executing move...");
-
             /* If there is already a piece at the spot, remove it. */
             if (captured != null) {
                 if (captured.getColor() == Piece.BLACK) black--;
@@ -147,7 +145,7 @@ public class Board {
 
         return null;
     }
-    
+
     /**
      * Link a transforming piece (always a King) to a delta.
      *
@@ -185,13 +183,9 @@ public class Board {
         
         if (captured != null) {
             if (captured.getColor() == Piece.BLACK) {
-                System.out.print("Black score went to " + black + " to ");
                 black++;
-                System.out.println(black);
             } else {
-                System.out.print("White score went to " + white + " to ");
                 white++;
-                System.out.println(white);
             }
             captured.setPosition(_delta.getDestX(), _delta.getDestY());
         }
@@ -211,8 +205,6 @@ public class Board {
      */
     public void redo(Object delta) {
         Delta _delta = (Delta)delta;
-        System.out.println(_delta.getSrcX() + "," + _delta.getSrcY() + " -> " +
-                           _delta.getDestX() + "," + _delta.getDestY());
 
         Piece piece = getPieceAt(_delta.getSrcX(), _delta.getSrcY());
         piece.clear();
@@ -236,6 +228,19 @@ public class Board {
         }
     }
 
+    public Object copyMove(Object delta) {
+        Delta _delta = (Delta)delta;
+
+        Piece piece = getPieceAt(_delta.getSrcX(), _delta.getSrcY());
+        piece.clear();
+        checkRestrictions(this, piece, piece.movement(getPlayingBoard()),
+                          _delta.getDestX(), _delta.getDestY());
+        teamCapture(piece.getColor());
+        
+        return move(_delta.getSrcX(), _delta.getSrcY(),
+                    _delta.getDestX(), _delta.getDestY());
+    }
+
     public void remove(int x, int y) {
         if (playingBoard[y][x] == null) {
             return;
@@ -244,6 +249,16 @@ public class Board {
         playingBoard[y][x].setPosition(-1, -1);
 
         playingBoard[y][x] = null;
+    }
+
+    public Piece getCapturer(Object delta) {
+        Delta _delta = (Delta)delta;
+        return _delta.getCapturer();
+    }
+
+    public void removeCapturer(Object delta) {
+        Delta _delta = (Delta)delta;
+        remove(_delta.getCapturer().getX(), _delta.getCapturer().getY());
     }
 
     public Piece getPieceAt(int x, int y) {
