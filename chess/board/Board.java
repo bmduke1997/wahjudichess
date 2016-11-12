@@ -206,9 +206,12 @@ public class Board {
         piece.clear();
         checkRestrictions(this, piece, piece.movement(getPlayingBoard()),
                           _delta.getDestX(), _delta.getDestY());
+        teamCapture(piece.getColor());
         
-        move(_delta.getSrcX(), _delta.getSrcY(),
-             _delta.getDestX(), _delta.getDestY());
+        if (move(_delta.getSrcX(), _delta.getSrcY(),
+                 _delta.getDestX(), _delta.getDestY()) == null) {
+            System.out.println("Move unsuccessful.");
+        }
 
         if (_delta.isTransform()) {
             remove(_delta.getDestX(), _delta.getDestY());

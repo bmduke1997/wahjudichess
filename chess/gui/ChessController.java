@@ -91,6 +91,8 @@ public class ChessController implements Initializable {
         board.undo(delta);
         moveFutures.push(delta);
         selection = null;
+        selectionX.set(-100);
+        selectionY.set(-100);
 
         counter--;
         redoButton.setDisable(false);
@@ -105,6 +107,8 @@ public class ChessController implements Initializable {
         board.redo(delta);
         moveHistory.push(delta);
         selection = null;
+        selectionX.set(-100);
+        selectionY.set(-100);
 
         counter++;
         undoButton.setDisable(false);
