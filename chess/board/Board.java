@@ -23,6 +23,9 @@ public class Board {
                 remove(j, i);
             }
         }
+
+        black = 10;
+        white = 10;
     }
     
     /**

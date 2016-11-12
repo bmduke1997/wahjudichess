@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
 import javafx.scene.paint.*;
 import javafx.scene.layout.Pane;
@@ -44,6 +45,8 @@ public class ChessController implements Initializable {
     private final Material pieceBlackMat = new PhongMaterial(Color.web("#333"));
     private final Material pieceWhiteMat = new PhongMaterial(Color.web("#ddd"));
 
+    @FXML
+    private Label statusBar;
     @FXML
     private Slider slider;
     @FXML
@@ -95,6 +98,8 @@ public class ChessController implements Initializable {
         selectionY.set(-100);
 
         counter--;
+        updateStatusBar();
+
         redoButton.setDisable(false);
 
         if (moveHistory.size() == 0)
@@ -113,8 +118,32 @@ public class ChessController implements Initializable {
         counter++;
         undoButton.setDisable(false);
 
+        if(board.black == 0) {
+            handleWin(Piece.WHITE);
+        } else if (board.white == 0){
+            handleWin(Piece.BLACK);
+        } else {
+            updateStatusBar();
+        }
+
         if (moveFutures.size() == 0)
             redoButton.setDisable(true);
+    }
+
+    void updateStatusBar() {
+        if (counter % 2 == 0) {
+            statusBar.setText("Black's turn.");
+        } else if (counter % 2 == 1) {
+            statusBar.setText("White's turn.");
+        }
+    }
+
+    private void handleWin(int color) {
+        if (color == Piece.BLACK) {
+            statusBar.setText("Black wins!");
+        } else if (color == Piece.WHITE) {
+            statusBar.setText("White wins!");
+        }
     }
 
     public void put(Board board, Piece piece) {
@@ -188,12 +217,14 @@ public class ChessController implements Initializable {
     public void setupGame(boolean whiteGoesFirst,
                           boolean blackIsHuman,
                           boolean whiteIsHuman) {
-
         if (whiteGoesFirst) {
             counter = 1;
         } else {
             counter = 0;
         }
+
+        /* Say whose turn it is. */
+        updateStatusBar();
 
         /* Clear any selection. */
         selection = null;
@@ -406,6 +437,7 @@ public class ChessController implements Initializable {
                                 moveFutures.clear();
 
                                 counter++;
+                                updateStatusBar();
 
                                 undoButton.setDisable(false);
                                 moveHistory.push(delta);
@@ -416,11 +448,11 @@ public class ChessController implements Initializable {
                         selectionY.set(-100);
                         selection = null;
                     }
+
                     if(board.black == 0) {
-                        System.out.println("Black won!");
-                    }
-                    if(board.white == 0){
-                        System.out.println("White won!");
+                        handleWin(Piece.WHITE);
+                    } else if (board.white == 0){
+                        handleWin(Piece.BLACK);
                     }
                 });
 

@@ -13,42 +13,49 @@
 
 <BorderPane id="BorderPane" minWidth="260" minHeight="200" prefHeight="350" prefWidth="440" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.gui.ChessController" stylesheets="@style.css">
     <top>
-        <HBox spacing="5" styleClass="button-bar" alignment="center">
-            <padding>
-                <Insets left="10" top="10" right="10" bottom="10" />
-            </padding>
-            <children>
-              <Button text="New" onAction="#openNewGameWindow" />
-              <!-- <Region HBox.hgrow="ALWAYS" /> -->
-              <Slider fx:id="slider" min="0" max="360" showTickLabels="true" showTickMarks="true" majorTickUnit="90" minorTickCount="3" value="0" HBox.hgrow="ALWAYS">
-                <tooltip><Tooltip text="Rotation (in Degrees)" wrapText="true" /></tooltip>
-              </Slider>
-              <Button fx:id="undoButton" onAction="#handleUndo">
-                <tooltip><Tooltip text="Undo" wrapText="true" /></tooltip>
-                <graphic>
-                  <ImageView>
-                    <Image url="@undo.png" />
-                  </ImageView>
-                </graphic>
-              </Button>
-              <Button fx:id="redoButton" onAction="#handleRedo">
-                <tooltip><Tooltip text="Redo" wrapText="true" /></tooltip>
-                <graphic>
-                  <ImageView>
-                    <Image url="@redo.png" />
-                  </ImageView>
-                </graphic>
-              </Button>
-              <Button fx:id="aboutButton" onAction="#openAboutWindow">
-                <tooltip><Tooltip text="About" wrapText="true" /></tooltip>
-                <graphic>
-                  <ImageView>
-                    <Image url="@about.png" />
-                  </ImageView>
-                </graphic>
-              </Button>
-            </children>
-        </HBox>
+        <VBox>
+            <HBox spacing="5" styleClass="button-bar" alignment="center">
+                <padding>
+                    <Insets left="10" top="10" right="10" bottom="10" />
+                </padding>
+                <children>
+                  <Button text="New" onAction="#openNewGameWindow" />
+                  <!-- <Region HBox.hgrow="ALWAYS" /> -->
+                  <Slider fx:id="slider" min="0" max="360" showTickLabels="true" showTickMarks="true" majorTickUnit="90" minorTickCount="3" value="0" HBox.hgrow="ALWAYS">
+                    <tooltip><Tooltip text="Rotation (in Degrees)" wrapText="true" /></tooltip>
+                  </Slider>
+                  <Button fx:id="undoButton" onAction="#handleUndo">
+                    <tooltip><Tooltip text="Undo" wrapText="true" /></tooltip>
+                    <graphic>
+                      <ImageView>
+                        <Image url="@undo.png" />
+                      </ImageView>
+                    </graphic>
+                  </Button>
+                  <Button fx:id="redoButton" onAction="#handleRedo">
+                    <tooltip><Tooltip text="Redo" wrapText="true" /></tooltip>
+                    <graphic>
+                      <ImageView>
+                        <Image url="@redo.png" />
+                      </ImageView>
+                    </graphic>
+                  </Button>
+                  <Button fx:id="aboutButton" onAction="#openAboutWindow">
+                    <tooltip><Tooltip text="About" wrapText="true" /></tooltip>
+                    <graphic>
+                      <ImageView>
+                        <Image url="@about.png" />
+                      </ImageView>
+                    </graphic>
+                  </Button>
+                </children>
+            </HBox>
+            <HBox>
+                <Region HBox.hgrow="ALWAYS" />
+                <Label fx:id="statusBar" text="No game started." />
+                <Region HBox.hgrow="ALWAYS" />
+            </HBox>
+        </VBox>
     </top>
     <center>
         <Pane fx:id="subScenePane" />
