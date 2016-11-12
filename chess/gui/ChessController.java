@@ -119,9 +119,9 @@ public class ChessController implements Initializable {
         undoButton.setDisable(false);
 
         if(board.black == 0) {
-            handleWin(Piece.WHITE);
-        } else if (board.white == 0){
             handleWin(Piece.BLACK);
+        } else if (board.white == 0){
+            handleWin(Piece.WHITE);
         } else {
             updateStatusBar();
         }
@@ -450,9 +450,9 @@ public class ChessController implements Initializable {
                     }
 
                     if(board.black == 0) {
-                        handleWin(Piece.WHITE);
-                    } else if (board.white == 0){
                         handleWin(Piece.BLACK);
+                    } else if (board.white == 0){
+                        handleWin(Piece.WHITE);
                     }
                 });
 
