@@ -180,7 +180,7 @@ public class ChessController implements Initializable {
 
         /* These transforms are just copied from the small box transforms
          * in #initialize(). */
-        Translate smtrans = new Translate(0, 0, 88);
+        Translate smtrans = new Translate(0, 0, 92);
         smtrans.xProperty().bind(piece.xProperty().subtract(2.0).multiply(10));
         smtrans.yProperty().bind(piece.yProperty().subtract(2.0).multiply(10).subtract(175));
 
@@ -634,7 +634,7 @@ public class ChessController implements Initializable {
                 /* Transform mini-board so that it is always at the top */
                 Translate smtrans = new Translate((((double)i - 2.0) * 10),
                                                   (((double)j - 2.0) * 10) - 175,
-                                                  90);
+                                                  94);
                 Rotate smrotate = new Rotate(0, 0, 0, 0);
                 smrotate.angleProperty().bind(slider.valueProperty());
                 smallBox.getTransforms().add(smrotate);
