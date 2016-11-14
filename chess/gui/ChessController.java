@@ -4,6 +4,7 @@ import chess.board.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Stack;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
@@ -432,7 +433,13 @@ public class ChessController implements Initializable {
         undoButton.setDisable(true);
         redoButton.setDisable(true);
         
-        
+        statusBar
+          .styleProperty()
+          .bind(
+            Bindings.concat(
+              "-fx-font-size: ",
+              subScenePane.widthProperty().divide(35).asString()));
+
         /* Declare our group of solid shapes. */
         solids = new Group();
         
