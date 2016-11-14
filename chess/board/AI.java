@@ -5,9 +5,12 @@ package chess.board;
  * @version 11/14/16
  */
 public class AI {
-    private Board board;
+    private Piece[][] board;
+    private int color;
 
-    public AI (Board board){
+    public AI (Piece[][] board, int color){
         this.board = board;
+        this.color = color;
     }
+
 }

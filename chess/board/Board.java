@@ -7,8 +7,6 @@ public class Board {
 
     Piece[][] playingBoard = new Piece[5][5];
 
-    private int turn;
-
     public Board(int turn){
         this.turn = turn;
     }
@@ -153,6 +151,7 @@ public class Board {
     }
 
 
+    private int turn;
 
     public void updateTurn(int i){
         turn = i;
@@ -162,6 +161,16 @@ public class Board {
         return turn;
     }
 
+    private boolean whiteAI = false , blackAI = false;
+
+    public void setAI(boolean white,boolean black){
+        whiteAI = white;
+        blackAI = black;
+    }
+
+    public boolean pieceBelongsToCurrentPlayer(int x, int y){
+        return  playingBoard[y][x].getColor() == turn%2;
+    }
     /**
      * Link a transforming piece (always a King) to a delta.
      *

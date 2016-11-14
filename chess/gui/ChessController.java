@@ -332,6 +332,9 @@ public class ChessController implements Initializable {
             counter = 0;
         }
 
+        board.setAI(!whiteIsHuman, !blackIsHuman);
+
+
         /* Say whose turn it is. */
         updateStatusBar();
 
@@ -406,6 +409,14 @@ public class ChessController implements Initializable {
         miniPut(prevBoard, new Pawn(2, 3, Piece.WHITE));
         miniPut(prevBoard, new Pawn(3, 3, Piece.WHITE));
         miniPut(prevBoard, new Pawn(4, 3, Piece.WHITE));
+
+        while(curentPlayerIsAI && noWin)
+        {
+            AI.move(color, board); //translation
+            checkWin;
+            changeColor;
+        }
+
 
         System.out.println("ChessController got message about new game.");
         System.out.println("First player: " + (whiteGoesFirst ? "white" : "black"));
@@ -551,7 +562,7 @@ public class ChessController implements Initializable {
 
                     if (selection == null) {
                         /* Try to select the piece if there is one */
-                        if (board.getPieceAt(x, y) != null && board.getPieceAt(x, y).getColor() == counter%2) {
+                        if (board.getPieceAt(x, y) != null && board.pieceBelongsToCurrentPlayer(x, y)) {
                             selection = board.getPieceAt(x, y);
                             selectionX.set(x);
                             selectionY.set(y);
