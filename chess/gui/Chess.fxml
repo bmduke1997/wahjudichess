@@ -50,14 +50,14 @@
                   </Button>
                 </children>
             </HBox>
-            <HBox>
-                <Region HBox.hgrow="ALWAYS" />
-                <Label fx:id="statusBar" text="No game started." />
-                <Region HBox.hgrow="ALWAYS" />
-            </HBox>
         </VBox>
     </top>
     <center>
-        <Pane fx:id="subScenePane" />
+        <Pane fx:id="subScenePane">
+            <HBox>
+                <Label fx:id="statusBar" text="No game started." style="-fx-font-size: 14" />
+                <Region HBox.hgrow="ALWAYS" />
+            </HBox>
+        </Pane>
     </center>
 </BorderPane>
