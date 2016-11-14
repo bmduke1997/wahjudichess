@@ -132,6 +132,8 @@ public class ChessController implements Initializable {
         }
 
         counter++;
+        board.updateTurn(counter);
+
         undoButton.setDisable(false);
 
         if(board.black == 0) {
@@ -147,6 +149,8 @@ public class ChessController implements Initializable {
     }
 
     void updateStatusBar() {
+        counter = board.getTurn();
+
         if (counter % 2 == 0) {
             statusBar.setText("Black's turn.");
         } else if (counter % 2 == 1) {
@@ -411,8 +415,8 @@ public class ChessController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        board = new Board();
-        prevBoard = new Board();
+        board = new Board(counter);
+        prevBoard = new Board(counter);
 
         /* Initialize the game history stack. */
         moveHistory = new Stack<>();
@@ -538,7 +542,12 @@ public class ChessController implements Initializable {
                     int x = pos[0];
                     int y = pos[1];
 
-                    board.teamCapture(counter%2);
+                    /*compute if the current player's team has a capture,
+                      of so restrict so that when moving a piece the oly valid move is a capture.
+                     */
+                    board.teamCapture();
+
+                    counter = board.getTurn();
 
                     if (selection == null) {
                         /* Try to select the piece if there is one */
@@ -576,7 +585,7 @@ public class ChessController implements Initializable {
                                 redoButton.setDisable(true);
                                 moveFutures.clear();
 
-                                counter++;
+                                //counter++;
                                 updateStatusBar();
 
                                 undoButton.setDisable(false);

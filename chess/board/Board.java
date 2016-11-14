@@ -7,7 +7,11 @@ public class Board {
 
     Piece[][] playingBoard = new Piece[5][5];
 
-    public Board(){}
+    private int turn;
+
+    public Board(int turn){
+        this.turn = turn;
+    }
 
     public void put(Piece piece) {
         playingBoard[piece.getY()][piece.getX()] = piece;
@@ -138,12 +142,24 @@ public class Board {
             capturer.setPosition(destX, destY);
 
             playingBoard[srcY][srcX] = null;
-        
+
+            turn++;
+
             return (Object)(new Delta(srcX, srcY, destX, destY,
                                       capturer, captured, isTransform));
         }
 
         return null;
+    }
+
+
+
+    public void updateTurn(int i){
+        turn = i;
+    }
+
+    public int getTurn(){
+        return turn;
     }
 
     /**
@@ -192,6 +208,8 @@ public class Board {
         
         playingBoard[_delta.getSrcY()][_delta.getSrcX()] = capturer;
         playingBoard[_delta.getDestY()][_delta.getDestX()] = captured;
+
+        turn--;
     }
     
     /**
@@ -210,7 +228,7 @@ public class Board {
         piece.clear();
         checkRestrictions(this, piece, piece.movement(getPlayingBoard()),
                           _delta.getDestX(), _delta.getDestY());
-        teamCapture(piece.getColor());
+        teamCapture();
         
         if (move(_delta.getSrcX(), _delta.getSrcY(),
                  _delta.getDestX(), _delta.getDestY()) == null) {
@@ -226,6 +244,8 @@ public class Board {
 
             put(king);
         }
+
+        turn++;
     }
 
     public Object copyMove(Object delta) {
@@ -235,7 +255,7 @@ public class Board {
         piece.clear();
         checkRestrictions(this, piece, piece.movement(getPlayingBoard()),
                           _delta.getDestX(), _delta.getDestY());
-        teamCapture(piece.getColor());
+        teamCapture();
         
         return move(_delta.getSrcX(), _delta.getSrcY(),
                     _delta.getDestX(), _delta.getDestY());
@@ -306,7 +326,8 @@ public class Board {
         isLegalMove(board, piece, myMovements, targetX, targetY);
     }
     private boolean capture;
-    public void teamCapture(int color){
+    public void teamCapture(){
+        int color = turn%2;
         capture = false;
 
         for (int y = 0; y < 5; y++){
