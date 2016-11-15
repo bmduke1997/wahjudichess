@@ -330,14 +330,16 @@ public class ChessController implements Initializable {
     public void setupGame(boolean whiteGoesFirst,
                           boolean blackIsHuman,
                           boolean whiteIsHuman) {
-        if (whiteGoesFirst) {
-            counter = 1;
-        } else {
-            counter = 0;
-        }
+        /* Set the turn counters to the correct turn. */
+        int startingTurn =
+            whiteGoesFirst ? Piece.WHITE : Piece.BLACK;
 
+        counter = startingTurn;
+
+        board.updateTurn(startingTurn);
+
+        /* Set up the AIs, if there are any. */
         board.setAI(!whiteIsHuman, !blackIsHuman);
-
 
         /* Say whose turn it is. */
         updateStatusBar();
