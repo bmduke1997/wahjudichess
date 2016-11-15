@@ -7,8 +7,7 @@ public class Board {
 
     Piece[][] playingBoard = new Piece[5][5];
 
-    public Board(int turn){
-        this.turn = turn;
+    public Board(){
     }
 
     public void put(Piece piece) {

@@ -49,6 +49,10 @@ public class ChessController implements Initializable {
     private final Material pieceBlackMat = new PhongMaterial(Color.web("#333"));
     private final Material pieceWhiteMat = new PhongMaterial(Color.web("#ddd"));
 
+    //Initialize AI object
+    AI myAI = new AI();
+    int[] AIplacement = new int[4];
+
     @FXML
     private Label statusBar;
     @FXML
@@ -66,8 +70,8 @@ public class ChessController implements Initializable {
         FXMLLoader loader = new FXMLLoader(url);
         Parent root = loader.load();
 
-        ((NewGameWindowController)loader.getController())
-          .setChessController(this);
+        ((NewGameWindowController) loader.getController())
+                .setChessController(this);
 
         Scene scene = new Scene(root);
 
@@ -94,7 +98,7 @@ public class ChessController implements Initializable {
     @FXML
     private void handleUndo() {
         Object delta = moveHistory.pop();
-        
+
         board.undo(delta);
         moveFutures.push(delta);
         selection = null;
@@ -136,9 +140,9 @@ public class ChessController implements Initializable {
 
         undoButton.setDisable(false);
 
-        if(board.black == 0) {
+        if (board.black == 0) {
             handleWin(Piece.BLACK);
-        } else if (board.white == 0){
+        } else if (board.white == 0) {
             handleWin(Piece.WHITE);
         } else {
             updateStatusBar();
@@ -170,17 +174,17 @@ public class ChessController implements Initializable {
         final MeshView mv;
 
         if (piece instanceof Pawn) {
-            mv = (MeshView)(new PawnMeshView());
+            mv = (MeshView) (new PawnMeshView());
         } else if (piece instanceof Queen) {
-            mv = (MeshView)(new QueenMeshView());
+            mv = (MeshView) (new QueenMeshView());
         } else if (piece instanceof Knight) {
-            mv = (MeshView)(new KnightMeshView());
+            mv = (MeshView) (new KnightMeshView());
         } else if (piece instanceof King) {
-            mv = (MeshView)(new KingMeshView());
+            mv = (MeshView) (new KingMeshView());
         } else if (piece instanceof Rook) {
-            mv = (MeshView)(new RookMeshView());
+            mv = (MeshView) (new RookMeshView());
         } else {
-            mv = (MeshView)(new BishopMeshView());
+            mv = (MeshView) (new BishopMeshView());
         }
 
         /* These transforms are just copied from the small box transforms
@@ -196,32 +200,32 @@ public class ChessController implements Initializable {
         Rotate sminnerrotate = new Rotate(0, 0, 0, 0);
         sminnerrotate.angleProperty().bind(slider.valueProperty().negate());
         sminnerrotate
-          .pivotXProperty()
-          .bind(
-            piece
-              .xProperty()
-              .subtract(2)
-              .multiply(10)
-              .add(
-                piece
-                  .xProperty()
-                  .multiply(10)
-                  .negate()
-                  .add(20)));
+                .pivotXProperty()
+                .bind(
+                        piece
+                                .xProperty()
+                                .subtract(2)
+                                .multiply(10)
+                                .add(
+                                        piece
+                                                .xProperty()
+                                                .multiply(10)
+                                                .negate()
+                                                .add(20)));
         sminnerrotate
-          .pivotYProperty()
-          .bind(
-            piece
-              .yProperty()
-              .subtract(2)
-              .multiply(10)
-              .subtract(175)
-              .add(
-                piece
-                  .yProperty()
-                  .multiply(10)
-                  .negate()
-                  .add(30)));
+                .pivotYProperty()
+                .bind(
+                        piece
+                                .yProperty()
+                                .subtract(2)
+                                .multiply(10)
+                                .subtract(175)
+                                .add(
+                                        piece
+                                                .yProperty()
+                                                .multiply(10)
+                                                .negate()
+                                                .add(30)));
         mv.getTransforms().add(sminnerrotate);
         mv.getTransforms().add(smtrans);
 
@@ -235,8 +239,8 @@ public class ChessController implements Initializable {
         mv.setMaterial(mat);
 
         piece.positionProperty().addListener((obs, old, neu) -> {
-            int[] oldints = (int[])old;
-            int[] neuints = (int[])neu;
+            int[] oldints = (int[]) old;
+            int[] neuints = (int[]) neu;
 
             if (old != null) {
                 if (oldints[0] != -1 && oldints[1] != -1) {
@@ -259,31 +263,31 @@ public class ChessController implements Initializable {
         final MeshView mv;
 
         if (piece instanceof Pawn) {
-            mv = (MeshView)(new PawnMeshView());
+            mv = (MeshView) (new PawnMeshView());
         } else if (piece instanceof Queen) {
-            mv = (MeshView)(new QueenMeshView());
+            mv = (MeshView) (new QueenMeshView());
         } else if (piece instanceof Knight) {
-            mv = (MeshView)(new KnightMeshView());
+            mv = (MeshView) (new KnightMeshView());
         } else if (piece instanceof King) {
-            mv = (MeshView)(new KingMeshView());
+            mv = (MeshView) (new KingMeshView());
         } else if (piece instanceof Rook) {
-            mv = (MeshView)(new RookMeshView());
+            mv = (MeshView) (new RookMeshView());
         } else {
-            mv = (MeshView)(new BishopMeshView());
+            mv = (MeshView) (new BishopMeshView());
         }
 
         mv.translateXProperty()
-          .bind(
-            piece
-              .xProperty()
-              .subtract(2)
-              .multiply(10));
+                .bind(
+                        piece
+                                .xProperty()
+                                .subtract(2)
+                                .multiply(10));
         mv.translateYProperty()
-          .bind(
-            piece
-              .yProperty()
-              .subtract(3)
-              .multiply(10));
+                .bind(
+                        piece
+                                .yProperty()
+                                .subtract(3)
+                                .multiply(10));
         mv.setRotationAxis(Rotate.Z_AXIS);
         mv.setTranslateZ(18);
 
@@ -296,10 +300,10 @@ public class ChessController implements Initializable {
         }
         mv.setMaterial(mat);
 
-	/* Updates the cell group matrix whenever the piece moves. */
+    /* Updates the cell group matrix whenever the piece moves. */
         piece.positionProperty().addListener((obs, old, neu) -> {
-            int[] oldints = (int[])old;
-            int[] neuints = (int[])neu;
+            int[] oldints = (int[]) old;
+            int[] neuints = (int[]) neu;
 
             if (old != null) {
                 if (oldints[0] != -1 && oldints[1] != -1) {
@@ -342,17 +346,17 @@ public class ChessController implements Initializable {
         selection = null;
         selectionX.set(-100);
         selectionY.set(-100);
-        
+
         /* Clear out undo lists. */
         moveHistory.clear();
         moveFutures.clear();
         prevMoveHistory.clear();
         prevMoveFutures.clear();
-        
+
         /* Undo/redo buttons start out disabled. */
         undoButton.setDisable(true);
         redoButton.setDisable(true);
-        
+
         /* Get rid of models for old pieces. */
         for (int i = 0; i < 5; i++) {
             for (int j = 0; j < 5; j++) {
@@ -410,298 +414,412 @@ public class ChessController implements Initializable {
         miniPut(prevBoard, new Pawn(3, 3, Piece.WHITE));
         miniPut(prevBoard, new Pawn(4, 3, Piece.WHITE));
 
-        while(curentPlayerIsAI && noWin)
-        {
-            AI.move(color, board); //translation
-            checkWin;
-            changeColor;
-        }
+        //If both are AI, this will run until there is a winner
+        if (!whiteIsHuman && !blackIsHuman) {
+            //While no one has won
+            int j = 0;
+            while (j < 5){ //(board.black > 0 && board.white > 0) {
 
+                //White's turn
+                if (counter%2 ==1) {
+                    System.out.println("WHITE TEST");
+                    //Get desired AI location
+                    AIplacement = myAI.AImove(board, 1); //translation
+                    board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
+                    board.checkRestrictions(board, myAI.selection, myAI.AImovements, AIplacement[2], AIplacement[3]);
 
-        System.out.println("ChessController got message about new game.");
-        System.out.println("First player: " + (whiteGoesFirst ? "white" : "black"));
-        System.out.println("Black is " + (blackIsHuman ? "human" : "machine"));
-        System.out.println("White is " + (whiteIsHuman ? "human" : "machine"));
-    }
+                    boolean isTransform = selection instanceof Pawn
+                            && (AIplacement[0] == 0 || AIplacement[3] == 4);
+                    if(board.hasLegalMove) {
+                        Object delta = board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
+                        if (delta != null) {
+                                /* Transform pawn to king at end of board. */
+                            if (isTransform) {
+                                board.remove(AIplacement[0], AIplacement[1]);
 
-    @Override
-    public void initialize(URL url, ResourceBundle rb) {
-        board = new Board(counter);
-        prevBoard = new Board(counter);
+                                Piece king = new King(AIplacement[0], AIplacement[1], counter % 2);
+                                board.assocMorphed(delta, king);
 
-        /* Initialize the game history stack. */
-        moveHistory = new Stack<>();
-        moveFutures = new Stack<>();
-        prevMoveHistory = new Stack<>();
-        prevMoveFutures = new Stack<>();
+                                put(board, king);
+                            }
 
-        /* Initialize the cell groups (tile + piece groups). */
-        cellGroups = new Group[5][5];
+                            redoButton.setDisable(true);
+                            moveFutures.clear();
 
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                cellGroups[i][j] = new Group();
-            }
-        }
-        
-        /* Undo/redo buttons start out disabled. */
-        undoButton.setDisable(true);
-        redoButton.setDisable(true);
-        
-        statusBar
-          .styleProperty()
-          .bind(
-            Bindings.concat(
-              "-fx-font-size: ",
-              subScenePane.widthProperty().divide(35).asString()));
+                            //counter++;
+                            updateStatusBar();
 
-        /* Declare our group of solid shapes. */
-        solids = new Group();
-        
-        /* Make the selection ring. */
-        Group selectionRing = new Group();
-        Material blueMat = new PhongMaterial(Color.web("#cff"));
-        Box top = new Box(10, 1, 0.2);
-        top.setMaterial(blueMat);
-        top.setTranslateY(-4.5);
-        Box left = new Box(1, 10, 0.2);
-        left.setTranslateX(-4.5);
-        left.setMaterial(blueMat);
-        Box bottom = new Box(10, 1, 0.2);
-        bottom.setMaterial(blueMat);
-        bottom.setTranslateY(4.5); /* maybe 1 less? */
-        Box right = new Box(1, 10, 0.2);
-        right.setMaterial(blueMat);
-        right.setTranslateX(4.5); /* maybe 1 less? */
-        selectionRing.getChildren().addAll(top, bottom, left, right);
-        
-        selectionRing
-          .translateXProperty()
-          .bind(selectionX.subtract(2).multiply(10).subtract(0));
-        selectionRing
-          .translateYProperty()
-          .bind(selectionY.subtract(2).multiply(10).subtract(10));
-        selectionRing.setTranslateZ(18.8 + (top.getDepth() / 2));
-        solids.getChildren().add(selectionRing);
+                            undoButton.setDisable(false);
+                            if (moveHistory.size() > 0) {
+                                   /*  If there has been a previous board state,
+                                     * reflect it on the miniboard. */
+                                Object prevDelta = moveHistory.peek();
 
-        /* Populate the group with boxes to make the checkerboard. */
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                /* Create the big board. */
-                Box box = new Box();
+                                Object newDelta = prevBoard
+                                        .copyMove(
+                                                prevDelta);
 
-                box.setWidth(10);
-                box.setHeight(10);
-                box.setDepth(2);
+                                if (prevBoard.wasTransform(newDelta)) {
+                                    Piece miniKing = new King(prevBoard.getCapturer(newDelta).getX(), prevBoard.getCapturer(newDelta).getY(), counter % 2);
+                                    prevBoard.removeCapturer(newDelta);
 
-                /* Color each tile black or white. */
-                if (((i + j) & 1) == 1) {
-                    box.setMaterial(blackMat);
-                } else {
-                    box.setMaterial(whiteMat);
+                                    prevBoard.assocMorphed(newDelta, miniKing);
+                                    miniPut(prevBoard, miniKing);
+                                }
+
+                                prevMoveHistory.push(newDelta);
+                            }
+                            moveHistory.push(delta);
+                        }
+                    }
+                    //Reset counter to turn, thus switching AI turns
+                    counter = board.getTurn();
                 }
 
+                //Black's turn
+                if(counter%2 == 0) {
+                    System.out.println("BLACK TEST");
+                    //Get desired AI location
+                    AIplacement = myAI.AImove(board, 0); //translation
+                    board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
+                    board.checkRestrictions(board, myAI.selection, myAI.AImovements, AIplacement[2], AIplacement[3]);
+
+                    boolean isTransform = selection instanceof Pawn
+                            && (AIplacement[0] == 0 || AIplacement[3] == 4);
+                    if(board.hasLegalMove) {
+                        Object delta = board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
+                        if (delta != null) {
+                            /* Transform pawn to king at end of board. */
+                            if (isTransform) {
+                                board.remove(AIplacement[0], AIplacement[1]);
+
+                                Piece king = new King(AIplacement[0], AIplacement[1], counter % 2);
+                                board.assocMorphed(delta, king);
+
+                                put(board, king);
+                            }
+
+                            redoButton.setDisable(true);
+                            moveFutures.clear();
+
+                            //counter++;
+                            updateStatusBar();
+
+                            undoButton.setDisable(false);
+                            if (moveHistory.size() > 0) {
+                                    /* If there has been a previous board state,
+                                     * reflect it on the miniboard. */
+                                Object prevDelta = moveHistory.peek();
+
+                                Object newDelta = prevBoard
+                                        .copyMove(
+                                                prevDelta);
+
+                                if (prevBoard.wasTransform(newDelta)) {
+                                    Piece miniKing = new King(prevBoard.getCapturer(newDelta).getX(), prevBoard.getCapturer(newDelta).getY(), counter % 2);
+                                    prevBoard.removeCapturer(newDelta);
+
+                                    prevBoard.assocMorphed(newDelta, miniKing);
+                                    miniPut(prevBoard, miniKing);
+                                }
+
+                                prevMoveHistory.push(newDelta);
+                            }
+                            moveHistory.push(delta);
+                        }
+                    }
+                    //Reset counter to turn, thus switching AI turns
+                    counter = board.getTurn();
+                }
+                j++;
+            }
+        }
+
+            System.out.println("ChessController got message about new game.");
+            System.out.println("First player: " + (whiteGoesFirst ? "white" : "black"));
+            System.out.println("Black is " + (blackIsHuman ? "human" : "machine"));
+            System.out.println("White is " + (whiteIsHuman ? "human" : "machine"));
+
+        }
+
+        @Override
+        public void initialize (URL url, ResourceBundle rb){
+            board = new Board();
+            prevBoard = new Board();
+
+        /* Initialize the game history stack. */
+            moveHistory = new Stack<>();
+            moveFutures = new Stack<>();
+            prevMoveHistory = new Stack<>();
+            prevMoveFutures = new Stack<>();
+
+        /* Initialize the cell groups (tile + piece groups). */
+            cellGroups = new Group[5][5];
+
+            for (int i = 0; i < 5; i++) {
+                for (int j = 0; j < 5; j++) {
+                    cellGroups[i][j] = new Group();
+                }
+            }
+
+        /* Undo/redo buttons start out disabled. */
+            undoButton.setDisable(true);
+            redoButton.setDisable(true);
+
+            statusBar
+                    .styleProperty()
+                    .bind(
+                            Bindings.concat(
+                                    "-fx-font-size: ",
+                                    subScenePane.widthProperty().divide(35).asString()));
+
+        /* Declare our group of solid shapes. */
+            solids = new Group();
+
+        /* Make the selection ring. */
+            Group selectionRing = new Group();
+            Material blueMat = new PhongMaterial(Color.web("#cff"));
+            Box top = new Box(10, 1, 0.2);
+            top.setMaterial(blueMat);
+            top.setTranslateY(-4.5);
+            Box left = new Box(1, 10, 0.2);
+            left.setTranslateX(-4.5);
+            left.setMaterial(blueMat);
+            Box bottom = new Box(10, 1, 0.2);
+            bottom.setMaterial(blueMat);
+            bottom.setTranslateY(4.5); /* maybe 1 less? */
+            Box right = new Box(1, 10, 0.2);
+            right.setMaterial(blueMat);
+            right.setTranslateX(4.5); /* maybe 1 less? */
+            selectionRing.getChildren().addAll(top, bottom, left, right);
+
+            selectionRing
+                    .translateXProperty()
+                    .bind(selectionX.subtract(2).multiply(10).subtract(0));
+            selectionRing
+                    .translateYProperty()
+                    .bind(selectionY.subtract(2).multiply(10).subtract(10));
+            selectionRing.setTranslateZ(18.8 + (top.getDepth() / 2));
+            solids.getChildren().add(selectionRing);
+
+        /* Populate the group with boxes to make the checkerboard. */
+            for (int i = 0; i < 5; i++) {
+                for (int j = 0; j < 5; j++) {
+                /* Create the big board. */
+                    Box box = new Box();
+
+                    box.setWidth(10);
+                    box.setHeight(10);
+                    box.setDepth(2);
+
+                /* Color each tile black or white. */
+                    if (((i + j) & 1) == 1) {
+                        box.setMaterial(blackMat);
+                    } else {
+                        box.setMaterial(whiteMat);
+                    }
+
                 /* Save the tile's position to pass to its handlers. */
-                final int pos[] = {i, j};
+                    final int pos[] = {i, j};
 
                 /* Hilight the row/column of hovered tiles. */
-                cellGroups[i][j].setOnMouseEntered(e -> {
-                    int x = pos[0];
-                    int y = pos[1];
+                    cellGroups[i][j].setOnMouseEntered(e -> {
+                        int x = pos[0];
+                        int y = pos[1];
 
-                    for (Node child : cellGroups[x][y].getChildren()) {
-                        if (child instanceof Box) {
-                            if (((x + y) & 1) == 1) {
-                                ((Box)child).setMaterial(hiblackMat);
+                        for (Node child : cellGroups[x][y].getChildren()) {
+                            if (child instanceof Box) {
+                                if (((x + y) & 1) == 1) {
+                                    ((Box) child).setMaterial(hiblackMat);
+                                } else {
+                                    ((Box) child).setMaterial(hiwhiteMat);
+                                }
                             } else {
-                                ((Box)child).setMaterial(hiwhiteMat);
-                            }
-                        } else {
-                            if (board.getPieceAt(x, y).getColor() == Piece.BLACK) {
-                                ((MeshView)child).setMaterial(hiblackMat);
-                            } else {
-                                ((MeshView)child).setMaterial(hiwhiteMat);
+                                if (board.getPieceAt(x, y).getColor() == Piece.BLACK) {
+                                    ((MeshView) child).setMaterial(hiblackMat);
+                                } else {
+                                    ((MeshView) child).setMaterial(hiwhiteMat);
+                                }
                             }
                         }
-                    }
-                });
+                    });
 
                 /* Darken when mouse leaves. */
-                cellGroups[i][j].setOnMouseExited(e -> {
-                    int x = pos[0];
-                    int y = pos[1];
+                    cellGroups[i][j].setOnMouseExited(e -> {
+                        int x = pos[0];
+                        int y = pos[1];
 
-                    for (Node child : cellGroups[x][y].getChildren()) {
-                        if (child instanceof Box) {
-                            if (((x + y) & 1) == 1) {
-                                ((Box)child).setMaterial(blackMat);
+                        for (Node child : cellGroups[x][y].getChildren()) {
+                            if (child instanceof Box) {
+                                if (((x + y) & 1) == 1) {
+                                    ((Box) child).setMaterial(blackMat);
+                                } else {
+                                    ((Box) child).setMaterial(whiteMat);
+                                }
                             } else {
-                                ((Box)child).setMaterial(whiteMat);
-                            }
-                        } else {
-                            if (board.getPieceAt(x, y).getColor() == Piece.BLACK) {
-                                ((MeshView)child).setMaterial(pieceBlackMat);
-                            } else {
-                                ((MeshView)child).setMaterial(pieceWhiteMat);
+                                if (board.getPieceAt(x, y).getColor() == Piece.BLACK) {
+                                    ((MeshView) child).setMaterial(pieceBlackMat);
+                                } else {
+                                    ((MeshView) child).setMaterial(pieceWhiteMat);
+                                }
                             }
                         }
-                    }
-                });
+                    });
 
                 /* Make tiles react to clicking. */
-                cellGroups[i][j].setOnMouseClicked(e -> {
-                    int x = pos[0];
-                    int y = pos[1];
+                    cellGroups[i][j].setOnMouseClicked(e -> {
+                        int x = pos[0];
+                        int y = pos[1];
 
                     /*compute if the current player's team has a capture,
                       of so restrict so that when moving a piece the oly valid move is a capture.
                      */
-                    board.teamCapture();
+                        board.teamCapture();
 
-                    counter = board.getTurn();
+                        counter = board.getTurn();
 
-                    if (selection == null) {
+                        if (selection == null) {
                         /* Try to select the piece if there is one */
-                        if (board.getPieceAt(x, y) != null && board.pieceBelongsToCurrentPlayer(x, y)) {
-                            selection = board.getPieceAt(x, y);
-                            selectionX.set(x);
-                            selectionY.set(y);
-                        }
-                    } else {
+                            if (board.getPieceAt(x, y) != null && board.pieceBelongsToCurrentPlayer(x, y)) {
+                                selection = board.getPieceAt(x, y);
+                                selectionX.set(x);
+                                selectionY.set(y);
+                            }
+                        } else {
                         /* Try to move the piece to that square. */
-                        selection.clear();
-                        board.checkRestrictions(board, selection,
-                                selection.movement(board.getPlayingBoard()),
-                                x, y);
-                        
-                        boolean isTransform = selection instanceof Pawn
-                                                && (y == 0 || y == 4);
-                        
+                            selection.clear();
+                            board.checkRestrictions(board, selection,
+                                    selection.movement(board.getPlayingBoard()),
+                                    x, y);
+
+                            boolean isTransform = selection instanceof Pawn
+                                    && (y == 0 || y == 4);
+
                         /* remove mesh for taken pieces, if appropriate */
-                        if(board.hasLegalMove) {
-                            Object delta = board.move(selection.getX(),
-                                                      selection.getY(),
-                                                      x, y);
-                            if (delta != null) {
+                            if (board.hasLegalMove) {
+                                Object delta = board.move(selection.getX(),
+                                        selection.getY(),
+                                        x, y);
+                                if (delta != null) {
                                 /* Transform pawn to king at end of board. */
-                                if (isTransform) {
-                                    board.remove(x, y);
-                                    
-                                    Piece king = new King(x, y, counter%2);
-                                    board.assocMorphed(delta, king);
-                                    
-                                    put(board, king);
-                                }
-                                
-                                redoButton.setDisable(true);
-                                moveFutures.clear();
+                                    if (isTransform) {
+                                        board.remove(x, y);
 
-                                //counter++;
-                                updateStatusBar();
+                                        Piece king = new King(x, y, counter % 2);
+                                        board.assocMorphed(delta, king);
 
-                                undoButton.setDisable(false);
-                                if (moveHistory.size() > 0) {
-                                    /* If there has been a previous board state,
-                                     * reflect it on the miniboard. */
-                                    Object prevDelta = moveHistory.peek();
-
-                                    Object newDelta = prevBoard
-                                                        .copyMove(
-                                                          prevDelta);
-
-                                    if (prevBoard.wasTransform(newDelta)) {
-                                        Piece miniKing = new King(prevBoard.getCapturer(newDelta).getX(), prevBoard.getCapturer(newDelta).getY(), counter%2);
-                                        prevBoard.removeCapturer(newDelta);
-                                    
-                                        prevBoard.assocMorphed(newDelta, miniKing);
-                                        miniPut(prevBoard, miniKing);
+                                        put(board, king);
                                     }
 
-                                    prevMoveHistory.push(newDelta);
+                                    redoButton.setDisable(true);
+                                    moveFutures.clear();
+
+                                    //counter++;
+                                    updateStatusBar();
+
+                                    undoButton.setDisable(false);
+                                    if (moveHistory.size() > 0) {
+                                    /* If there has been a previous board state,
+                                     * reflect it on the miniboard. */
+                                        Object prevDelta = moveHistory.peek();
+
+                                        Object newDelta = prevBoard
+                                                .copyMove(
+                                                        prevDelta);
+
+                                        if (prevBoard.wasTransform(newDelta)) {
+                                            Piece miniKing = new King(prevBoard.getCapturer(newDelta).getX(), prevBoard.getCapturer(newDelta).getY(), counter % 2);
+                                            prevBoard.removeCapturer(newDelta);
+
+                                            prevBoard.assocMorphed(newDelta, miniKing);
+                                            miniPut(prevBoard, miniKing);
+                                        }
+
+                                        prevMoveHistory.push(newDelta);
+                                    }
+                                    moveHistory.push(delta);
                                 }
-                                moveHistory.push(delta);
                             }
+
+                            selectionX.set(-100);
+                            selectionY.set(-100);
+                            selection = null;
                         }
 
-                        selectionX.set(-100);
-                        selectionY.set(-100);
-                        selection = null;
-                    }
-
-                    if(board.black == 0) {
-                        handleWin(Piece.BLACK);
-                    } else if (board.white == 0){
-                        handleWin(Piece.WHITE);
-                    }
-                });
+                        if (board.black == 0) {
+                            handleWin(Piece.BLACK);
+                        } else if (board.white == 0) {
+                            handleWin(Piece.WHITE);
+                        }
+                    });
 
                 /* Position the tile on the board. */
-                Translate translation = new Translate(((double)i - 2.0) * 10,
-                                                      (((double)j - 2.0) * 10) - 10,
-                                                      20);
+                    Translate translation = new Translate(((double) i - 2.0) * 10,
+                            (((double) j - 2.0) * 10) - 10,
+                            20);
 
-                box.getTransforms().add(translation);
-                cellGroups[i][j].getChildren().add(box);
-                solids.getChildren().add(cellGroups[i][j]);
-                
+                    box.getTransforms().add(translation);
+                    cellGroups[i][j].getChildren().add(box);
+                    solids.getChildren().add(cellGroups[i][j]);
+
                 /* Create the small board (for showing the previous move). */
-                Box smallBox = new Box();
-                
-                smallBox.setWidth(10);
-                smallBox.setHeight(10);
-                smallBox.setDepth(2);
-                
+                    Box smallBox = new Box();
+
+                    smallBox.setWidth(10);
+                    smallBox.setHeight(10);
+                    smallBox.setDepth(2);
+
                 /* Color each tile black or white. */
-                if (((i + j) & 1) == 1) {
-                    smallBox.setMaterial(blackMat);
-                } else {
-                    smallBox.setMaterial(whiteMat);
-                }
-                
+                    if (((i + j) & 1) == 1) {
+                        smallBox.setMaterial(blackMat);
+                    } else {
+                        smallBox.setMaterial(whiteMat);
+                    }
+
                 /* Transform mini-board so that it is always at the top */
-                Translate smtrans = new Translate((((double)i - 2.0) * 10),
-                                                  (((double)j - 2.0) * 10) - 175,
-                                                  94);
-                Rotate smrotate = new Rotate(0, 0, 0, 0);
-                smrotate.angleProperty().bind(slider.valueProperty());
-                smallBox.getTransforms().add(smrotate);
-                Rotate sminnerrotate = new Rotate(0, ((((double)i - 2.0) * 10)) + (20 - (10 * i)),
-                                                     ((((double)j - 2.0) * 10) - 175) + (30 - (10 * j)), 0);
-                sminnerrotate.angleProperty().bind(slider.valueProperty().negate().subtract(0));
-                smallBox.getTransforms().add(sminnerrotate);
-                
-                smallBox.getTransforms().add(smtrans);
-                solids.getChildren().add(smallBox);
+                    Translate smtrans = new Translate((((double) i - 2.0) * 10),
+                            (((double) j - 2.0) * 10) - 175,
+                            94);
+                    Rotate smrotate = new Rotate(0, 0, 0, 0);
+                    smrotate.angleProperty().bind(slider.valueProperty());
+                    smallBox.getTransforms().add(smrotate);
+                    Rotate sminnerrotate = new Rotate(0, ((((double) i - 2.0) * 10)) + (20 - (10 * i)),
+                            ((((double) j - 2.0) * 10) - 175) + (30 - (10 * j)), 0);
+                    sminnerrotate.angleProperty().bind(slider.valueProperty().negate().subtract(0));
+                    smallBox.getTransforms().add(sminnerrotate);
+
+                    smallBox.getTransforms().add(smtrans);
+                    solids.getChildren().add(smallBox);
+                }
             }
-        }
 
         /* Create an internal scene for the 3D graphics. */
-        SubScene sub = new SubScene((Parent)solids, 0, 0, true, null);
+            SubScene sub = new SubScene((Parent) solids, 0, 0, true, null);
 
         /* Declare the camera we will use for the board. */
-        PerspectiveCamera camera = new PerspectiveCamera(true);
-        camera.setFarClip(400);
+            PerspectiveCamera camera = new PerspectiveCamera(true);
+            camera.setFarClip(400);
 
         /* Put the camera at a distance from the board. */
-        camera.setTranslateY(80);
-        camera.setTranslateZ(-80);
+            camera.setTranslateY(80);
+            camera.setTranslateZ(-80);
 
         /* Make the slide-able rotation for the board. */
-        Rotate rotate = new Rotate(0, 0, -90, 0);
-        rotate.angleProperty().bind(slider.valueProperty());
-        camera.getTransforms().add(rotate);
+            Rotate rotate = new Rotate(0, 0, -90, 0);
+            rotate.angleProperty().bind(slider.valueProperty());
+            camera.getTransforms().add(rotate);
 
         /* The chin-down rotation for looking at the board. */
-        camera.getTransforms().add(new Rotate(45, Rotate.X_AXIS));
+            camera.getTransforms().add(new Rotate(45, Rotate.X_AXIS));
 
         /* Finally, make the subscene use the camera we've defined. */
-        sub.setCamera(camera);
+            sub.setCamera(camera);
 
         /* Ensure that the subscene resizes along with the window. */
-        sub.widthProperty().bind(subScenePane.widthProperty());
-        sub.heightProperty().bind(subScenePane.heightProperty());
+            sub.widthProperty().bind(subScenePane.widthProperty());
+            sub.heightProperty().bind(subScenePane.heightProperty());
 
         /* Add the subscene to the window. */
-        subScenePane.getChildren().add(sub);
-    }    
+            subScenePane.getChildren().add(sub);
+        }
 }
