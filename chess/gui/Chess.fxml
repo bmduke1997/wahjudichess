@@ -55,7 +55,7 @@
     <center>
         <Pane fx:id="subScenePane">
             <HBox>
-                <Label fx:id="statusBar" text="No game started." style="-fx-font-size: 14" />
+                <Label fx:id="statusBar" text="No game started." />
                 <Region HBox.hgrow="ALWAYS" />
             </HBox>
         </Pane>

@@ -4,6 +4,7 @@ import chess.board.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Stack;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.fxml.FXML;
@@ -131,6 +132,8 @@ public class ChessController implements Initializable {
         }
 
         counter++;
+        board.updateTurn(counter);
+
         undoButton.setDisable(false);
 
         if(board.black == 0) {
@@ -146,6 +149,8 @@ public class ChessController implements Initializable {
     }
 
     void updateStatusBar() {
+        counter = board.getTurn();
+
         if (counter % 2 == 0) {
             statusBar.setText("Black's turn.");
         } else if (counter % 2 == 1) {
@@ -327,6 +332,9 @@ public class ChessController implements Initializable {
             counter = 0;
         }
 
+        board.setAI(!whiteIsHuman, !blackIsHuman);
+
+
         /* Say whose turn it is. */
         updateStatusBar();
 
@@ -402,6 +410,14 @@ public class ChessController implements Initializable {
         miniPut(prevBoard, new Pawn(3, 3, Piece.WHITE));
         miniPut(prevBoard, new Pawn(4, 3, Piece.WHITE));
 
+        while(curentPlayerIsAI && noWin)
+        {
+            AI.move(color, board); //translation
+            checkWin;
+            changeColor;
+        }
+
+
         System.out.println("ChessController got message about new game.");
         System.out.println("First player: " + (whiteGoesFirst ? "white" : "black"));
         System.out.println("Black is " + (blackIsHuman ? "human" : "machine"));
@@ -410,8 +426,8 @@ public class ChessController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        board = new Board();
-        prevBoard = new Board();
+        board = new Board(counter);
+        prevBoard = new Board(counter);
 
         /* Initialize the game history stack. */
         moveHistory = new Stack<>();
@@ -432,7 +448,13 @@ public class ChessController implements Initializable {
         undoButton.setDisable(true);
         redoButton.setDisable(true);
         
-        
+        statusBar
+          .styleProperty()
+          .bind(
+            Bindings.concat(
+              "-fx-font-size: ",
+              subScenePane.widthProperty().divide(35).asString()));
+
         /* Declare our group of solid shapes. */
         solids = new Group();
         
@@ -531,11 +553,16 @@ public class ChessController implements Initializable {
                     int x = pos[0];
                     int y = pos[1];
 
-                    board.teamCapture(counter%2);
+                    /*compute if the current player's team has a capture,
+                      of so restrict so that when moving a piece the oly valid move is a capture.
+                     */
+                    board.teamCapture();
+
+                    counter = board.getTurn();
 
                     if (selection == null) {
                         /* Try to select the piece if there is one */
-                        if (board.getPieceAt(x, y) != null && board.getPieceAt(x, y).getColor() == counter%2) {
+                        if (board.getPieceAt(x, y) != null && board.pieceBelongsToCurrentPlayer(x, y)) {
                             selection = board.getPieceAt(x, y);
                             selectionX.set(x);
                             selectionY.set(y);
@@ -569,7 +596,7 @@ public class ChessController implements Initializable {
                                 redoButton.setDisable(true);
                                 moveFutures.clear();
 
-                                counter++;
+                                //counter++;
                                 updateStatusBar();
 
                                 undoButton.setDisable(false);
