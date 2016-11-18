@@ -423,10 +423,10 @@ public class ChessController implements Initializable {
             while (j < 5){ //(board.black > 0 && board.white > 0) {
 
                 //White's turn
-                if (counter%2 ==1) {
+                if (counter%2 == 1) {
                     System.out.println("WHITE TEST");
                     //Get desired AI location
-                    AIplacement = myAI.AImove(board, 1); //translation
+                    AIplacement = myAI.AImove(board, counter%2); //translation
                     board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
                     board.checkRestrictions(board, myAI.selection, myAI.AImovements, AIplacement[2], AIplacement[3]);
 
@@ -482,7 +482,7 @@ public class ChessController implements Initializable {
                 if(counter%2 == 0) {
                     System.out.println("BLACK TEST");
                     //Get desired AI location
-                    AIplacement = myAI.AImove(board, 0); //translation
+                    AIplacement = myAI.AImove(board, counter%2); //translation
                     board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
                     board.checkRestrictions(board, myAI.selection, myAI.AImovements, AIplacement[2], AIplacement[3]);
 
