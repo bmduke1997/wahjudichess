@@ -167,6 +167,10 @@ public class Board {
         blackAI = black;
     }
 
+    public boolean someAi(){
+        return whiteAI || blackAI;
+    }
+
     public boolean pieceBelongsToCurrentPlayer(int x, int y){
         return  playingBoard[y][x].getColor() == turn%2;
     }

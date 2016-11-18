@@ -417,9 +417,8 @@ public class ChessController implements Initializable {
         miniPut(prevBoard, new Pawn(4, 3, Piece.WHITE));
 
         //If both are AI, this will run until there is a winner
-        if (!whiteIsHuman && !blackIsHuman) {
+        if ((!whiteIsHuman && whiteGoesFirst)  || (!blackIsHuman && !whiteGoesFirst)) {
             //While no one has won
-            int j = 0;
             while (board.black > 0 && board.white > 0) {
 
                 //White's turn
@@ -431,7 +430,7 @@ public class ChessController implements Initializable {
                     board.checkRestrictions(board, myAI.selection, myAI.AImovements, AIplacement[2], AIplacement[3]);
 
                     boolean isTransform = selection instanceof Pawn
-                            && (AIplacement[0] == 0 || AIplacement[3] == 4);
+                            && (AIplacement[3] == 0 || AIplacement[3] == 4);
                     if(board.hasLegalMove) {
                         System.out.println("legal move");
                         Object delta = board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
@@ -483,7 +482,7 @@ public class ChessController implements Initializable {
                 }
 
                 //Black's turn
-                if(counter%2 == 0) {
+                else if(counter%2 == 0) {
                     System.out.println("BLACK TEST");
                     //Get desired AI location
                     AIplacement = myAI.AImove(board, counter%2); //translation
@@ -491,7 +490,7 @@ public class ChessController implements Initializable {
                     board.checkRestrictions(board, myAI.selection, myAI.AImovements, AIplacement[2], AIplacement[3]);
 
                     boolean isTransform = selection instanceof Pawn
-                            && (AIplacement[0] == 0 || AIplacement[3] == 4);
+                            && (AIplacement[3] == 0 || AIplacement[3] == 4);
                     if(board.hasLegalMove) {
                         System.out.println("legal move");
                         Object delta = board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
@@ -539,7 +538,9 @@ public class ChessController implements Initializable {
                     //Reset counter to turn, thus switching AI turns
                     counter = board.getTurn();
                 }
-                j++;
+
+                if (whiteIsHuman || blackIsHuman) break;
+
             }
         }
 
@@ -746,6 +747,80 @@ public class ChessController implements Initializable {
                                         prevMoveHistory.push(newDelta);
                                     }
                                     moveHistory.push(delta);
+
+
+
+
+                                    if (board.someAi()){
+
+                                        board.teamCapture();
+
+                                        counter = board.getTurn();
+                                        try {
+                                            Thread.sleep((long) 100);
+                                        }
+                                        catch (Exception q) {
+
+                                        }
+                                        //Get desired AI location
+                                        AIplacement = myAI.AImove(board, counter%2); //translation
+                                        //board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
+                                        board.checkRestrictions(board, myAI.selection, myAI.AImovements, AIplacement[2], AIplacement[3]);
+
+                                        isTransform = myAI.selection instanceof Pawn
+                                                && (AIplacement[3] == 0 || AIplacement[3] == 4);
+                                        if(board.hasLegalMove) {
+                                            System.out.println("legal move");
+                                            delta = board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
+                                            if (delta != null) {
+                                                /* Transform pawn to king at end of board. */
+                                                if (isTransform) {
+                                                    board.remove(AIplacement[0], AIplacement[1]);
+
+                                                    Piece king = new King(AIplacement[0], AIplacement[1], counter % 2);
+                                                    board.assocMorphed(delta, king);
+
+                                                    put(board, king);
+                                                }
+
+                                                redoButton.setDisable(true);
+                                                moveFutures.clear();
+
+                                                //counter++;
+                                                updateStatusBar();
+
+                                                undoButton.setDisable(false);
+                                                if (moveHistory.size() > 0) {
+                                   /*  If there has been a previous board state,
+                                     * reflect it on the miniboard. */
+                                                    Object prevDelta = moveHistory.peek();
+
+                                                    Object newDelta = prevBoard
+                                                            .copyMove(
+                                                                    prevDelta);
+
+                                                    if (prevBoard.wasTransform(newDelta)) {
+                                                        Piece miniKing = new King(prevBoard.getCapturer(newDelta).getX(), prevBoard.getCapturer(newDelta).getY(), counter % 2);
+                                                        prevBoard.removeCapturer(newDelta);
+
+                                                        prevBoard.assocMorphed(newDelta, miniKing);
+                                                        miniPut(prevBoard, miniKing);
+                                                    }
+
+                                                    prevMoveHistory.push(newDelta);
+                                                }
+                                                moveHistory.push(delta);
+                                            }
+                                        }
+                                        //Reset counter to turn, thus switching AI turns
+                                        counter = board.getTurn();
+
+                                    }
+
+
+
+
+
                                 }
                             }
 

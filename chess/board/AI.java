@@ -47,6 +47,7 @@ public class AI {
         int captureX = 0;
         int captureY = 0;
         int firstSelection = 0;
+        int firstCapture = 0;
         boolean hasCapture = false;
 
         selection = null;
@@ -100,7 +101,23 @@ public class AI {
                         {
                             if(tempAImovements[i] != null)
                             {
-                                if(board.getPieceAt(tempAImovements[i].getX(),tempAImovements[i].getY()) != null)
+                                if(firstCapture !=0 && AImovements[i]!= null && board.getPieceAt(AImovements[i].getX(), AImovements[i].getY()) != null) {
+                                    if (board.getPieceAt(AImovements[i].getX(), AImovements[i].getY()).getValue()
+                                            < board.getPieceAt(captureX, captureY).getValue()) {
+                                        hasCapture = true;
+                                        selection = tempSelection;
+                                        selection.clear();
+                                        AImovements = null;
+                                        AImovements = selection.movement(board.getPlayingBoard());
+                                        System.out.println("Current piece with capture: " + selection.getValue());
+                                        pieceX = x;
+                                        pieceY = y;
+                                        captureX = AImovements[i].getX();
+                                        captureY = AImovements[i].getY();
+                                        firstSelection++;
+                                    }
+                                }
+                                else if(board.getPieceAt(tempAImovements[i].getX(),tempAImovements[i].getY()) != null)
                                 {
                                     hasCapture = true;
                                     selection = tempSelection;
@@ -113,6 +130,7 @@ public class AI {
                                     captureX = AImovements[i].getX();
                                     captureY = AImovements[i].getY();
                                     firstSelection++;
+                                    firstCapture++;
                                 }
                             }
                         }
@@ -202,6 +220,8 @@ public class AI {
             locations[3] = captureY;
         }
 
+        System.out.println("Location X: " + locations[0]);
+        System.out.println("Location Y: " + locations[1]);
         System.out.println("Capture X:" + captureX);
         System.out.println("Capture Y:" + captureY);
         System.out.println("Movement X:" + movementX);

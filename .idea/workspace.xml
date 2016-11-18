@@ -35,21 +35,23 @@
       <file leaf-file-name="Board.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chess/board/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="372">
-              <caret line="335" column="34" selection-start-line="335" selection-start-column="34" selection-end-line="335" selection-end-column="34" />
+            <state relative-caret-position="2016">
+              <caret line="262" column="41" selection-start-line="262" selection-start-column="41" selection-end-line="262" selection-end-column="41" />
               <folding>
                 <element signature="method#clear#0;class#Board#0" expanded="false" />
                 <element signature="class#Delta#0;class#Board#0" expanded="false" />
                 <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
+                <element signature="e#2414#2415#0" expanded="true" />
+                <element signature="e#2465#2466#0" expanded="true" />
                 <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
+                <element signature="e#4388#4389#0" expanded="true" />
+                <element signature="e#4429#4430#0" expanded="true" />
                 <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
                 <element signature="method#undo#0;class#Board#0" expanded="false" />
                 <element signature="method#redo#0;class#Board#0" expanded="false" />
-                <element signature="method#copyMove#0;class#Board#0" expanded="false" />
                 <element signature="method#remove#0;class#Board#0" expanded="false" />
                 <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
                 <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-                <element signature="method#teamCapture#0;class#Board#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -58,8 +60,8 @@
       <file leaf-file-name="AI.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chess/board/AI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-90">
-              <caret line="25" column="24" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
+            <state relative-caret-position="336">
+              <caret line="223" column="38" selection-start-line="223" selection-start-column="38" selection-end-line="223" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -68,8 +70,8 @@
       <file leaf-file-name="ChessController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/chess/gui/ChessController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="537" column="31" selection-start-line="537" selection-start-column="31" selection-end-line="537" selection-end-column="31" />
+            <state relative-caret-position="-3662">
+              <caret line="542" column="16" selection-start-line="542" selection-start-column="16" selection-end-line="542" selection-end-column="16" />
               <folding>
                 <element signature="method#openNewGameWindow#0;class#ChessController#0" expanded="false" />
                 <element signature="method#openAboutWindow#0;class#ChessController#0" expanded="false" />
@@ -111,8 +113,8 @@
         <option value="$PROJECT_DIR$/chess/board/King.java" />
         <option value="$PROJECT_DIR$/chess/board/Rook.java" />
         <option value="$PROJECT_DIR$/chess/board/Piece.java" />
-        <option value="$PROJECT_DIR$/chess/board/AI.java" />
         <option value="$PROJECT_DIR$/chess/board/Board.java" />
+        <option value="$PROJECT_DIR$/chess/board/AI.java" />
         <option value="$PROJECT_DIR$/chess/gui/ChessController.java" />
       </list>
     </option>
@@ -624,7 +626,7 @@
       <workItem from="1478741365164" duration="156000" />
       <workItem from="1478892313431" duration="13589000" />
       <workItem from="1479150179926" duration="6083000" />
-      <workItem from="1479496304149" duration="4538000" />
+      <workItem from="1479496304149" duration="10178000" />
     </task>
     <task id="LOCAL-00001" summary="Merge branch 'dev' of github.com:unternehmen/wahjudichess into dev&#10;&#10;# Conflicts:&#10;#&#9;chess/gui/ChessController.java&#10;">
       <created>1478294882430</created>
@@ -689,11 +691,18 @@
       <option name="project" value="LOCAL" />
       <updated>1479253280587</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="AI mostly working">
+      <created>1479500878749</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1479500878749</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35668000" />
+    <option name="totallyTimeSpent" value="41308000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="34" width="1920" height="1046" extended-state="6" />
@@ -774,7 +783,8 @@
     <MESSAGE value="Integrated changes from board to gui" />
     <MESSAGE value="move turn handling to baord" />
     <MESSAGE value="Turns no longer work" />
-    <option name="LAST_COMMIT_MESSAGE" value="Turns no longer work" />
+    <MESSAGE value="AI mostly working" />
+    <option name="LAST_COMMIT_MESSAGE" value="AI mostly working" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -813,15 +823,17 @@
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
+            <element signature="e#2414#2415#0" expanded="true" />
+            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
+            <element signature="e#4388#4389#0" expanded="true" />
+            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#redo#0;class#Board#0" expanded="false" />
-            <element signature="method#copyMove#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="method#teamCapture#0;class#Board#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -860,15 +872,17 @@
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
+            <element signature="e#2414#2415#0" expanded="true" />
+            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
+            <element signature="e#4388#4389#0" expanded="true" />
+            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#redo#0;class#Board#0" expanded="false" />
-            <element signature="method#copyMove#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="method#teamCapture#0;class#Board#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -900,15 +914,17 @@
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
+            <element signature="e#2414#2415#0" expanded="true" />
+            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
+            <element signature="e#4388#4389#0" expanded="true" />
+            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#redo#0;class#Board#0" expanded="false" />
-            <element signature="method#copyMove#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="method#teamCapture#0;class#Board#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -940,15 +956,17 @@
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
+            <element signature="e#2414#2415#0" expanded="true" />
+            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
+            <element signature="e#4388#4389#0" expanded="true" />
+            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#redo#0;class#Board#0" expanded="false" />
-            <element signature="method#copyMove#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="method#teamCapture#0;class#Board#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -980,15 +998,17 @@
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
+            <element signature="e#2414#2415#0" expanded="true" />
+            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
+            <element signature="e#4388#4389#0" expanded="true" />
+            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#redo#0;class#Board#0" expanded="false" />
-            <element signature="method#copyMove#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="method#teamCapture#0;class#Board#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1020,15 +1040,17 @@
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
+            <element signature="e#2414#2415#0" expanded="true" />
+            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
+            <element signature="e#4388#4389#0" expanded="true" />
+            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#redo#0;class#Board#0" expanded="false" />
-            <element signature="method#copyMove#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="method#teamCapture#0;class#Board#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1060,15 +1082,17 @@
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
+            <element signature="e#2414#2415#0" expanded="true" />
+            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
+            <element signature="e#4388#4389#0" expanded="true" />
+            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#redo#0;class#Board#0" expanded="false" />
-            <element signature="method#copyMove#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="method#teamCapture#0;class#Board#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1100,15 +1124,17 @@
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
+            <element signature="e#2414#2415#0" expanded="true" />
+            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
+            <element signature="e#4388#4389#0" expanded="true" />
+            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#redo#0;class#Board#0" expanded="false" />
-            <element signature="method#copyMove#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="method#teamCapture#0;class#Board#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1140,15 +1166,17 @@
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
+            <element signature="e#2414#2415#0" expanded="true" />
+            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
+            <element signature="e#4388#4389#0" expanded="true" />
+            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#redo#0;class#Board#0" expanded="false" />
-            <element signature="method#copyMove#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="method#teamCapture#0;class#Board#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1221,15 +1249,17 @@
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
+            <element signature="e#2414#2415#0" expanded="true" />
+            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
+            <element signature="e#4388#4389#0" expanded="true" />
+            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#redo#0;class#Board#0" expanded="false" />
-            <element signature="method#copyMove#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="method#teamCapture#0;class#Board#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1316,37 +1346,39 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/chess/board/AI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-90">
-          <caret line="25" column="24" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
+        <state relative-caret-position="336">
+          <caret line="223" column="38" selection-start-line="223" selection-start-column="38" selection-end-line="223" selection-end-column="38" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chess/board/Board.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="372">
-          <caret line="335" column="34" selection-start-line="335" selection-start-column="34" selection-end-line="335" selection-end-column="34" />
+        <state relative-caret-position="2016">
+          <caret line="262" column="41" selection-start-line="262" selection-start-column="41" selection-end-line="262" selection-end-column="41" />
           <folding>
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
+            <element signature="e#2414#2415#0" expanded="true" />
+            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
+            <element signature="e#4388#4389#0" expanded="true" />
+            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#redo#0;class#Board#0" expanded="false" />
-            <element signature="method#copyMove#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="method#teamCapture#0;class#Board#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chess/gui/ChessController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="537" column="31" selection-start-line="537" selection-start-column="31" selection-end-line="537" selection-end-column="31" />
+        <state relative-caret-position="-3662">
+          <caret line="542" column="16" selection-start-line="542" selection-start-column="16" selection-end-line="542" selection-end-column="16" />
           <folding>
             <element signature="method#openNewGameWindow#0;class#ChessController#0" expanded="false" />
             <element signature="method#openAboutWindow#0;class#ChessController#0" expanded="false" />
