@@ -319,19 +319,21 @@ public class Board {
 
         restricted = false;
 
-        for (int i = 0; i < myMovements.length; i++) {
-            if (myMovements[i] != null) {
-                if(board.getPieceAt(myMovements[i].getX(), myMovements[i].getY()) == null) {
-                    continue;
-                }
-                else if (board.getPieceAt(myMovements[i].getX(), myMovements[i].getY()).getColor() != piece.getColor()) {
-                    restricted = true;
-                    System.out.println("Is restricted!");
-                    break;
+        if (myMovements != null) {
+            for (int i = 0; i < myMovements.length; i++) {
+                if (myMovements[i] != null) {
+                    if (board.getPieceAt(myMovements[i].getX(), myMovements[i].getY()) == null) {
+                        continue;
+                    } else if (board.getPieceAt(myMovements[i].getX(), myMovements[i].getY()).getColor() != piece.getColor()) {
+                        restricted = true;
+                        System.out.println("Is restricted!");
+                        break;
+                    }
                 }
             }
+            isLegalMove(board, piece, myMovements, targetX, targetY);
         }
-        isLegalMove(board, piece, myMovements, targetX, targetY);
+        else hasLegalMove = false;
     }
     private boolean capture;
     public void teamCapture(){

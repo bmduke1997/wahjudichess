@@ -420,19 +420,20 @@ public class ChessController implements Initializable {
         if (!whiteIsHuman && !blackIsHuman) {
             //While no one has won
             int j = 0;
-            while (j < 5){ //(board.black > 0 && board.white > 0) {
+            while (board.black > 0 && board.white > 0) {
 
                 //White's turn
                 if (counter%2 == 1) {
                     System.out.println("WHITE TEST");
                     //Get desired AI location
                     AIplacement = myAI.AImove(board, counter%2); //translation
-                    board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
+                    //board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
                     board.checkRestrictions(board, myAI.selection, myAI.AImovements, AIplacement[2], AIplacement[3]);
 
                     boolean isTransform = selection instanceof Pawn
                             && (AIplacement[0] == 0 || AIplacement[3] == 4);
                     if(board.hasLegalMove) {
+                        System.out.println("legal move");
                         Object delta = board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
                         if (delta != null) {
                                 /* Transform pawn to king at end of board. */
@@ -474,6 +475,9 @@ public class ChessController implements Initializable {
                             moveHistory.push(delta);
                         }
                     }
+                    else{
+                        break;
+                    }
                     //Reset counter to turn, thus switching AI turns
                     counter = board.getTurn();
                 }
@@ -483,12 +487,13 @@ public class ChessController implements Initializable {
                     System.out.println("BLACK TEST");
                     //Get desired AI location
                     AIplacement = myAI.AImove(board, counter%2); //translation
-                    board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
+                    //board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
                     board.checkRestrictions(board, myAI.selection, myAI.AImovements, AIplacement[2], AIplacement[3]);
 
                     boolean isTransform = selection instanceof Pawn
                             && (AIplacement[0] == 0 || AIplacement[3] == 4);
                     if(board.hasLegalMove) {
+                        System.out.println("legal move");
                         Object delta = board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
                         if (delta != null) {
                             /* Transform pawn to king at end of board. */
@@ -530,6 +535,7 @@ public class ChessController implements Initializable {
                             moveHistory.push(delta);
                         }
                     }
+                    else break;
                     //Reset counter to turn, thus switching AI turns
                     counter = board.getTurn();
                 }
