@@ -360,7 +360,6 @@ public class Board {
         for (int y = 0; y < 5; y++){
             if(capture) break;
             for (int x = 0; x < 5; x++){
-                //TODO watch out for null spaces
                 try {
                     if (playingBoard[y][x].getColor() == color) {
                         capture = playingBoard[y][x].hasCapture(playingBoard);
@@ -377,4 +376,65 @@ public class Board {
         }
     }
 
+    //Get number of enemy captures at a certain location within AI movement array
+    int captureCounter = 0;
+    int[] locationToMove = new int [2];
+    public boolean betterAImove(Movement[] myMovements) {
+        int myColor = turn % 2;
+        int tempCaptureCounter = 0;
+        boolean captureMe = false;
+
+        //Temp piece to compare captures against AI selection movement array
+        Piece enemy;
+
+        //Literally just made this null to get intelliJ to stop complaining
+        Movement [] enemyMovements = null;
+        for (int y = 0; y < 5; y++) {
+            for (int x = 0; x < 5; x++) {
+                if (playingBoard[y][x] != null) {
+                    if (playingBoard[y][x].getColor() != myColor) {
+                        enemy = playingBoard[y][x];
+                        enemy.clear();
+                        enemyMovements = null;
+                        enemyMovements = enemy.movement(playingBoard);
+
+                        // Ignore pawns as they cannot take the capture for the move in front of them
+                        // and that is the only move in their movement array if they don't already have a capture.
+                        if(enemy.getValue() != 1) {
+
+                            for (int i = 0; i < myMovements.length; i++) {
+                                for (int j = 0; j < enemyMovements.length; j++) {
+                                    if (myMovements[i] != null && enemyMovements[j] != null) {
+                                        if (myMovements[i].getY() == enemyMovements[j].getY() && myMovements[i].getX() == enemyMovements[j].getX()) {
+                                            tempCaptureCounter++;
+                                        }
+                                    }
+                                }
+                                if (tempCaptureCounter > captureCounter) {
+                                    captureMe = true;
+                                    captureCounter = tempCaptureCounter;
+                                    locationToMove[0] = myMovements[i].getX();
+                                    locationToMove[1] = myMovements[i].getY();
+                                    tempCaptureCounter = 0;
+                                    System.out.println("New AI movement location!");
+                                    System.out.println("AI new move X: " + locationToMove[0]);
+                                    System.out.println("AI new move Y: " + locationToMove[1]);
+                                } else {
+                                    tempCaptureCounter = 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        return captureMe;
+    }
+
+    public void clearCaptureCounter(){
+        captureCounter = 0;
+    }
+    public void clearLocationToMove(){
+        locationToMove = new int[2];
+    }
 }

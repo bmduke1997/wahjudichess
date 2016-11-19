@@ -48,6 +48,7 @@ public class AI {
         int captureY = 0;
         int firstSelection = 0;
         int firstCapture = 0;
+        int bestCapture = 0;
         boolean hasCapture = false;
 
         selection = null;
@@ -55,7 +56,7 @@ public class AI {
         AImovements = null;
         tempAImovements = null;
 
-        //Get highest rated piece that has a capture
+        //Get lowest rated piece that has a capture
         for(int y = 0; y < 5; y++) {
             for (int x = 0; x < 5; x++) {
                 //Check for location being null
@@ -65,33 +66,47 @@ public class AI {
                     tempSelection.clear();
                     tempAImovements = null;
                     tempAImovements = tempSelection.movement(board.getPlayingBoard());
-                    System.out.println(Arrays.toString(tempAImovements));
+                    //System.out.println(Arrays.toString(tempAImovements));
                     if (selection != null && tempAImovements[0] != null) {
 
-                        for(int i = 0; i < tempAImovements.length; i++)
-                        {
-                            if(tempAImovements[i] != null)
-                            {
-                                if(board.getPieceAt(tempAImovements[i].getX(),tempAImovements[i].getY()) != null)
-                                {
-                                    if (tempSelection.getValue() > selection.getValue()) {
-                                        hasCapture = true;
-                                        selection = tempSelection;
-                                        selection.clear();
-                                        AImovements = null;
-                                        AImovements = selection.movement(board.getPlayingBoard());
-                                        System.out.println("Current piece with capture: " + selection.getValue());
-                                        /*//Might need this stuff
-                                        selection.clear();
-                                        AImovements = selection.movement(board.getPlayingBoard());*/
+                        if (tempSelection.getValue() <= selection.getValue()) {
 
-                                        pieceX = x;
-                                        pieceY = y;
-                                        captureX = AImovements[i].getX();
-                                        captureY = AImovements[i].getY();
+                            for (int i = 0; i < tempAImovements.length; i++) {
+                                if (tempAImovements[i] != null) {
+                                    if (board.getPieceAt(tempAImovements[i].getX(), tempAImovements[i].getY()) != null) {
+                                        if (bestCapture != 0) {
+                                            if (board.getPieceAt(tempAImovements[i].getX(), tempAImovements[i].getY()).getValue()
+                                                    < board.getPieceAt(captureX, captureY).getValue()) {
+                                                hasCapture = true;
+                                                selection = tempSelection;
+                                                selection.clear();
+                                                AImovements = null;
+                                                AImovements = selection.movement(board.getPlayingBoard());
+                                                System.out.println("Current piece with capture: " + selection.getValue());
+                                                pieceX = x;
+                                                pieceY = y;
+                                                captureX = AImovements[i].getX();
+                                                captureY = AImovements[i].getY();
+                                            }
+                                        }
+                                        //Get first available capture with new highest value piece
+                                        else if (board.getPieceAt(tempAImovements[i].getX(), tempAImovements[i].getY()) != null) {
+                                            hasCapture = true;
+                                            selection = tempSelection;
+                                            selection.clear();
+                                            AImovements = null;
+                                            AImovements = selection.movement(board.getPlayingBoard());
+                                            System.out.println("Current piece with capture: " + selection.getValue());
+                                            pieceX = x;
+                                            pieceY = y;
+                                            captureX = AImovements[i].getX();
+                                            captureY = AImovements[i].getY();
+                                            bestCapture++;
+                                        }
                                     }
                                 }
                             }
+                            bestCapture = 0;
                         }
                     }
                     //Gets first piece with available capture
@@ -101,8 +116,8 @@ public class AI {
                         {
                             if(tempAImovements[i] != null)
                             {
-                                if(firstCapture !=0 && AImovements[i]!= null && board.getPieceAt(AImovements[i].getX(), AImovements[i].getY()) != null) {
-                                    if (board.getPieceAt(AImovements[i].getX(), AImovements[i].getY()).getValue()
+                                if(firstCapture !=0 && tempAImovements[i]!= null && board.getPieceAt(tempAImovements[i].getX(), tempAImovements[i].getY()) != null) {
+                                    if (board.getPieceAt(tempAImovements[i].getX(), tempAImovements[i].getY()).getValue()
                                             < board.getPieceAt(captureX, captureY).getValue()) {
                                         hasCapture = true;
                                         selection = tempSelection;
@@ -166,15 +181,13 @@ public class AI {
                                 pieceY = y;
                                 movementX = AImovements[0].getX();
                                 movementY = AImovements[0].getY();
-                                for(int i = 0; i < AImovements.length; i++)
+
+                                if(board.betterAImove(AImovements))
                                 {
-                                    if(AImovements[i]!= null && board.getPieceAt(AImovements[i].getX(), AImovements[i].getY()) != null) {
-                                        if (board.getPieceAt(AImovements[i].getX(), AImovements[i].getY()).getValue()
-                                                < board.getPieceAt(movementX, movementY).getValue()) {
-                                            movementX = AImovements[i].getX();
-                                            movementY = AImovements[i].getY();
-                                        }
-                                    }
+                                    movementX = board.locationToMove[0];
+                                    movementY = board.locationToMove[1];
+                                    System.out.println("Updated Movement X:" + movementX);
+                                    System.out.println("Updated Movement Y:" + movementY);
                                 }
                             }
                         }
@@ -191,21 +204,24 @@ public class AI {
                             pieceY = y;
                             movementX = AImovements[0].getX();
                             movementY = AImovements[0].getY();
-                            for(int i = 0; i < AImovements.length; i++)
+                            System.out.println("Initial Movement X:" + movementX);
+                            System.out.println("Initial Movement Y:" + movementY);
+
+                            if(board.betterAImove(AImovements))
                             {
-                                if(AImovements[i]!=null && board.getPieceAt(AImovements[i].getX(), AImovements[i].getY()) != null) {
-                                    if (board.getPieceAt(AImovements[i].getX(), AImovements[i].getY()).getValue()
-                                            < board.getPieceAt(movementX, movementY).getValue()) {
-                                        movementX = AImovements[i].getX();
-                                        movementY = AImovements[i].getY();
-                                    }
-                                }
+                                movementX = board.locationToMove[0];
+                                movementY = board.locationToMove[1];
+                                System.out.println("Updated Movement X:" + movementX);
+                                System.out.println("Updated Movement Y:" + movementY);
                             }
+
                             firstSelection++;
                         }
                     }
                 }
             }
+            board.clearCaptureCounter();
+            board.clearLocationToMove();
         }
 
         //Use location values

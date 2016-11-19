@@ -5,7 +5,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/board/AI.java" afterPath="$PROJECT_DIR$/chess/board/AI.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/board/Board.java" afterPath="$PROJECT_DIR$/chess/board/Board.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/gui/ChessController.java" afterPath="$PROJECT_DIR$/chess/gui/ChessController.java" />
     </list>
     <ignored path="wahjudichess.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,20 +34,15 @@
       <file leaf-file-name="Board.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chess/board/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2016">
-              <caret line="262" column="41" selection-start-line="262" selection-start-column="41" selection-end-line="262" selection-end-column="41" />
+            <state relative-caret-position="4505">
+              <caret line="401" column="114" selection-start-line="401" selection-start-column="114" selection-end-line="401" selection-end-column="114" />
               <folding>
                 <element signature="method#clear#0;class#Board#0" expanded="false" />
                 <element signature="class#Delta#0;class#Board#0" expanded="false" />
                 <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-                <element signature="e#2414#2415#0" expanded="true" />
-                <element signature="e#2465#2466#0" expanded="true" />
                 <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-                <element signature="e#4388#4389#0" expanded="true" />
-                <element signature="e#4429#4430#0" expanded="true" />
                 <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
                 <element signature="method#undo#0;class#Board#0" expanded="false" />
-                <element signature="method#redo#0;class#Board#0" expanded="false" />
                 <element signature="method#remove#0;class#Board#0" expanded="false" />
                 <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
                 <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
@@ -57,21 +51,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AI.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="AI.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/chess/board/AI.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="223" column="38" selection-start-line="223" selection-start-column="38" selection-end-line="223" selection-end-column="38" />
+            <state relative-caret-position="240">
+              <caret line="71" column="55" selection-start-line="71" selection-start-column="55" selection-end-line="71" selection-end-column="55" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ChessController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ChessController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chess/gui/ChessController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3662">
-              <caret line="542" column="16" selection-start-line="542" selection-start-column="16" selection-end-line="542" selection-end-column="16" />
+            <state relative-caret-position="1462">
+              <caret line="136" column="0" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
               <folding>
                 <element signature="method#openNewGameWindow#0;class#ChessController#0" expanded="false" />
                 <element signature="method#openAboutWindow#0;class#ChessController#0" expanded="false" />
@@ -113,9 +107,9 @@
         <option value="$PROJECT_DIR$/chess/board/King.java" />
         <option value="$PROJECT_DIR$/chess/board/Rook.java" />
         <option value="$PROJECT_DIR$/chess/board/Piece.java" />
+        <option value="$PROJECT_DIR$/chess/gui/ChessController.java" />
         <option value="$PROJECT_DIR$/chess/board/Board.java" />
         <option value="$PROJECT_DIR$/chess/board/AI.java" />
-        <option value="$PROJECT_DIR$/chess/gui/ChessController.java" />
       </list>
     </option>
   </component>
@@ -126,9 +120,10 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="34" />
-    <option name="width" value="1920" />
-    <option name="height" value="1046" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1616" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -141,7 +136,7 @@
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1">
+    <navigator proportions="" version="1">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -154,14 +149,7 @@
       <manualOrder />
       <foldersAlwaysOnTop value="true" />
     </navigator>
-    <panes>
-      <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane />
-      </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scratches" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Project" />
@@ -270,136 +258,6 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="ArquillianJUnit" factoryName="">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <configuration default="true" type="ArquillianTestNG" factoryName="">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Cold Fusion runner description" factoryName="Cold Fusion" custom_browser="" web_path="">
-      <method />
-    </configuration>
-    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="myFilePath" />
-      <option name="GLUE" />
-      <option name="myNameFilter" />
-      <option name="myGeneratedName" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
-      <option name="BCName" value="" />
-      <option name="IOSSimulatorSdkPath" value="" />
-      <option name="adlOptions" value="" />
-      <option name="airProgramParameters" value="" />
-      <option name="appDescriptorForEmulator" value="Android" />
-      <option name="debugTransport" value="USB" />
-      <option name="debuggerSdkRaw" value="BC SDK" />
-      <option name="emulator" value="NexusOne" />
-      <option name="emulatorAdlOptions" value="" />
-      <option name="fastPackaging" value="true" />
-      <option name="fullScreenHeight" value="0" />
-      <option name="fullScreenWidth" value="0" />
-      <option name="launchUrl" value="false" />
-      <option name="launcherParameters">
-        <LauncherParameters>
-          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
-          <option name="launcherType" value="OSDefault" />
-          <option name="newPlayerInstance" value="false" />
-          <option name="playerPath" value="/usr/bin/flashplayerdebugger" />
-        </LauncherParameters>
-      </option>
-      <option name="mobileRunTarget" value="Emulator" />
-      <option name="moduleName" value="" />
-      <option name="overriddenMainClass" value="" />
-      <option name="overriddenOutputFileName" value="" />
-      <option name="overrideMainClass" value="false" />
-      <option name="runTrusted" value="true" />
-      <option name="screenDpi" value="0" />
-      <option name="screenHeight" value="0" />
-      <option name="screenWidth" value="0" />
-      <option name="url" value="http://" />
-      <option name="usbDebugPort" value="7936" />
-      <method />
-    </configuration>
-    <configuration default="true" type="FlexUnitRunConfigurationType" factoryName="FlexUnit" appDescriptorForEmulator="Android" class_name="" emulatorAdlOptions="" method_name="" package_name="" scope="Class">
-      <option name="BCName" value="" />
-      <option name="launcherParameters">
-        <LauncherParameters>
-          <option name="browser" value="a7bb68e0-33c0-4d6f-a81a-aac1fdb870c8" />
-          <option name="launcherType" value="OSDefault" />
-          <option name="newPlayerInstance" value="false" />
-          <option name="playerPath" value="/usr/bin/flashplayerdebugger" />
-        </LauncherParameters>
-      </option>
-      <option name="moduleName" value="" />
-      <option name="trusted" value="true" />
-      <method />
-    </configuration>
     <configuration default="true" type="GradleRunConfiguration" factoryName="Gradle">
       <ExternalSystemSettings>
         <option name="executionName" />
@@ -414,14 +272,6 @@
         </option>
         <option name="vmOptions" />
       </ExternalSystemSettings>
-      <method />
-    </configuration>
-    <configuration default="true" type="GrailsRunConfigurationType" factoryName="Grails">
-      <setting name="vmparams" value="" />
-      <setting name="cmdLine" value="run-app" />
-      <setting name="passParentEnv" value="true" />
-      <setting name="launchBrowser" value="true" />
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <method />
     </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
@@ -487,9 +337,6 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
-      <method />
-    </configuration>
     <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <option name="MAIN_CLASS_NAME" />
@@ -521,12 +368,6 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
-      <method />
-    </configuration>
-    <configuration default="true" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -583,22 +424,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
-      <method />
-    </configuration>
-    <configuration default="true" type="js.build_tools.npm" factoryName="npm">
-      <command value="run-script" />
-      <scripts />
-      <node-interpreter value="project" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="osgi.bnd.run" factoryName="Run Launcher">
-      <method />
-    </configuration>
-    <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
     <list size="1">
@@ -705,23 +530,21 @@
     <option name="totallyTimeSpent" value="41308000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="34" width="1920" height="1046" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32898173" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32870865" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32767624" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32898173" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17395833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -731,6 +554,8 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32898173" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -755,11 +580,11 @@
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32870865" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32767624" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32898173" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17395833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.17395833" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32977587" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
     </layout-to-restore>
@@ -797,24 +622,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/chess/board/Queen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1054">
-          <caret line="64" column="69" selection-start-line="64" selection-start-column="36" selection-end-line="64" selection-end-column="69" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chess/gui/ChessController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6375">
-          <caret line="425" column="33" selection-start-line="425" selection-start-column="33" selection-end-line="425" selection-end-column="33" />
-          <folding>
-            <element signature="method#openNewGameWindow#0;class#ChessController#0" expanded="false" />
-            <element signature="method#openAboutWindow#0;class#ChessController#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/chess/board/Board.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2839">
@@ -823,14 +630,9 @@
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="true" />
-            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="true" />
-            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
-            <element signature="method#redo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
@@ -872,14 +674,9 @@
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="true" />
-            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="true" />
-            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
-            <element signature="method#redo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
@@ -914,14 +711,9 @@
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="true" />
-            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="true" />
-            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
-            <element signature="method#redo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
@@ -956,14 +748,9 @@
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="true" />
-            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="true" />
-            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
-            <element signature="method#redo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
@@ -998,14 +785,9 @@
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="true" />
-            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="true" />
-            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
-            <element signature="method#redo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
@@ -1040,14 +822,9 @@
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="true" />
-            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="true" />
-            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
-            <element signature="method#redo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
@@ -1082,14 +859,9 @@
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="true" />
-            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="true" />
-            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
-            <element signature="method#redo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
@@ -1124,14 +896,9 @@
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="true" />
-            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="true" />
-            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
-            <element signature="method#redo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
@@ -1166,14 +933,9 @@
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="true" />
-            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="true" />
-            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
-            <element signature="method#redo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
@@ -1249,14 +1011,9 @@
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="true" />
-            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="true" />
-            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
-            <element signature="method#redo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
@@ -1306,13 +1063,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chess/board/Pawn.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="82" column="22" selection-start-line="82" selection-start-column="22" selection-end-line="82" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/chess/board/Rook.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="452">
@@ -1344,30 +1094,49 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chess/board/AI.java">
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_112/javafx-src.zip!/com/sun/javafx/tk/quantum/QuantumToolkit.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="223" column="38" selection-start-line="223" selection-start-column="38" selection-end-line="223" selection-end-column="38" />
-          <folding />
+        <state relative-caret-position="4352">
+          <caret line="388" column="0" selection-start-line="388" selection-start-column="0" selection-end-line="388" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chess/gui/NewGameWindowController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="298">
+          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chess/gui/ChessController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1462">
+          <caret line="136" column="0" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
+          <folding>
+            <element signature="method#openNewGameWindow#0;class#ChessController#0" expanded="false" />
+            <element signature="method#openAboutWindow#0;class#ChessController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chess/board/Pawn.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-255">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chess/board/Board.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2016">
-          <caret line="262" column="41" selection-start-line="262" selection-start-column="41" selection-end-line="262" selection-end-column="41" />
+        <state relative-caret-position="4505">
+          <caret line="401" column="114" selection-start-line="401" selection-start-column="114" selection-end-line="401" selection-end-column="114" />
           <folding>
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="true" />
-            <element signature="e#2465#2466#0" expanded="true" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="true" />
-            <element signature="e#4429#4430#0" expanded="true" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
-            <element signature="method#redo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
@@ -1375,14 +1144,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chess/gui/ChessController.java">
+    <entry file="file://$PROJECT_DIR$/chess/board/AI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3662">
-          <caret line="542" column="16" selection-start-line="542" selection-start-column="16" selection-end-line="542" selection-end-column="16" />
-          <folding>
-            <element signature="method#openNewGameWindow#0;class#ChessController#0" expanded="false" />
-            <element signature="method#openAboutWindow#0;class#ChessController#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="240">
+          <caret line="71" column="55" selection-start-line="71" selection-start-column="55" selection-end-line="71" selection-end-column="55" />
+          <folding />
         </state>
       </provider>
     </entry>
