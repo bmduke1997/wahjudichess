@@ -137,7 +137,7 @@ public class ChessController implements Initializable {
 
         counter++;
         board.updateTurn(counter);
-        prevBoard.updateTurn(counter);
+        prevBoard.updateTurn(counter-1);
 
         undoButton.setDisable(false);
 
