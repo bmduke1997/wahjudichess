@@ -453,7 +453,14 @@ public class ChessController implements Initializable {
                             moveFutures.clear();
 
                             //counter++;
-                            updateStatusBar();
+
+                            if (board.black == 0) {
+                                handleWin(Piece.BLACK);
+                            } else if (board.white == 0) {
+                                handleWin(Piece.WHITE);
+                            } else {
+                                updateStatusBar();
+                            }
 
                             undoButton.setDisable(false);
                             if (moveHistory.size() > 0) {
@@ -513,7 +520,14 @@ public class ChessController implements Initializable {
                             moveFutures.clear();
 
                             //counter++;
-                            updateStatusBar();
+
+                            if (board.black == 0) {
+                                handleWin(Piece.BLACK);
+                            } else if (board.white == 0) {
+                                handleWin(Piece.WHITE);
+                            } else {
+                                updateStatusBar();
+                            }
 
                             undoButton.setDisable(false);
                             if (moveHistory.size() > 0) {
