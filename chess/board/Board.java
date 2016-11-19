@@ -269,8 +269,20 @@ public class Board {
                           _delta.getDestX(), _delta.getDestY());
         teamCapture();
         
-        return move(_delta.getSrcX(), _delta.getSrcY(),
-                    _delta.getDestX(), _delta.getDestY());
+        Object o = move(_delta.getSrcX(), _delta.getSrcY(),
+                        _delta.getDestX(), _delta.getDestY());
+
+        if (o != null) {
+            System.out.print ("[*] Successfully copied move: ");
+            System.out.print ("(" + _delta.getSrcX() + ", " + _delta.getSrcY() + ")");
+            System.out.println (" -> (" + _delta.getDestX() + ", " + _delta.getDestY() + ")");
+            return o;
+        } else {
+            System.out.print ("[*] Move copy determined to be impossible: ");
+            System.out.print ("(" + _delta.getSrcX() + ", " + _delta.getSrcY() + ")");
+            System.out.println (" -> (" + _delta.getDestX() + ", " + _delta.getDestY() + ")");
+            return o;
+        }
     }
 
     public void remove(int x, int y) {

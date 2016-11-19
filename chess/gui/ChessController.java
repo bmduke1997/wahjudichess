@@ -437,9 +437,9 @@ public class ChessController implements Initializable {
                         if (delta != null) {
                                 /* Transform pawn to king at end of board. */
                             if (isTransform) {
-                                board.remove(AIplacement[0], AIplacement[1]);
+                                board.remove(AIplacement[2], AIplacement[3]);
 
-                                Piece king = new King(AIplacement[0], AIplacement[1], counter % 2);
+                                Piece king = new King(AIplacement[2], AIplacement[3], counter % 2);
                                 board.assocMorphed(delta, king);
 
                                 put(board, king);
@@ -756,12 +756,7 @@ public class ChessController implements Initializable {
                                         board.teamCapture();
 
                                         counter = board.getTurn();
-                                        try {
-                                            Thread.sleep((long) 100);
-                                        }
-                                        catch (Exception q) {
 
-                                        }
                                         //Get desired AI location
                                         AIplacement = myAI.AImove(board, counter%2); //translation
                                         //board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
@@ -775,9 +770,9 @@ public class ChessController implements Initializable {
                                             if (delta != null) {
                                                 /* Transform pawn to king at end of board. */
                                                 if (isTransform) {
-                                                    board.remove(AIplacement[0], AIplacement[1]);
+                                                    board.remove(AIplacement[2], AIplacement[3]);
 
-                                                    Piece king = new King(AIplacement[0], AIplacement[1], counter % 2);
+                                                    Piece king = new King(AIplacement[2], AIplacement[3], counter % 2);
                                                     board.assocMorphed(delta, king);
 
                                                     put(board, king);
