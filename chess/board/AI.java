@@ -69,7 +69,7 @@ public class AI {
                     //System.out.println(Arrays.toString(tempAImovements));
                     if (selection != null && tempAImovements[0] != null) {
 
-                        if (tempSelection.getValue() <= selection.getValue()) {
+                        if (tempSelection.getValue() < selection.getValue()) {
 
                             for (int i = 0; i < tempAImovements.length; i++) {
                                 if (tempAImovements[i] != null) {
@@ -184,8 +184,9 @@ public class AI {
                                 pieceY = y;
                                 movementX = AImovements[0].getX();
                                 movementY = AImovements[0].getY();
-
-                                if(board.betterAImove(AImovements))
+                                System.out.println("Initial Movement X:" + movementX);
+                                System.out.println("Initial Movement Y:" + movementY);
+                                if(board.betterAImove(AImovements, selection.getColor()))
                                 {
                                     movementX = board.locationToMove[0];
                                     movementY = board.locationToMove[1];
@@ -210,7 +211,7 @@ public class AI {
                             System.out.println("Initial Movement X:" + movementX);
                             System.out.println("Initial Movement Y:" + movementY);
 
-                            if(board.betterAImove(AImovements))
+                            if(board.betterAImove(AImovements, selection.getColor()))
                             {
                                 movementX = board.locationToMove[0];
                                 movementY = board.locationToMove[1];
@@ -223,8 +224,6 @@ public class AI {
                     }
                 }
             }
-            board.clearCaptureCounter();
-            board.clearLocationToMove();
         }
 
         //Use location values

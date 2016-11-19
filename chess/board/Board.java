@@ -379,12 +379,14 @@ public class Board {
     //Get number of enemy captures at a certain location within AI movement array
     int captureCounter = 0;
     int[] locationToMove = new int [2];
-    public boolean betterAImove(Movement[] myMovements) {
+    public boolean betterAImove(Movement[] myMovements, int color) {
         System.out.println("Checking for better move");
-        int myColor = turn % 2;
+        int myColor = color;
         int tempCaptureCounter = 0;
+        int tempEnemyValue = 0;
         boolean captureMe = false;
-
+        locationToMove = new int[2];
+        captureCounter = 0;
         //Temp piece to compare captures against AI selection movement array
         Piece enemy;
 
@@ -401,7 +403,7 @@ public class Board {
 
                         // Ignore pawns as they cannot take the capture for the move in front of them
                         // and that is the only move in their movement array if they don't already have a capture.
-                        if(enemy.getValue() != 1) {
+                        if(enemy.getValue() > 1) {
 
                             for (int i = 0; i < myMovements.length; i++) {
                                 for (int j = 0; j < enemyMovements.length; j++) {
@@ -411,16 +413,18 @@ public class Board {
                                         }
                                     }
                                 }
-                                if (tempCaptureCounter != 0 && tempCaptureCounter >= captureCounter) {
+                                if (tempCaptureCounter > 0 && (enemy.getValue() > tempEnemyValue || tempEnemyValue == 0)) {
                                     captureMe = true;
                                     captureCounter = tempCaptureCounter;
+                                    tempEnemyValue = enemy.getValue();
                                     locationToMove[0] = myMovements[i].getX();
                                     locationToMove[1] = myMovements[i].getY();
                                     tempCaptureCounter = 0;
                                     System.out.println("New AI movement location!");
                                     System.out.println("AI new move X: " + locationToMove[0]);
                                     System.out.println("AI new move Y: " + locationToMove[1]);
-                                } else {
+                                }
+                                else {
                                     tempCaptureCounter = 0;
                                 }
                             }
@@ -430,12 +434,5 @@ public class Board {
             }
         }
         return captureMe;
-    }
-
-    public void clearCaptureCounter(){
-        captureCounter = 0;
-    }
-    public void clearLocationToMove(){
-        locationToMove = new int[2];
     }
 }

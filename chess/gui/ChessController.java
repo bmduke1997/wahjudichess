@@ -4,6 +4,8 @@ import chess.board.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.Stack;
+import java.util.concurrent.ExecutionException;
+
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -418,6 +420,7 @@ public class ChessController implements Initializable {
         miniPut(prevBoard, new Pawn(3, 3, Piece.WHITE));
         miniPut(prevBoard, new Pawn(4, 3, Piece.WHITE));
 
+
         //If both are AI, this will run until there is a winner
         if ((!whiteIsHuman && whiteGoesFirst)  || (!blackIsHuman && !whiteGoesFirst)) {
             board.teamCapture();
@@ -508,9 +511,9 @@ public class ChessController implements Initializable {
                         if (delta != null) {
                             /* Transform pawn to king at end of board. */
                             if (isTransform) {
-                                board.remove(AIplacement[0], AIplacement[1]);
+                                board.remove(AIplacement[2], AIplacement[3]);
 
-                                Piece king = new King(AIplacement[0], AIplacement[1], counter % 2);
+                                Piece king = new King(AIplacement[2], AIplacement[3], counter % 2);
                                 board.assocMorphed(delta, king);
 
                                 put(board, king);
@@ -556,9 +559,12 @@ public class ChessController implements Initializable {
                     //Reset counter to turn, thus switching AI turns
                     counter = board.getTurn();
                 }
-
                 if (whiteIsHuman || blackIsHuman) break;
-
+                if (board.black == 0) {
+                    handleWin(Piece.BLACK);
+                } else if (board.white == 0) {
+                    handleWin(Piece.WHITE);
+                }
             }
         }
 

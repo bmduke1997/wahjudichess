@@ -10,7 +10,7 @@ public class Rook extends Piece
     public Rook (int x, int y, int color)
     {
 
-        super(x, y, 3, color);
+        super(x, y, 4, color);
     }
 
     public Movement[] movement(Piece[][] board)
