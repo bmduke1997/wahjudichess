@@ -693,7 +693,9 @@ public class ChessController implements Initializable {
 
                         if (selection == null) {
                         /* Try to select the piece if there is one */
-                            if (board.getPieceAt(x, y) != null && board.pieceBelongsToCurrentPlayer(x, y)) {
+                            if (board.getPieceAt(x, y) != null &&
+                                  board.isCurrentPlayerHuman () &&
+                                  board.pieceBelongsToCurrentPlayer(x, y)) {
                                 selection = board.getPieceAt(x, y);
                                 selectionX.set(x);
                                 selectionY.set(y);

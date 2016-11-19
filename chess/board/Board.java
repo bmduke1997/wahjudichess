@@ -320,6 +320,16 @@ public class Board {
         }
     }
 
+    public boolean isCurrentPlayerHuman () {
+        int currentPlayer = turn % 2;
+
+        if (currentPlayer == Piece.WHITE) {
+            return !whiteAI;
+        } else {
+            return !blackAI;
+        }
+    }
+
     /* Check for captures for selected piece */
     public boolean restricted;
     public void checkRestrictions(Board board, Piece piece, Movement[] myMovements, int targetX, int targetY) {
