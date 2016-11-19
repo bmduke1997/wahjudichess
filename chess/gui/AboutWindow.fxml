@@ -7,14 +7,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.geometry.*?>
+<?import javafx.scene.image.*?>
 
-<BorderPane id="VBox" prefHeight="128" prefWidth="240" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.gui.AboutWindowController" stylesheets="@style.css">
+<BorderPane id="VBox" prefHeight="290" prefWidth="240" xmlns:fx="http://javafx.com/fxml/1" fx:controller="chess.gui.AboutWindowController" stylesheets="@style.css">
   <padding>
     <Insets top="10" bottom="10" left="10" right="10" />
   </padding>
   <center>
-    <VBox>
-      <Label wrapText="true" text="Program written by three hyenas with a typewriter." />
+    <VBox spacing="6">
+      <children>
+          <ImageView>
+            <image>
+              <Image url="@hyenas.jpg" />
+            </image>
+          </ImageView>
+          <Label wrapText="true" text="Program written by the Hyena Squad, a.k.a. three hyenas with a typewriter.  Brody, Brandon, &amp; Chris." />
+      </children>
     </VBox>
   </center>
   <bottom>
