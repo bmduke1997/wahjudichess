@@ -137,6 +137,7 @@ public class ChessController implements Initializable {
 
         counter++;
         board.updateTurn(counter);
+        prevBoard.updateTurn(counter);
 
         undoButton.setDisable(false);
 
@@ -337,6 +338,7 @@ public class ChessController implements Initializable {
         counter = startingTurn;
 
         board.updateTurn(startingTurn);
+        prevBoard.updateTurn(startingTurn);
 
         /* Set up the AIs, if there are any. */
         board.setAI(!whiteIsHuman, !blackIsHuman);
