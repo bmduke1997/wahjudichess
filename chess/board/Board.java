@@ -380,6 +380,7 @@ public class Board {
     int captureCounter = 0;
     int[] locationToMove = new int [2];
     public boolean betterAImove(Movement[] myMovements) {
+        System.out.println("Checking for better move");
         int myColor = turn % 2;
         int tempCaptureCounter = 0;
         boolean captureMe = false;
@@ -410,7 +411,7 @@ public class Board {
                                         }
                                     }
                                 }
-                                if (tempCaptureCounter > captureCounter) {
+                                if (tempCaptureCounter != 0 && tempCaptureCounter >= captureCounter) {
                                     captureMe = true;
                                     captureCounter = tempCaptureCounter;
                                     locationToMove[0] = myMovements[i].getX();
