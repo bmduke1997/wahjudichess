@@ -272,69 +272,8 @@ public class Board {
                           _delta.getDestX(), _delta.getDestY());
         teamCapture();
         
-        Object o = move(_delta.getSrcX(), _delta.getSrcY(),
-                        _delta.getDestX(), _delta.getDestY());
-
-        if (o != null) {
-            System.out.print ("[*] Successfully copied move: ");
-            System.out.print ("(" + _delta.getSrcX() + ", " + _delta.getSrcY() + ")");
-            System.out.println (" -> (" + _delta.getDestX() + ", " + _delta.getDestY() + ")");
-        } else {
-            System.out.print ("[*] Move copy determined to be impossible: ");
-            System.out.print ("(" + _delta.getSrcX() + ", " + _delta.getSrcY() + ")");
-            System.out.println (" -> (" + _delta.getDestX() + ", " + _delta.getDestY() + ")");
-        }
-
-        System.out.println ("[*] ... new board state:");
-
-        System.out.print ("[*] [");
-        for (int i = 0; i < 5; i++) {
-            System.out.print("[");
-            for (int j = 0; j < 5; j++) {
-                Piece p = getPieceAt (j, i);
-
-                if (p == null) {
-                    System.out.print (".");
-                } else if (p.getColor () == Piece.WHITE) {
-                    if (p instanceof Rook)
-                        System.out.print ("R");
-                    else if (p instanceof Knight)
-                        System.out.print ("N");
-                    else if (p instanceof King)
-                        System.out.print ("K");
-                    else if (p instanceof Queen)
-                        System.out.print ("Q");
-                    else if (p instanceof Pawn)
-                        System.out.print ("P");
-                    else if (p instanceof Bishop)
-                        System.out.print ("B");
-                } else {
-                    if (p instanceof Rook)
-                        System.out.print ("r");
-                    else if (p instanceof Knight)
-                        System.out.print ("n");
-                    else if (p instanceof King)
-                        System.out.print ("k");
-                    else if (p instanceof Queen)
-                        System.out.print ("q");
-                    else if (p instanceof Pawn)
-                        System.out.print ("p");
-                    else if (p instanceof Bishop)
-                        System.out.print ("b");
-                }
-
-                if (j != 4)
-                    System.out.print (",");
-            }
-            if (i == 4)
-                System.out.println ("]]");
-            else {
-                System.out.println ("],");
-                System.out.print ("[*]  ");
-            }
-        }
-
-        return o;
+        return move(_delta.getSrcX(), _delta.getSrcY(),
+                    _delta.getDestX(), _delta.getDestY());
     }
 
     public void remove(int x, int y) {
