@@ -420,6 +420,8 @@ public class ChessController implements Initializable {
 
         //If both are AI, this will run until there is a winner
         if ((!whiteIsHuman && whiteGoesFirst)  || (!blackIsHuman && !whiteGoesFirst)) {
+            board.teamCapture();
+
             //While no one has won
             while (board.black > 0 && board.white > 0) {
 
