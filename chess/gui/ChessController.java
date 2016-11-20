@@ -705,7 +705,7 @@ public class ChessController implements Initializable {
                         int y = pos[1];
 
                     /*compute if the current player's team has a capture,
-                      of so restrict so that when moving a piece the oly valid move is a capture.
+                      if so restrict so that when moving a piece the only valid move is a capture.
                      */
                         board.teamCapture();
 
