@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="6719bd32-4d1d-4062-b3eb-a54ad18ec736" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/board/Knight.java" afterPath="$PROJECT_DIR$/chess/board/Knight.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/gui/ChessController.java" afterPath="$PROJECT_DIR$/chess/gui/ChessController.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/board/King.java" afterPath="$PROJECT_DIR$/chess/board/King.java" />
     </list>
     <ignored path="wahjudichess.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -34,7 +33,7 @@
       <file leaf-file-name="Board.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chess/board/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4097">
+            <state relative-caret-position="17">
               <caret line="377" column="0" selection-start-line="377" selection-start-column="0" selection-end-line="377" selection-end-column="0" />
               <folding>
                 <element signature="method#clear#0;class#Board#0" expanded="false" />
@@ -51,34 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Knight.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/chess/board/Knight.java">
+      <file leaf-file-name="King.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/chess/board/King.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2193">
-              <caret line="132" column="17" selection-start-line="132" selection-start-column="17" selection-end-line="132" selection-end-column="17" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ChessController.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/chess/gui/ChessController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="11203">
-              <caret line="711" column="50" selection-start-line="711" selection-start-column="50" selection-end-line="711" selection-end-column="50" />
-              <folding>
-                <element signature="method#openNewGameWindow#0;class#ChessController#0" expanded="false" />
-                <element signature="method#openAboutWindow#0;class#ChessController#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="AI.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/chess/board/AI.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1003">
-              <caret line="59" column="36" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
+            <state relative-caret-position="328">
+              <caret line="50" column="20" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -112,7 +88,6 @@
         <option value="$PROJECT_DIR$/board/Pawn.java" />
         <option value="$PROJECT_DIR$/chess/board/Bishop.java" />
         <option value="$PROJECT_DIR$/chess/board/Queen.java" />
-        <option value="$PROJECT_DIR$/chess/board/King.java" />
         <option value="$PROJECT_DIR$/chess/board/Piece.java" />
         <option value="$PROJECT_DIR$/chess/board/Rook.java" />
         <option value="$PROJECT_DIR$/chess/board/AI.java" />
@@ -120,6 +95,7 @@
         <option value="$PROJECT_DIR$/chess/board/Board.java" />
         <option value="$PROJECT_DIR$/chess/board/Pawn.java" />
         <option value="$PROJECT_DIR$/chess/board/Knight.java" />
+        <option value="$PROJECT_DIR$/chess/board/King.java" />
       </list>
     </option>
   </component>
@@ -554,7 +530,14 @@
       <option name="project" value="LOCAL" />
       <updated>1479593382944</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Fixed Knight hasCapture method!">
+      <created>1479628781929</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1479628781929</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -643,7 +626,8 @@
     <MESSAGE value="Changed some things in the AI, made it slightly better." />
     <MESSAGE value="Tweaked AI a bit further" />
     <MESSAGE value="Tweaked AI a bit further, now neither win or lose, only stalemate" />
-    <option name="LAST_COMMIT_MESSAGE" value="Tweaked AI a bit further, now neither win or lose, only stalemate" />
+    <MESSAGE value="Fixed Knight hasCapture method!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed Knight hasCapture method!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1084,13 +1068,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chess/gui/NewGameWindow.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-654">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_112/javafx-src.zip!/com/sun/javafx/tk/quantum/QuantumToolkit.java">
@@ -1107,45 +1091,36 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/chess/gui/ChessController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="711" column="50" selection-start-line="711" selection-start-column="50" selection-end-line="711" selection-end-column="50" />
+          <folding>
+            <element signature="method#openNewGameWindow#0;class#ChessController#0" expanded="false" />
+            <element signature="method#openAboutWindow#0;class#ChessController#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/chess/board/AI.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1003">
-          <caret line="59" column="36" selection-start-line="59" selection-start-column="36" selection-end-line="59" selection-end-column="36" />
+        <state relative-caret-position="256">
+          <caret line="61" column="19" selection-start-line="61" selection-start-column="18" selection-end-line="61" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chess/board/Queen.java">
+    <entry file="file://$PROJECT_DIR$/chess/board/Knight.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-595">
+        <state relative-caret-position="85">
           <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chess/board/King.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="38" column="5" selection-start-line="38" selection-start-column="5" selection-end-line="38" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chess/board/Bishop.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="491">
-          <caret line="107" column="35" selection-start-line="107" selection-start-column="35" selection-end-line="107" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chess/board/Rook.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="869">
-          <caret line="115" column="30" selection-start-line="115" selection-start-column="30" selection-end-line="115" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chess/board/Board.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4097">
+        <state relative-caret-position="17">
           <caret line="377" column="0" selection-start-line="377" selection-start-column="0" selection-end-line="377" selection-end-column="0" />
           <folding>
             <element signature="method#clear#0;class#Board#0" expanded="false" />
@@ -1161,29 +1136,42 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chess/gui/ChessController.java">
+    <entry file="file://$PROJECT_DIR$/chess/board/Rook.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="11203">
-          <caret line="711" column="50" selection-start-line="711" selection-start-column="50" selection-end-line="711" selection-end-column="50" />
-          <folding>
-            <element signature="method#openNewGameWindow#0;class#ChessController#0" expanded="false" />
-            <element signature="method#openAboutWindow#0;class#ChessController#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="85">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chess/board/Queen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-461">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/chess/board/Pawn.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="67" column="83" selection-start-line="67" selection-start-column="83" selection-end-line="67" selection-end-column="83" />
+        <state relative-caret-position="-716">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chess/board/Knight.java">
+    <entry file="file://$PROJECT_DIR$/chess/board/Bishop.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2193">
-          <caret line="132" column="17" selection-start-line="132" selection-start-column="17" selection-end-line="132" selection-end-column="17" />
+        <state relative-caret-position="-1411">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chess/board/King.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="328">
+          <caret line="50" column="20" selection-start-line="50" selection-start-column="20" selection-end-line="50" selection-end-column="20" />
           <folding />
         </state>
       </provider>

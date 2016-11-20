@@ -47,8 +47,11 @@ public class King extends Piece {
 			tempY += j;
 			for (int k = -1; k < 2; k++) {
 				tempX += k;
-				if (tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX] == null) continue;
-				else if (tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor()) {
+				if (tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX] == null) {
+					tempX = getX();
+					continue;
+				}
+				else if (board[tempY][tempX] != null && tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor()) {
 					capture = true;
 					break;
 				}
