@@ -818,7 +818,12 @@ public class ChessController implements Initializable {
                                     moveHistory.push(delta);
 
 
+                                    counter = board.getTurn();
 
+                                    //Check for stalemate
+                                    if(!board.hasAMove(counter%2)){
+                                        handleStaleMate();
+                                    }
 
                                     if (board.someAi()){
 
