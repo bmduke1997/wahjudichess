@@ -183,7 +183,7 @@ public class ChessController implements Initializable {
     void updateStatusBar() {
         counter = board.getTurn();
 
-        if (!board.hasAMove (counter % 2)) {
+        if (firstMove > 0 && !board.hasAMove (counter % 2)) {
             handleStaleMate();
         } else if (counter % 2 == 0) {
             statusBar.setText("Black's turn.");
@@ -765,9 +765,9 @@ public class ChessController implements Initializable {
                     });
 
                     counter = board.getTurn();
-
+                    System.out.println("First move: " + firstMove);
                     //Check for stalemate if not first move
-                    if(firstMove >0) {
+                    if(firstMove > 1) {
                         if (!board.hasAMove(counter % 2)) {
                             handleStaleMate();
                         }
