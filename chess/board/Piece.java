@@ -84,6 +84,9 @@ public abstract class Piece {
 
         movements = new ArrayList < > ();
 
+        /* Get rid of old movements. */
+        clear ();
+
         /* Collect all capturing moves we can perform. */
         for (Movement move : movement (board.getPlayingBoard ())) {
             if (move == null)
