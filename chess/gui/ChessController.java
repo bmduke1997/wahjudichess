@@ -42,6 +42,7 @@ public class ChessController implements Initializable {
     private Stack<Object> moveHistory;
     private Stack<Object> moveFutures;
     private Board prevBoard;
+    private Group[] captureHilites;
 
     //Used to determine whether to display stalemate info or not when human is playing
     //is incremented after a successful move has been made
@@ -54,6 +55,7 @@ public class ChessController implements Initializable {
     private final Material hiwhiteMat = new PhongMaterial(Color.web("#fff"));
     private final Material pieceBlackMat = new PhongMaterial(Color.web("#333"));
     private final Material pieceWhiteMat = new PhongMaterial(Color.web("#ddd"));
+    private final Material redMat = new PhongMaterial(Color.web("#f00"));
 
     //Initialize AI object
     AI myAI = new AI();
@@ -111,6 +113,16 @@ public class ChessController implements Initializable {
         selectionX.set(-100);
         selectionY.set(-100);
 
+        if (captureHilites != null) {
+            /* Remove capture hilites. */
+            for (Group g : captureHilites) {
+                solids.getChildren ().remove (g);
+            }
+
+            captureHilites = null;
+        }
+
+
         if (moveHistory.size() > 0) {
             Object prevDelta = prevMoveHistory.pop();
             prevBoard.undo(prevDelta);
@@ -134,6 +146,15 @@ public class ChessController implements Initializable {
         selection = null;
         selectionX.set(-100);
         selectionY.set(-100);
+
+        if (captureHilites != null) {
+            /* Remove capture hilites. */
+            for (Group g : captureHilites) {
+                solids.getChildren ().remove (g);
+            }
+
+            captureHilites = null;
+        }
 
         if (moveHistory.size() > 1) {
             Object prevDelta = prevMoveFutures.pop();
@@ -372,6 +393,15 @@ public class ChessController implements Initializable {
         selection = null;
         selectionX.set(-100);
         selectionY.set(-100);
+
+        if (captureHilites != null) {
+            /* Remove capture hilites. */
+            for (Group g : captureHilites) {
+                solids.getChildren ().remove (g);
+            }
+
+            captureHilites = null;
+        }
 
         /* Clear out undo lists. */
         moveHistory.clear();
@@ -613,6 +643,8 @@ public class ChessController implements Initializable {
             board = new Board();
             prevBoard = new Board();
 
+            captureHilites = null;
+
         /* Initialize the game history stack. */
             moveHistory = new Stack<>();
             moveFutures = new Stack<>();
@@ -758,9 +790,47 @@ public class ChessController implements Initializable {
                             if (board.getPieceAt(x, y) != null &&
                                   board.isCurrentPlayerHuman () &&
                                   board.pieceBelongsToCurrentPlayer(x, y)) {
-                                selection = board.getPieceAt(x, y);
+                                Piece p = board.getPieceAt (x, y);
+
+                                selection = p;
                                 selectionX.set(x);
                                 selectionY.set(y);
+
+                                Movement[] caps = p.findCaptureMovements (board);
+                                captureHilites = new Group[caps.length];
+
+                                int idx = 0;
+                                for (Movement cap : caps) {
+                                    /* Create the red hilight around the capture. */
+                                    Group g = new Group ();
+                                    int cx = cap.getX ();
+                                    int cy = cap.getY ();
+
+                                    Box topEdge = new Box(10, 1, 0.2);
+                                    topEdge.setMaterial(redMat);
+                                    topEdge.setTranslateY(-4.5);
+                                    Box leftEdge = new Box(1, 10, 0.2);
+                                    leftEdge.setTranslateX(-4.5);
+                                    leftEdge.setMaterial(redMat);
+                                    Box bottomEdge = new Box(10, 1, 0.2);
+                                    bottomEdge.setMaterial(redMat);
+                                    bottomEdge.setTranslateY(4.5);
+                                    Box rightEdge = new Box(1, 10, 0.2);
+                                    rightEdge.setMaterial(redMat);
+                                    rightEdge.setTranslateX(4.5);
+
+                                    g.getChildren ().addAll (topEdge, leftEdge,
+                                                             bottomEdge, rightEdge);
+                                    g.setTranslateX ((cx - 2) * 10);
+                                    g.setTranslateY (((cy - 2) * 10) - 10);
+                                    g.setTranslateZ (18.9);
+
+                                    /* Add it to the list of rendered solids. */
+                                    captureHilites[idx] = g;
+                                    solids.getChildren ().add (g);
+
+                                    idx++;
+                                }
                             }
                         } else {
                         /* Try to move the piece to that square. */
@@ -892,6 +962,13 @@ public class ChessController implements Initializable {
                             selectionX.set(-100);
                             selectionY.set(-100);
                             selection = null;
+                            /* Remove capture hilites. */
+                            for (Group g : captureHilites) {
+                                solids.getChildren ().remove (g);
+                            }
+
+                            captureHilites = null;
+
                         }
 
                         if (board.black == 0) {

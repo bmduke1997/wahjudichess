@@ -4,6 +4,7 @@ import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import java.util.ArrayList;
 
 /**
  * Created by brandon on 11/4/16.
@@ -69,4 +70,44 @@ public abstract class Piece {
     public abstract boolean hasCapture(Piece[][] board);
 
     public abstract void clear();
+
+    /**
+     * Return an array of legal movements for this piece which are captures.
+     *
+     * @param board the board the piece is on.
+     * @return the array of Movements which are captures.
+     */
+    public Movement[] findCaptureMovements (Board board) {
+        ArrayList < Movement > movements;
+        Piece piece;
+        int x, y;
+
+        movements = new ArrayList < > ();
+
+        /* Collect all capturing moves we can perform. */
+        for (Movement move : movement (board.getPlayingBoard ())) {
+            if (move == null)
+                break;
+
+            x = move.getX ();
+            y = move.getY ();
+
+            /* Ensure that the movement is within the board's bounds. */
+            assert x >= 0 : "x >= 0";
+            assert y >= 0 : "y >= 0";
+            assert x <= 4 : "x <= 4";
+            assert y <= 4 : "y <= 4";
+
+            piece = board.getPieceAt (x, y);
+
+            if (piece != null) {
+                /* Ensure that the move is not onto our own teammate. */
+                assert piece.getColor () != getColor ()
+                       : "piece.getColor () != getColor ()";
+                movements.add (move);
+            }
+        }
+
+        return movements.toArray (new Movement [0]);
+    }
 }
