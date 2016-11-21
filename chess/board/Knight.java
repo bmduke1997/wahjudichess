@@ -99,8 +99,7 @@ public class Knight extends Piece
 			for (dx = -2; dx <= 2; dx++)
 			{
 				tempX += dx;
-
-				if (board[tempY][tempX] != null && tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor()) {
+				if (tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX] != null && board[tempY][tempX].getColor() != getColor()) {
 					capture = true;
 					break;
 				}
@@ -127,7 +126,7 @@ public class Knight extends Piece
 			for(dx = -1; dx <= 1; dx++)
 			{
 				tempX += dx;
-				if (board[tempY][tempX] != null && tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor()) {
+				if (tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX] != null && board[tempY][tempX].getColor() != getColor()) {
 					capture = true;
 					break;
 				}

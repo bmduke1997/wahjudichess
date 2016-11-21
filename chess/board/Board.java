@@ -376,6 +376,36 @@ public class Board {
         }
     }
 
+    public boolean hasAMove(int color)
+    {
+        boolean hasAMove = false;
+        Movement[] checkForMove;
+        for (int y = 0; y < 5; y++){
+            if(hasAMove) break;
+            for (int x = 0; x < 5; x++){
+                try {
+                    if (playingBoard[y][x].getColor() == color) {
+                        checkForMove = playingBoard[y][x].movement(playingBoard);
+                        for (int i = 0; i < checkForMove.length; i ++) {
+                            if (checkForMove[i] != null) {
+                                hasAMove = true;
+                                break;
+                            }
+                        }
+                        if(hasAMove) {
+                            System.out.println("Team has a move.");
+                            break;
+                        }
+                    }
+                }
+                catch (Exception e){
+                    //get rid of this error
+                }
+            }
+        }
+        return hasAMove;
+    }
+
     //Get number of enemy captures at a certain location within AI movement array
     int captureCounter = 0;
     int[] locationToMove = new int [2];

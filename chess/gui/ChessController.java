@@ -43,6 +43,10 @@ public class ChessController implements Initializable {
     private Stack<Object> moveFutures;
     private Board prevBoard;
 
+    //Used to determine whether to display stalemate info or not when human is playing
+    //is incremented after a successful move has been made
+    private int firstMove = 0;
+
     /* Color materials. */
     private final Material blackMat = new PhongMaterial(Color.web("#000"));
     private final Material hiblackMat = new PhongMaterial(Color.web("#666"));
@@ -170,6 +174,18 @@ public class ChessController implements Initializable {
             statusBar.setText("Black wins!");
         } else if (color == Piece.WHITE) {
             statusBar.setText("White wins!");
+        }
+    }
+
+    private void handleStaleMate() {
+        if (board.black < board.white) {
+            statusBar.setText("No moves left, black wins!");
+            System.out.println("No moves, black wins!");
+        } else if (board.white < board.black) {
+            statusBar.setText("No moves left, white wins!");
+            System.out.println("No moves, white wins!");
+        } else {
+            statusBar.setText("No moves left, stalemate.");
         }
     }
 
@@ -339,6 +355,8 @@ public class ChessController implements Initializable {
 
         counter = startingTurn;
 
+        firstMove = 0;
+
         board.updateTurn(startingTurn);
         prevBoard.updateTurn(startingTurn);
 
@@ -420,7 +438,6 @@ public class ChessController implements Initializable {
         miniPut(prevBoard, new Pawn(3, 3, Piece.WHITE));
         miniPut(prevBoard, new Pawn(4, 3, Piece.WHITE));
 
-
         //If both are AI, this will run until there is a winner
         if ((!whiteIsHuman && whiteGoesFirst)  || (!blackIsHuman && !whiteGoesFirst)) {
             board.teamCapture();
@@ -431,6 +448,12 @@ public class ChessController implements Initializable {
                 //White's turn
                 if (counter%2 == 1) {
                     System.out.println("WHITE TEST");
+
+                    //Check for stalemate
+                    if(!board.hasAMove(1)){
+                        handleStaleMate();
+                    }
+
                     //Get desired AI location
                     AIplacement = myAI.AImove(board, counter%2); //translation
                     //board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
@@ -441,6 +464,7 @@ public class ChessController implements Initializable {
                     if(board.hasLegalMove) {
                         System.out.println("legal move");
                         Object delta = board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
+                        firstMove++;
                         if (delta != null) {
                                 /* Transform pawn to king at end of board. */
                             if (isTransform) {
@@ -498,6 +522,12 @@ public class ChessController implements Initializable {
                 //Black's turn
                 else if(counter%2 == 0) {
                     System.out.println("BLACK TEST");
+
+                    //Check for stalemate
+                    if(!board.hasAMove(0)){
+                        handleStaleMate();
+                    }
+
                     //Get desired AI location
                     AIplacement = myAI.AImove(board, counter%2); //translation
                     //board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
@@ -508,6 +538,7 @@ public class ChessController implements Initializable {
                     if(board.hasLegalMove) {
                         System.out.println("legal move");
                         Object delta = board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
+                        firstMove++;
                         if (delta != null) {
                             /* Transform pawn to king at end of board. */
                             if (isTransform) {
@@ -699,6 +730,15 @@ public class ChessController implements Initializable {
                         }
                     });
 
+                    counter = board.getTurn();
+
+                    //Check for stalemate if not first move
+                    if(firstMove >0) {
+                        if (!board.hasAMove(counter % 2)) {
+                            handleStaleMate();
+                        }
+                    }
+
                 /* Make tiles react to clicking. */
                     cellGroups[i][j].setOnMouseClicked(e -> {
                         int x = pos[0];
@@ -710,6 +750,11 @@ public class ChessController implements Initializable {
                         board.teamCapture();
 
                         counter = board.getTurn();
+
+                        //Check for stalemate
+                        if(!board.hasAMove(counter%2)){
+                            handleStaleMate();
+                        }
 
                         if (selection == null) {
                         /* Try to select the piece if there is one */
@@ -735,6 +780,7 @@ public class ChessController implements Initializable {
                                 Object delta = board.move(selection.getX(),
                                         selection.getY(),
                                         x, y);
+                                firstMove++;
                                 if (delta != null) {
                                 /* Transform pawn to king at end of board. */
                                     if (isTransform) {
@@ -783,6 +829,11 @@ public class ChessController implements Initializable {
 
                                         counter = board.getTurn();
 
+                                        //Check for stalemate
+                                        if(!board.hasAMove(counter%2)){
+                                            handleStaleMate();
+                                        }
+
                                         //Get desired AI location
                                         AIplacement = myAI.AImove(board, counter%2); //translation
                                         //board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
@@ -793,6 +844,7 @@ public class ChessController implements Initializable {
                                         if(board.hasLegalMove) {
                                             System.out.println("legal move");
                                             delta = board.move(AIplacement[0], AIplacement[1], AIplacement[2], AIplacement[3]);
+                                            firstMove++;
                                             if (delta != null) {
                                                 /* Transform pawn to king at end of board. */
                                                 if (isTransform) {

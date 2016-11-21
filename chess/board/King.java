@@ -51,7 +51,7 @@ public class King extends Piece {
 					tempX = getX();
 					continue;
 				}
-				else if (board[tempY][tempX] != null && tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX].getColor() != getColor()) {
+				else if (tempY > -1 && tempX > -1 && tempY < 5 && tempX < 5 && board[tempY][tempX] != null && board[tempY][tempX].getColor() != getColor()) {
 					capture = true;
 					break;
 				}
