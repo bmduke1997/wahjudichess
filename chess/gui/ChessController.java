@@ -162,7 +162,9 @@ public class ChessController implements Initializable {
     void updateStatusBar() {
         counter = board.getTurn();
 
-        if (counter % 2 == 0) {
+        if (!board.hasAMove (counter % 2)) {
+            handleStaleMate();
+        } else if (counter % 2 == 0) {
             statusBar.setText("Black's turn.");
         } else if (counter % 2 == 1) {
             statusBar.setText("White's turn.");
@@ -751,11 +753,6 @@ public class ChessController implements Initializable {
 
                         counter = board.getTurn();
 
-                        //Check for stalemate
-                        if(!board.hasAMove(counter%2)){
-                            handleStaleMate();
-                        }
-
                         if (selection == null) {
                         /* Try to select the piece if there is one */
                             if (board.getPieceAt(x, y) != null &&
@@ -887,12 +884,7 @@ public class ChessController implements Initializable {
                                         }
                                         //Reset counter to turn, thus switching AI turns
                                         counter = board.getTurn();
-
                                     }
-
-
-
-
 
                                 }
                             }
