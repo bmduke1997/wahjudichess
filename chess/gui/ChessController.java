@@ -475,7 +475,7 @@ public class ChessController implements Initializable {
             board.teamCapture();
 
             //While no one has won
-            while (board.black > 0 && board.white > 0) {
+            while (board.black > 0 && board.white > 0 || board.hasAMove(counter%2)) {
 
                 //White's turn
                 if (counter%2 == 1) {

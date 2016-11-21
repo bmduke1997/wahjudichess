@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6719bd32-4d1d-4062-b3eb-a54ad18ec736" name="Default" comment="Stalemate now more reactive">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/board/AI.java" afterPath="$PROJECT_DIR$/chess/board/AI.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/board/Board.java" afterPath="$PROJECT_DIR$/chess/board/Board.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/chess/gui/ChessController.java" afterPath="$PROJECT_DIR$/chess/gui/ChessController.java" />
     </list>
     <ignored path="wahjudichess.iws" />
@@ -30,15 +32,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="ChessController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="ChessController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chess/gui/ChessController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="825" column="37" selection-start-line="825" selection-start-column="37" selection-end-line="825" selection-end-column="37" />
-              <folding>
-                <element signature="method#openNewGameWindow#0;class#ChessController#0" expanded="false" />
-                <element signature="method#openAboutWindow#0;class#ChessController#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="-5675">
+              <caret line="551" column="17" selection-start-line="551" selection-start-column="17" selection-end-line="551" selection-end-column="17" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -46,53 +45,39 @@
       <file leaf-file-name="Board.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/chess/board/Board.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="4165">
-              <caret line="381" column="31" selection-start-line="381" selection-start-column="31" selection-end-line="381" selection-end-column="31" />
+            <state relative-caret-position="138">
+              <caret line="387" column="51" selection-start-line="387" selection-start-column="51" selection-end-line="387" selection-end-column="51" />
               <folding>
-                <element signature="e#193#194#0" expanded="false" />
-                <element signature="e#257#258#0" expanded="false" />
-                <element signature="e#299#300#0" expanded="false" />
-                <element signature="e#334#335#0" expanded="false" />
                 <element signature="method#clear#0;class#Board#0" expanded="false" />
                 <element signature="class#Delta#0;class#Board#0" expanded="false" />
-                <element signature="e#1516#1517#0" expanded="false" />
-                <element signature="e#1551#1552#0" expanded="false" />
-                <element signature="e#1583#1584#0" expanded="false" />
-                <element signature="e#1618#1619#0" expanded="false" />
-                <element signature="e#1651#1652#0" expanded="false" />
-                <element signature="e#1687#1688#0" expanded="false" />
-                <element signature="e#1720#1721#0" expanded="false" />
-                <element signature="e#1756#1757#0" expanded="false" />
-                <element signature="e#1794#1795#0" expanded="false" />
-                <element signature="e#1833#1834#0" expanded="false" />
-                <element signature="e#1871#1872#0" expanded="false" />
-                <element signature="e#1910#1911#0" expanded="false" />
-                <element signature="e#1950#1951#0" expanded="false" />
-                <element signature="e#1992#1993#0" expanded="false" />
-                <element signature="e#2029#2030#0" expanded="false" />
-                <element signature="e#2067#2068#0" expanded="false" />
-                <element signature="e#2116#2117#0" expanded="false" />
-                <element signature="e#2162#2163#0" expanded="false" />
                 <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-                <element signature="e#2414#2415#0" expanded="false" />
-                <element signature="e#2465#2466#0" expanded="false" />
                 <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-                <element signature="e#4115#4116#0" expanded="false" />
-                <element signature="e#4139#4140#0" expanded="false" />
-                <element signature="e#4166#4167#0" expanded="false" />
-                <element signature="e#4193#4194#0" expanded="false" />
-                <element signature="e#4388#4389#0" expanded="false" />
-                <element signature="e#4429#4430#0" expanded="false" />
-                <element signature="e#4492#4493#0" expanded="false" />
-                <element signature="e#4555#4556#0" expanded="false" />
                 <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
                 <element signature="method#undo#0;class#Board#0" expanded="false" />
                 <element signature="method#remove#0;class#Board#0" expanded="false" />
                 <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
                 <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-                <element signature="e#8325#8326#0" expanded="false" />
-                <element signature="e#8366#8367#0" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Piece.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/chess/board/Piece.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="273">
+              <caret line="91" column="29" selection-start-line="91" selection-start-column="29" selection-end-line="91" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AI.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/chess/board/AI.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="174" column="58" selection-start-line="174" selection-start-column="58" selection-end-line="174" selection-end-column="58" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -125,14 +110,14 @@
         <option value="$PROJECT_DIR$/board/Pawn.java" />
         <option value="$PROJECT_DIR$/chess/board/Bishop.java" />
         <option value="$PROJECT_DIR$/chess/board/Queen.java" />
-        <option value="$PROJECT_DIR$/chess/board/Piece.java" />
-        <option value="$PROJECT_DIR$/chess/board/AI.java" />
         <option value="$PROJECT_DIR$/chess/board/Pawn.java" />
-        <option value="$PROJECT_DIR$/chess/board/Board.java" />
         <option value="$PROJECT_DIR$/chess/board/Knight.java" />
         <option value="$PROJECT_DIR$/chess/board/King.java" />
         <option value="$PROJECT_DIR$/chess/board/Rook.java" />
+        <option value="$PROJECT_DIR$/chess/board/Piece.java" />
+        <option value="$PROJECT_DIR$/chess/board/Board.java" />
         <option value="$PROJECT_DIR$/chess/gui/ChessController.java" />
+        <option value="$PROJECT_DIR$/chess/board/AI.java" />
       </list>
     </option>
   </component>
@@ -205,7 +190,7 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/chess/gui/ChessController.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/chess/board/Piece.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -705,7 +690,14 @@
       <option name="project" value="LOCAL" />
       <updated>1479689938487</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Stalemate now more reactive">
+      <created>1479696103095</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1479696103095</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -797,7 +789,8 @@
     <MESSAGE value="Fixed Knight hasCapture method!" />
     <MESSAGE value="Fixed king hasCapture" />
     <MESSAGE value="Now handle stalemates although they do take a mouse click or two to display when it is human vs AI, however they do display automatically when AI plays against itself. &#10;&#10;Updated piece hasCaptures to check for X and Y being out of bounds before checking board location at what would be out of bounds locations." />
-    <option name="LAST_COMMIT_MESSAGE" value="Now handle stalemates although they do take a mouse click or two to display when it is human vs AI, however they do display automatically when AI plays against itself. &#10;&#10;Updated piece hasCaptures to check for X and Y being out of bounds before checking board location at what would be out of bounds locations." />
+    <MESSAGE value="Stalemate now more reactive" />
+    <option name="LAST_COMMIT_MESSAGE" value="Stalemate now more reactive" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -815,49 +808,15 @@
         <state relative-caret-position="2839">
           <caret line="359" column="0" selection-start-line="359" selection-start-column="0" selection-end-line="359" selection-end-column="0" />
           <folding>
-            <element signature="e#193#194#0" expanded="false" />
-            <element signature="e#257#258#0" expanded="false" />
-            <element signature="e#299#300#0" expanded="false" />
-            <element signature="e#334#335#0" expanded="false" />
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
-            <element signature="e#1516#1517#0" expanded="false" />
-            <element signature="e#1551#1552#0" expanded="false" />
-            <element signature="e#1583#1584#0" expanded="false" />
-            <element signature="e#1618#1619#0" expanded="false" />
-            <element signature="e#1651#1652#0" expanded="false" />
-            <element signature="e#1687#1688#0" expanded="false" />
-            <element signature="e#1720#1721#0" expanded="false" />
-            <element signature="e#1756#1757#0" expanded="false" />
-            <element signature="e#1794#1795#0" expanded="false" />
-            <element signature="e#1833#1834#0" expanded="false" />
-            <element signature="e#1871#1872#0" expanded="false" />
-            <element signature="e#1910#1911#0" expanded="false" />
-            <element signature="e#1950#1951#0" expanded="false" />
-            <element signature="e#1992#1993#0" expanded="false" />
-            <element signature="e#2029#2030#0" expanded="false" />
-            <element signature="e#2067#2068#0" expanded="false" />
-            <element signature="e#2116#2117#0" expanded="false" />
-            <element signature="e#2162#2163#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="false" />
-            <element signature="e#2465#2466#0" expanded="false" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4115#4116#0" expanded="false" />
-            <element signature="e#4139#4140#0" expanded="false" />
-            <element signature="e#4166#4167#0" expanded="false" />
-            <element signature="e#4193#4194#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="false" />
-            <element signature="e#4429#4430#0" expanded="false" />
-            <element signature="e#4492#4493#0" expanded="false" />
-            <element signature="e#4555#4556#0" expanded="false" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="e#8325#8326#0" expanded="false" />
-            <element signature="e#8366#8367#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -881,10 +840,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#openNewGameWindow#0;class#ChessController#0" expanded="false" />
-            <element signature="method#openAboutWindow#0;class#ChessController#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -893,49 +849,15 @@
         <state relative-caret-position="2788">
           <caret line="164" column="51" selection-start-line="164" selection-start-column="51" selection-end-line="164" selection-end-column="51" />
           <folding>
-            <element signature="e#193#194#0" expanded="false" />
-            <element signature="e#257#258#0" expanded="false" />
-            <element signature="e#299#300#0" expanded="false" />
-            <element signature="e#334#335#0" expanded="false" />
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
-            <element signature="e#1516#1517#0" expanded="false" />
-            <element signature="e#1551#1552#0" expanded="false" />
-            <element signature="e#1583#1584#0" expanded="false" />
-            <element signature="e#1618#1619#0" expanded="false" />
-            <element signature="e#1651#1652#0" expanded="false" />
-            <element signature="e#1687#1688#0" expanded="false" />
-            <element signature="e#1720#1721#0" expanded="false" />
-            <element signature="e#1756#1757#0" expanded="false" />
-            <element signature="e#1794#1795#0" expanded="false" />
-            <element signature="e#1833#1834#0" expanded="false" />
-            <element signature="e#1871#1872#0" expanded="false" />
-            <element signature="e#1910#1911#0" expanded="false" />
-            <element signature="e#1950#1951#0" expanded="false" />
-            <element signature="e#1992#1993#0" expanded="false" />
-            <element signature="e#2029#2030#0" expanded="false" />
-            <element signature="e#2067#2068#0" expanded="false" />
-            <element signature="e#2116#2117#0" expanded="false" />
-            <element signature="e#2162#2163#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="false" />
-            <element signature="e#2465#2466#0" expanded="false" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4115#4116#0" expanded="false" />
-            <element signature="e#4139#4140#0" expanded="false" />
-            <element signature="e#4166#4167#0" expanded="false" />
-            <element signature="e#4193#4194#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="false" />
-            <element signature="e#4429#4430#0" expanded="false" />
-            <element signature="e#4492#4493#0" expanded="false" />
-            <element signature="e#4555#4556#0" expanded="false" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="e#8325#8326#0" expanded="false" />
-            <element signature="e#8366#8367#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -952,10 +874,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#openNewGameWindow#0;class#ChessController#0" expanded="false" />
-            <element signature="method#openAboutWindow#0;class#ChessController#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -964,49 +883,15 @@
         <state relative-caret-position="2788">
           <caret line="164" column="51" selection-start-line="164" selection-start-column="51" selection-end-line="164" selection-end-column="51" />
           <folding>
-            <element signature="e#193#194#0" expanded="false" />
-            <element signature="e#257#258#0" expanded="false" />
-            <element signature="e#299#300#0" expanded="false" />
-            <element signature="e#334#335#0" expanded="false" />
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
-            <element signature="e#1516#1517#0" expanded="false" />
-            <element signature="e#1551#1552#0" expanded="false" />
-            <element signature="e#1583#1584#0" expanded="false" />
-            <element signature="e#1618#1619#0" expanded="false" />
-            <element signature="e#1651#1652#0" expanded="false" />
-            <element signature="e#1687#1688#0" expanded="false" />
-            <element signature="e#1720#1721#0" expanded="false" />
-            <element signature="e#1756#1757#0" expanded="false" />
-            <element signature="e#1794#1795#0" expanded="false" />
-            <element signature="e#1833#1834#0" expanded="false" />
-            <element signature="e#1871#1872#0" expanded="false" />
-            <element signature="e#1910#1911#0" expanded="false" />
-            <element signature="e#1950#1951#0" expanded="false" />
-            <element signature="e#1992#1993#0" expanded="false" />
-            <element signature="e#2029#2030#0" expanded="false" />
-            <element signature="e#2067#2068#0" expanded="false" />
-            <element signature="e#2116#2117#0" expanded="false" />
-            <element signature="e#2162#2163#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="false" />
-            <element signature="e#2465#2466#0" expanded="false" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4115#4116#0" expanded="false" />
-            <element signature="e#4139#4140#0" expanded="false" />
-            <element signature="e#4166#4167#0" expanded="false" />
-            <element signature="e#4193#4194#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="false" />
-            <element signature="e#4429#4430#0" expanded="false" />
-            <element signature="e#4492#4493#0" expanded="false" />
-            <element signature="e#4555#4556#0" expanded="false" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="e#8325#8326#0" expanded="false" />
-            <element signature="e#8366#8367#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1023,10 +908,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="8449">
           <caret line="547" column="34" selection-start-line="547" selection-start-column="34" selection-end-line="547" selection-end-column="34" />
-          <folding>
-            <element signature="method#openNewGameWindow#0;class#ChessController#0" expanded="false" />
-            <element signature="method#openAboutWindow#0;class#ChessController#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1035,49 +917,15 @@
         <state relative-caret-position="1989">
           <caret line="156" column="17" selection-start-line="156" selection-start-column="17" selection-end-line="156" selection-end-column="17" />
           <folding>
-            <element signature="e#193#194#0" expanded="false" />
-            <element signature="e#257#258#0" expanded="false" />
-            <element signature="e#299#300#0" expanded="false" />
-            <element signature="e#334#335#0" expanded="false" />
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
-            <element signature="e#1516#1517#0" expanded="false" />
-            <element signature="e#1551#1552#0" expanded="false" />
-            <element signature="e#1583#1584#0" expanded="false" />
-            <element signature="e#1618#1619#0" expanded="false" />
-            <element signature="e#1651#1652#0" expanded="false" />
-            <element signature="e#1687#1688#0" expanded="false" />
-            <element signature="e#1720#1721#0" expanded="false" />
-            <element signature="e#1756#1757#0" expanded="false" />
-            <element signature="e#1794#1795#0" expanded="false" />
-            <element signature="e#1833#1834#0" expanded="false" />
-            <element signature="e#1871#1872#0" expanded="false" />
-            <element signature="e#1910#1911#0" expanded="false" />
-            <element signature="e#1950#1951#0" expanded="false" />
-            <element signature="e#1992#1993#0" expanded="false" />
-            <element signature="e#2029#2030#0" expanded="false" />
-            <element signature="e#2067#2068#0" expanded="false" />
-            <element signature="e#2116#2117#0" expanded="false" />
-            <element signature="e#2162#2163#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="false" />
-            <element signature="e#2465#2466#0" expanded="false" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4115#4116#0" expanded="false" />
-            <element signature="e#4139#4140#0" expanded="false" />
-            <element signature="e#4166#4167#0" expanded="false" />
-            <element signature="e#4193#4194#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="false" />
-            <element signature="e#4429#4430#0" expanded="false" />
-            <element signature="e#4492#4493#0" expanded="false" />
-            <element signature="e#4555#4556#0" expanded="false" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="e#8325#8326#0" expanded="false" />
-            <element signature="e#8366#8367#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1094,10 +942,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#openNewGameWindow#0;class#ChessController#0" expanded="false" />
-            <element signature="method#openAboutWindow#0;class#ChessController#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1106,49 +951,15 @@
         <state relative-caret-position="1989">
           <caret line="156" column="17" selection-start-line="156" selection-start-column="17" selection-end-line="156" selection-end-column="17" />
           <folding>
-            <element signature="e#193#194#0" expanded="false" />
-            <element signature="e#257#258#0" expanded="false" />
-            <element signature="e#299#300#0" expanded="false" />
-            <element signature="e#334#335#0" expanded="false" />
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
-            <element signature="e#1516#1517#0" expanded="false" />
-            <element signature="e#1551#1552#0" expanded="false" />
-            <element signature="e#1583#1584#0" expanded="false" />
-            <element signature="e#1618#1619#0" expanded="false" />
-            <element signature="e#1651#1652#0" expanded="false" />
-            <element signature="e#1687#1688#0" expanded="false" />
-            <element signature="e#1720#1721#0" expanded="false" />
-            <element signature="e#1756#1757#0" expanded="false" />
-            <element signature="e#1794#1795#0" expanded="false" />
-            <element signature="e#1833#1834#0" expanded="false" />
-            <element signature="e#1871#1872#0" expanded="false" />
-            <element signature="e#1910#1911#0" expanded="false" />
-            <element signature="e#1950#1951#0" expanded="false" />
-            <element signature="e#1992#1993#0" expanded="false" />
-            <element signature="e#2029#2030#0" expanded="false" />
-            <element signature="e#2067#2068#0" expanded="false" />
-            <element signature="e#2116#2117#0" expanded="false" />
-            <element signature="e#2162#2163#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="false" />
-            <element signature="e#2465#2466#0" expanded="false" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4115#4116#0" expanded="false" />
-            <element signature="e#4139#4140#0" expanded="false" />
-            <element signature="e#4166#4167#0" expanded="false" />
-            <element signature="e#4193#4194#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="false" />
-            <element signature="e#4429#4430#0" expanded="false" />
-            <element signature="e#4492#4493#0" expanded="false" />
-            <element signature="e#4555#4556#0" expanded="false" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="e#8325#8326#0" expanded="false" />
-            <element signature="e#8366#8367#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1165,10 +976,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#openNewGameWindow#0;class#ChessController#0" expanded="false" />
-            <element signature="method#openAboutWindow#0;class#ChessController#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1177,49 +985,15 @@
         <state relative-caret-position="1989">
           <caret line="156" column="17" selection-start-line="156" selection-start-column="17" selection-end-line="156" selection-end-column="17" />
           <folding>
-            <element signature="e#193#194#0" expanded="false" />
-            <element signature="e#257#258#0" expanded="false" />
-            <element signature="e#299#300#0" expanded="false" />
-            <element signature="e#334#335#0" expanded="false" />
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
-            <element signature="e#1516#1517#0" expanded="false" />
-            <element signature="e#1551#1552#0" expanded="false" />
-            <element signature="e#1583#1584#0" expanded="false" />
-            <element signature="e#1618#1619#0" expanded="false" />
-            <element signature="e#1651#1652#0" expanded="false" />
-            <element signature="e#1687#1688#0" expanded="false" />
-            <element signature="e#1720#1721#0" expanded="false" />
-            <element signature="e#1756#1757#0" expanded="false" />
-            <element signature="e#1794#1795#0" expanded="false" />
-            <element signature="e#1833#1834#0" expanded="false" />
-            <element signature="e#1871#1872#0" expanded="false" />
-            <element signature="e#1910#1911#0" expanded="false" />
-            <element signature="e#1950#1951#0" expanded="false" />
-            <element signature="e#1992#1993#0" expanded="false" />
-            <element signature="e#2029#2030#0" expanded="false" />
-            <element signature="e#2067#2068#0" expanded="false" />
-            <element signature="e#2116#2117#0" expanded="false" />
-            <element signature="e#2162#2163#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="false" />
-            <element signature="e#2465#2466#0" expanded="false" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4115#4116#0" expanded="false" />
-            <element signature="e#4139#4140#0" expanded="false" />
-            <element signature="e#4166#4167#0" expanded="false" />
-            <element signature="e#4193#4194#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="false" />
-            <element signature="e#4429#4430#0" expanded="false" />
-            <element signature="e#4492#4493#0" expanded="false" />
-            <element signature="e#4555#4556#0" expanded="false" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="e#8325#8326#0" expanded="false" />
-            <element signature="e#8366#8367#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1236,10 +1010,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#openNewGameWindow#0;class#ChessController#0" expanded="false" />
-            <element signature="method#openAboutWindow#0;class#ChessController#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1248,49 +1019,15 @@
         <state relative-caret-position="1173">
           <caret line="91" column="23" selection-start-line="91" selection-start-column="20" selection-end-line="91" selection-end-column="23" />
           <folding>
-            <element signature="e#193#194#0" expanded="false" />
-            <element signature="e#257#258#0" expanded="false" />
-            <element signature="e#299#300#0" expanded="false" />
-            <element signature="e#334#335#0" expanded="false" />
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
-            <element signature="e#1516#1517#0" expanded="false" />
-            <element signature="e#1551#1552#0" expanded="false" />
-            <element signature="e#1583#1584#0" expanded="false" />
-            <element signature="e#1618#1619#0" expanded="false" />
-            <element signature="e#1651#1652#0" expanded="false" />
-            <element signature="e#1687#1688#0" expanded="false" />
-            <element signature="e#1720#1721#0" expanded="false" />
-            <element signature="e#1756#1757#0" expanded="false" />
-            <element signature="e#1794#1795#0" expanded="false" />
-            <element signature="e#1833#1834#0" expanded="false" />
-            <element signature="e#1871#1872#0" expanded="false" />
-            <element signature="e#1910#1911#0" expanded="false" />
-            <element signature="e#1950#1951#0" expanded="false" />
-            <element signature="e#1992#1993#0" expanded="false" />
-            <element signature="e#2029#2030#0" expanded="false" />
-            <element signature="e#2067#2068#0" expanded="false" />
-            <element signature="e#2116#2117#0" expanded="false" />
-            <element signature="e#2162#2163#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="false" />
-            <element signature="e#2465#2466#0" expanded="false" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4115#4116#0" expanded="false" />
-            <element signature="e#4139#4140#0" expanded="false" />
-            <element signature="e#4166#4167#0" expanded="false" />
-            <element signature="e#4193#4194#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="false" />
-            <element signature="e#4429#4430#0" expanded="false" />
-            <element signature="e#4492#4493#0" expanded="false" />
-            <element signature="e#4555#4556#0" expanded="false" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="e#8325#8326#0" expanded="false" />
-            <element signature="e#8366#8367#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1307,10 +1044,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#openNewGameWindow#0;class#ChessController#0" expanded="false" />
-            <element signature="method#openAboutWindow#0;class#ChessController#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1319,49 +1053,15 @@
         <state relative-caret-position="2397">
           <caret line="163" column="4" selection-start-line="163" selection-start-column="4" selection-end-line="163" selection-end-column="4" />
           <folding>
-            <element signature="e#193#194#0" expanded="false" />
-            <element signature="e#257#258#0" expanded="false" />
-            <element signature="e#299#300#0" expanded="false" />
-            <element signature="e#334#335#0" expanded="false" />
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
-            <element signature="e#1516#1517#0" expanded="false" />
-            <element signature="e#1551#1552#0" expanded="false" />
-            <element signature="e#1583#1584#0" expanded="false" />
-            <element signature="e#1618#1619#0" expanded="false" />
-            <element signature="e#1651#1652#0" expanded="false" />
-            <element signature="e#1687#1688#0" expanded="false" />
-            <element signature="e#1720#1721#0" expanded="false" />
-            <element signature="e#1756#1757#0" expanded="false" />
-            <element signature="e#1794#1795#0" expanded="false" />
-            <element signature="e#1833#1834#0" expanded="false" />
-            <element signature="e#1871#1872#0" expanded="false" />
-            <element signature="e#1910#1911#0" expanded="false" />
-            <element signature="e#1950#1951#0" expanded="false" />
-            <element signature="e#1992#1993#0" expanded="false" />
-            <element signature="e#2029#2030#0" expanded="false" />
-            <element signature="e#2067#2068#0" expanded="false" />
-            <element signature="e#2116#2117#0" expanded="false" />
-            <element signature="e#2162#2163#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="false" />
-            <element signature="e#2465#2466#0" expanded="false" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4115#4116#0" expanded="false" />
-            <element signature="e#4139#4140#0" expanded="false" />
-            <element signature="e#4166#4167#0" expanded="false" />
-            <element signature="e#4193#4194#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="false" />
-            <element signature="e#4429#4430#0" expanded="false" />
-            <element signature="e#4492#4493#0" expanded="false" />
-            <element signature="e#4555#4556#0" expanded="false" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="e#8325#8326#0" expanded="false" />
-            <element signature="e#8366#8367#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1370,10 +1070,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="method#openNewGameWindow#0;class#ChessController#0" expanded="false" />
-            <element signature="method#openAboutWindow#0;class#ChessController#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1390,49 +1087,15 @@
         <state relative-caret-position="1530">
           <caret line="109" column="11" selection-start-line="109" selection-start-column="11" selection-end-line="109" selection-end-column="11" />
           <folding>
-            <element signature="e#193#194#0" expanded="false" />
-            <element signature="e#257#258#0" expanded="false" />
-            <element signature="e#299#300#0" expanded="false" />
-            <element signature="e#334#335#0" expanded="false" />
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
-            <element signature="e#1516#1517#0" expanded="false" />
-            <element signature="e#1551#1552#0" expanded="false" />
-            <element signature="e#1583#1584#0" expanded="false" />
-            <element signature="e#1618#1619#0" expanded="false" />
-            <element signature="e#1651#1652#0" expanded="false" />
-            <element signature="e#1687#1688#0" expanded="false" />
-            <element signature="e#1720#1721#0" expanded="false" />
-            <element signature="e#1756#1757#0" expanded="false" />
-            <element signature="e#1794#1795#0" expanded="false" />
-            <element signature="e#1833#1834#0" expanded="false" />
-            <element signature="e#1871#1872#0" expanded="false" />
-            <element signature="e#1910#1911#0" expanded="false" />
-            <element signature="e#1950#1951#0" expanded="false" />
-            <element signature="e#1992#1993#0" expanded="false" />
-            <element signature="e#2029#2030#0" expanded="false" />
-            <element signature="e#2067#2068#0" expanded="false" />
-            <element signature="e#2116#2117#0" expanded="false" />
-            <element signature="e#2162#2163#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="false" />
-            <element signature="e#2465#2466#0" expanded="false" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4115#4116#0" expanded="false" />
-            <element signature="e#4139#4140#0" expanded="false" />
-            <element signature="e#4166#4167#0" expanded="false" />
-            <element signature="e#4193#4194#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="false" />
-            <element signature="e#4429#4430#0" expanded="false" />
-            <element signature="e#4492#4493#0" expanded="false" />
-            <element signature="e#4555#4556#0" expanded="false" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="e#8325#8326#0" expanded="false" />
-            <element signature="e#8366#8367#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1462,10 +1125,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7038">
           <caret line="414" column="41" selection-start-line="414" selection-start-column="41" selection-end-line="414" selection-end-column="41" />
-          <folding>
-            <element signature="method#openNewGameWindow#0;class#ChessController#0" expanded="false" />
-            <element signature="method#openAboutWindow#0;class#ChessController#0" expanded="false" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1502,49 +1162,15 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#193#194#0" expanded="false" />
-            <element signature="e#257#258#0" expanded="false" />
-            <element signature="e#299#300#0" expanded="false" />
-            <element signature="e#334#335#0" expanded="false" />
             <element signature="method#clear#0;class#Board#0" expanded="false" />
             <element signature="class#Delta#0;class#Board#0" expanded="false" />
-            <element signature="e#1516#1517#0" expanded="false" />
-            <element signature="e#1551#1552#0" expanded="false" />
-            <element signature="e#1583#1584#0" expanded="false" />
-            <element signature="e#1618#1619#0" expanded="false" />
-            <element signature="e#1651#1652#0" expanded="false" />
-            <element signature="e#1687#1688#0" expanded="false" />
-            <element signature="e#1720#1721#0" expanded="false" />
-            <element signature="e#1756#1757#0" expanded="false" />
-            <element signature="e#1794#1795#0" expanded="false" />
-            <element signature="e#1833#1834#0" expanded="false" />
-            <element signature="e#1871#1872#0" expanded="false" />
-            <element signature="e#1910#1911#0" expanded="false" />
-            <element signature="e#1950#1951#0" expanded="false" />
-            <element signature="e#1992#1993#0" expanded="false" />
-            <element signature="e#2029#2030#0" expanded="false" />
-            <element signature="e#2067#2068#0" expanded="false" />
-            <element signature="e#2116#2117#0" expanded="false" />
-            <element signature="e#2162#2163#0" expanded="false" />
             <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="false" />
-            <element signature="e#2465#2466#0" expanded="false" />
             <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4115#4116#0" expanded="false" />
-            <element signature="e#4139#4140#0" expanded="false" />
-            <element signature="e#4166#4167#0" expanded="false" />
-            <element signature="e#4193#4194#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="false" />
-            <element signature="e#4429#4430#0" expanded="false" />
-            <element signature="e#4492#4493#0" expanded="false" />
-            <element signature="e#4555#4556#0" expanded="false" />
             <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
             <element signature="method#undo#0;class#Board#0" expanded="false" />
             <element signature="method#remove#0;class#Board#0" expanded="false" />
             <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
             <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="e#8325#8326#0" expanded="false" />
-            <element signature="e#8366#8367#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1570,21 +1196,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/chess/board/Piece.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="58" column="22" selection-start-line="58" selection-start-column="22" selection-end-line="58" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/chess/gui/NewGameWindow.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-654">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
+      </provider>
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
       </provider>
     </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_112/javafx-src.zip!/com/sun/javafx/tk/quantum/QuantumToolkit.java">
@@ -1598,66 +1217,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="298">
           <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chess/board/AI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="61" column="19" selection-start-line="61" selection-start-column="18" selection-end-line="61" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/chess/board/Board.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4165">
-          <caret line="381" column="31" selection-start-line="381" selection-start-column="31" selection-end-line="381" selection-end-column="31" />
-          <folding>
-            <element signature="e#193#194#0" expanded="false" />
-            <element signature="e#257#258#0" expanded="false" />
-            <element signature="e#299#300#0" expanded="false" />
-            <element signature="e#334#335#0" expanded="false" />
-            <element signature="method#clear#0;class#Board#0" expanded="false" />
-            <element signature="class#Delta#0;class#Board#0" expanded="false" />
-            <element signature="e#1516#1517#0" expanded="false" />
-            <element signature="e#1551#1552#0" expanded="false" />
-            <element signature="e#1583#1584#0" expanded="false" />
-            <element signature="e#1618#1619#0" expanded="false" />
-            <element signature="e#1651#1652#0" expanded="false" />
-            <element signature="e#1687#1688#0" expanded="false" />
-            <element signature="e#1720#1721#0" expanded="false" />
-            <element signature="e#1756#1757#0" expanded="false" />
-            <element signature="e#1794#1795#0" expanded="false" />
-            <element signature="e#1833#1834#0" expanded="false" />
-            <element signature="e#1871#1872#0" expanded="false" />
-            <element signature="e#1910#1911#0" expanded="false" />
-            <element signature="e#1950#1951#0" expanded="false" />
-            <element signature="e#1992#1993#0" expanded="false" />
-            <element signature="e#2029#2030#0" expanded="false" />
-            <element signature="e#2067#2068#0" expanded="false" />
-            <element signature="e#2116#2117#0" expanded="false" />
-            <element signature="e#2162#2163#0" expanded="false" />
-            <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
-            <element signature="e#2414#2415#0" expanded="false" />
-            <element signature="e#2465#2466#0" expanded="false" />
-            <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
-            <element signature="e#4115#4116#0" expanded="false" />
-            <element signature="e#4139#4140#0" expanded="false" />
-            <element signature="e#4166#4167#0" expanded="false" />
-            <element signature="e#4193#4194#0" expanded="false" />
-            <element signature="e#4388#4389#0" expanded="false" />
-            <element signature="e#4429#4430#0" expanded="false" />
-            <element signature="e#4492#4493#0" expanded="false" />
-            <element signature="e#4555#4556#0" expanded="false" />
-            <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
-            <element signature="method#undo#0;class#Board#0" expanded="false" />
-            <element signature="method#remove#0;class#Board#0" expanded="false" />
-            <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
-            <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
-            <element signature="e#8325#8326#0" expanded="false" />
-            <element signature="e#8366#8367#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1709,14 +1268,45 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/chess/board/Piece.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="91" column="29" selection-start-line="91" selection-start-column="29" selection-end-line="91" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chess/board/Board.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="138">
+          <caret line="387" column="51" selection-start-line="387" selection-start-column="51" selection-end-line="387" selection-end-column="51" />
+          <folding>
+            <element signature="method#clear#0;class#Board#0" expanded="false" />
+            <element signature="class#Delta#0;class#Board#0" expanded="false" />
+            <element signature="docComment;method#wasTransform#0;class#Board#0" expanded="false" />
+            <element signature="docComment;field#black#0;class#Board#0" expanded="false" />
+            <element signature="method#assocMorphed#0;class#Board#0" expanded="false" />
+            <element signature="method#undo#0;class#Board#0" expanded="false" />
+            <element signature="method#remove#0;class#Board#0" expanded="false" />
+            <element signature="method#getCapturer#0;class#Board#0" expanded="false" />
+            <element signature="method#removeCapturer#0;class#Board#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/chess/gui/ChessController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="825" column="37" selection-start-line="825" selection-start-column="37" selection-end-line="825" selection-end-column="37" />
-          <folding>
-            <element signature="method#openNewGameWindow#0;class#ChessController#0" expanded="false" />
-            <element signature="method#openAboutWindow#0;class#ChessController#0" expanded="false" />
-          </folding>
+        <state relative-caret-position="-5675">
+          <caret line="551" column="17" selection-start-line="551" selection-start-column="17" selection-end-line="551" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/chess/board/AI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="174" column="58" selection-start-line="174" selection-start-column="58" selection-end-line="174" selection-end-column="58" />
+          <folding />
         </state>
       </provider>
     </entry>

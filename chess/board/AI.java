@@ -69,7 +69,7 @@ public class AI {
                     //System.out.println(Arrays.toString(tempAImovements));
                     if (selection != null && tempAImovements[0] != null) {
 
-                        if (tempSelection.getValue() < selection.getValue()) {
+                        if (tempSelection.getValue() <= selection.getValue()) {
 
                             for (int i = 0; i < tempAImovements.length; i++) {
                                 if (tempAImovements[i] != null) {

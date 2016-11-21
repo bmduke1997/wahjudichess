@@ -385,6 +385,7 @@ public class Board {
             for (int x = 0; x < 5; x++){
                 try {
                     if (playingBoard[y][x].getColor() == color) {
+                        playingBoard[y][x].clear();
                         checkForMove = playingBoard[y][x].movement(playingBoard);
                         for (int i = 0; i < checkForMove.length; i ++) {
                             if (checkForMove[i] != null) {
